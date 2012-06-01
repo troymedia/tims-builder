@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<formUtils:SmartButton xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:formUtils="com.idxd.components.formUtils.*"
+					   chromeColor="0xffc125"
+					   height="12" width="12" 
+					   emphasized="true"
+					   buttonMode="true" useHandCursor="true"
+					   hideEffect="{remove}" showEffect="{add}"
+					   doesHaveProperties="true"
+					   enabled="{!panelIsOpen}"
+					   creationComplete="init()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			//import components.ToolTipPanel;
+			//import components.qnr.PropertiesBox;
+			
+			import mx.managers.PopUpManager;
+			
+			[Bindable] public var panelIsOpen:Boolean = false;
+			//public var propertyWindow:ToolTipPanel;
+			
+			override protected function init():void
+			{
+				this.productParent  = this.parent.parent.parent.parent;
+				trace('parent ' + this.productParent)
+				addEventListener('panelClosed', function():void
+				{
+					trace('closed');
+				});
+			}
+			
+			public function showPropertiesBox(title:String, properties:String):void
+			{
+				//panelIsOpen = true;
+//				propertyWindow = new ToolTipPanel();
+//				var pt:Point = new Point(this.x, this.y);
+//				pt = this.contentToGlobal(pt);
+//				PopUpManager.addPopUp(propertyWindow, DisplayObject(this.parentApplication));
+				//propBox.titleText = title;
+				//propBox.propertyText = properties;
+//				propertyWindow.x = pt.x;
+//				propertyWindow.y = pt.y - 13;
+			}
+		]]>
+	</fx:Script>
+</formUtils:SmartButton>

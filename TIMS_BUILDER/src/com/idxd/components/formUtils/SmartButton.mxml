@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Button xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  toolTip="{this.label}" color="black"
+		  enabled="{isEnabled}"
+		  emphasized="true"
+		  >
+	<fx:Declarations>
+		<fx:String id="btnText"/>
+		<s:Fade id="add" alphaFrom="0" alphaTo="1" duration="300"/>
+		<s:Fade id="remove" alphaFrom="1" alphaTo="0" duration="700"/>
+		<fx:Boolean id="doesHaveProperties"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import flash.geom.Point;
+			
+			import mx.controls.ToolTip;
+			import mx.managers.PopUpManager;
+			import mx.managers.ToolTipManager;
+			
+			public var productParent:DisplayObject;
+			[Bindable] public static var isSelected:Boolean;
+			[Bindable] public var isEnabled:Boolean = true;
+			[Bindable] private var toolTipIsVisible:Boolean = false;
+			public var tip:ToolTip;
+			
+			protected function init():void
+			{
+				ToolTipManager.showDelay = 100000;
+				ToolTipManager.hideDelay = 0;
+			}
+			
+			public function removeSpaces(str:String):String{
+				var text_arr:Array=str.split(' ');
+				return(text_arr.join(''));
+			}
+			
+			public function show():void
+			{
+				this.includeInLayout = true;
+				this.visible = true;
+			}
+			
+			public function hide():void
+			{
+				this.visible = false;
+				this.visible = false;
+			}
+			
+			public function viewToolTip(e:Object):void
+			{
+				if(!tip)
+				{
+					var pt:Point = new Point(e.currentTarget.x, e.currentTarget.y);
+					pt = e.currentTarget.parent.contentToGlobal(pt);
+					if(doesHaveProperties)
+					{
+						tip = ToolTipManager.createToolTip('Properties', 
+							pt.x + e.currentTarget.width + 10, pt.y, 'errorTipRight') as ToolTip;
+						toolTipIsVisible = true;
+					}
+				}
+				else
+				{
+					destroyToolTip();
+					tip == null;
+				}
+					
+				
+			}
+			
+			public function destroyToolTip():void
+			{
+				ToolTipManager.destroyToolTip(tip);
+				doesHaveProperties = false;
+			}	  
+			
+			//TODO create methods to set styles, width and height depending on btn label
+		]]>
+	</fx:Script>
+</s:Button>

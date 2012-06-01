@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TextInput xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+			 xmlns:mx="library://ns.adobe.com/flex/mx"
+			 fontWeight="bold"
+			 color.initial="0xcecece" alpha.initial="0.85"
+			 color.modifiedWithNoText="0xcecece" alpha.modifiedWithNoText="0.85"
+			 text.initial="{placeholderText}" text.modifiedWithNoText="{placeholderText}"
+			 color.modifiedWithText="black"
+			 textInput="{userHasEnteredText = true; currentState='modifiedWithText'}"
+			 creationComplete="init()">
+	<fx:Declarations>
+		<fx:String id="placeholderText"/>
+		<fx:String id="type"/>
+		<!-- Validators --> 
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			
+			[Bindable] public static var userHasEnteredText:Boolean;
+			
+			override protected function createChildren():void
+			{
+				placeholderText = (type == '') ? 'PLACEHOLDER' : type.toUpperCase();
+			}
+			
+			protected function init():void
+			{
+				addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
+			}
+			
+			protected function onFocusIn(e:FocusEvent):void
+			{
+				removePlaceholder();
+				if(type == 'password')
+					displayAsPassword = true;
+				removeEventListener(FocusEvent.FOCUS_IN, onFocusIn);
+				addEventListener(FocusEvent.FOCUS_OUT, onFocusOut);
+			}
+			
+			protected function onFocusOut(e:FocusEvent):void
+			{
+				if(this.text.length < 1)
+					resetControl();
+				else
+					currentState = 'modifiedWithText';
+				addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
+			}
+			
+			protected function resetControl():void
+			{
+				this.currentState = 'modifiedWithNoText';
+				displayAsPassword = false;
+				userHasEnteredText = false;
+			}
+			
+			protected function removePlaceholder():void
+			{
+				this.text = '';
+				this.currentState = 'userHasInteracted';
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="initial"/>
+		<s:State name="modifiedWithNoText"/>
+		<s:State name="modifiedWithText"/>
+		<s:State name="userHasInteracted"/>
+	</s:states>
+</s:TextInput>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<formUtils:SmartButton xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" 
+					   xmlns:formUtils="com.idxd.components.formUtils.*"
+					   label.pageView="Edit"
+					   emphasized="true"
+					   fontWeight="bold"
+					   width="54" height="18"
+					   cornerRadius="8"
+					   creationComplete="init()">
+	<fx:Declarations>
+		
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			override protected function init():void
+			{
+				super.init();
+				productParent = this.parent.parent.parent.parent.parent.parent.parent.parent.parent;
+				var parent:String = this.parent.parent.parent.parent.parent.parent.parent.parent.parent.name;
+				trace('edit btn parent ' + productParent);
+			}
+		]]>
+	</fx:Script>
+	<formUtils:states>
+		<s:State name="pageView"/>
+		<s:State name="editView"/>
+	</formUtils:states>
+</formUtils:SmartButton>

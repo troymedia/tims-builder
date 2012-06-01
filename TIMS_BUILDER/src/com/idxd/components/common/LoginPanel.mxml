@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					  xmlns:s="library://ns.adobe.com/flex/spark" 
+					  xmlns:mx="library://ns.adobe.com/flex/mx" 
+					  xmlns:formUtils="com.idxd.components.formUtils.*"
+					  xmlns:buttons="com.idxd.components.buttons.*"
+					  width="320" height="160"
+					  title="IET Assessment Entry Tool"
+					  moveEffect="{slideUp}"
+					  defaultButton="{loginBtn}">
+	<fx:Declarations>
+		<!--<mx:StringValidator id="usernameValidator" source="{username}" required="true" property="text"/>-->
+		<s:Move3D id="slideUp" yTo="{-this.height - 50}" duration="450" startDelay="100"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			
+			
+			public function doLogin():void
+			{
+				//Alert.show('Login was a success!');
+				reset();
+				slideUp.play();
+				//var callout:Callout = new Callout();
+				//callout.open(this);
+			}
+			
+			public function reset():void
+			{
+				username.text = password.text = '';
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout paddingBottom="10" paddingTop="10" paddingRight="10" paddingLeft="10" gap="10"/>
+	</s:layout>
+	
+	<formUtils:SmartTextInput id="username" type="username" width="100%" />
+	<formUtils:SmartTextInput id="password" type="password" width="100%"/>
+	<formUtils:HGroupWide horizontalAlign="right">
+		<buttons:LoginButton id="loginBtn" enabled="{SmartTextInput.userHasEnteredText}"/>
+	</formUtils:HGroupWide>
+
+</s:Panel>

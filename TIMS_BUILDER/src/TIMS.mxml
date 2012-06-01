@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:views="org.aaae.timsBuilder.views.*" 
+			   xmlns:mvcs="org.robotlegs.mvcs.*"
+			   xmlns:common="com.idxd.components.common.*"
+			   xmlns:local="*"
+			   minWidth="955" minHeight="600"
+			   creationComplete="init()">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<local:IETContext contextView="{this}"/>
+		<s:Parallel id="xFadeOut">
+			<s:Move xBy="2000" duration="500"/>
+			<s:Fade alphaFrom="1" alphaTo="0"/>
+		</s:Parallel>
+		<s:Move id="flyOut" target="{login}" yTo="0" duration="2000"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			
+			[Bindable] protected var stageHeight:int;
+			[Bindable] protected var stageWidth:int;
+			[Bindable] protected var loginIsSuccess:Boolean;
+			
+			protected function init():void
+			{
+				stageHeight = stage.stageHeight;
+				stageWidth = stage.stageWidth;
+				//Alert.show(String(stage.stageHeight));
+			}
+			
+			protected function loginFlyOut():void
+			{
+				loginIsSuccess = true;
+				xFadeOut.play();
+				currentState = 'mainView';	
+				//Alert.show('success');
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="login"/>
+		<s:State name="mainView"/>
+	</s:states>
+	
+	<views:MainView height="100%" width="100%"/>
+	
+	<common:LoginPanel id="login" verticalCenter="0" horizontalCenter="0" hideEffect="{xFadeOut}" excludeFrom="mainView"/>
+	
+</s:Application>

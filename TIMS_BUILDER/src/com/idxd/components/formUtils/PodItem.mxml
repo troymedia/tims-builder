@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:FormItem xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			 xmlns:s="library://ns.adobe.com/flex/spark" 
+			 xmlns:mx="library://ns.adobe.com/flex/mx" 
+			 indicatorGap="10"
+			 color="0x333333"
+			 backgroundColor="0xdedede" borderVisible="true"
+			 fontWeight="bold"
+			 creationComplete="init()" horizontalGap="0">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.controls.DateField;
+			import mx.controls.TextArea;
+			import mx.core.UIComponent;
+			
+			import spark.components.CheckBox;
+			import spark.components.ComboBox;
+			import spark.components.DropDownList;
+			import spark.components.Label;
+			import spark.components.TextInput;
+			
+			private var c:UIComponent;
+			
+			[Bindable] public var itemHeight:Number;
+			[Bindable] public var itemWidth:Number;
+			[Bindable] private var _itemType:String = 'textInput';
+			[Bindable] private var _itemText:String;
+			[Bindable] private var _labelBackgroundColor:uint = 0x333333;
+			[Bindable] public var dataProvider:ArrayCollection;
+			[Bindable] public var labelField:String;
+			[Bindable] public var prompt:String = '';
+			[Bindable] public var selected:Boolean = false;
+			[Bindable] public var editable:Boolean = true;
+			[Bindable] public var mouseIsEnabled:Boolean;
+			[Bindable] public var displayAsPassword:Boolean;
+			[Bindable] public var maxChars:int;
+			[Bindable] public static var TEXT_INPUT:String = 'textInput';
+			[Bindable] public static var TEXT_AREA:String = 'textArea';
+			[Bindable] public static var CHECKBOX:String = 'checkBox';
+			[Bindable] public static var DATE_FIELD:String = 'dateField';
+			[Bindable] public static var DROP_DOWN_LIST:String = 'dropDownList';
+			[Bindable] public static var COMBO_BOX:String = 'comboBox';
+			[Bindable] public static var LABEL:String = 'components.title';
+			
+			protected function init():void
+			{
+				setComponent();
+				this.toolTip = this.label;
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList( unscaledWidth, unscaledHeight );
+			}
+			
+			public function set itemType(t:String):void
+			{
+				_itemType = t;
+			}
+			
+			public function get itemType():String
+			{
+				return _itemType;
+			}
+			
+			[Bindable]
+			public function set itemText(text:String):void
+			{
+				_itemText = text;
+			}
+			
+			public function get itemText():String
+			{
+				return _itemText;
+			}
+			
+			public function set labelBackgroundColor(value:uint):void
+			{
+				if(itemType != 'components.title')
+					return;
+				_labelBackgroundColor = value;
+			}
+			
+			public function get labelBackgroundColor():uint
+			{
+				return _labelBackgroundColor;
+			}
+			
+			private function setComponent():void
+			{
+				switch(itemType)
+				{
+					case 'textInput':
+						var textInput:TextInput = new TextInput();
+						textInput.width = itemWidth;
+						textInput.editable = editable;
+						textInput.displayAsPassword = displayAsPassword;
+						//textInput.editable = false;
+						/* textInput.setStyle('borderVisible', 'false'); */
+						textInput.setStyle('contentBackgroundColor', 'white'); 
+						// textInput.setStyle('contentBackgroundAlpha', 0.8); 
+						//add to stylesheet
+						this.addElement(textInput);
+						textInput.text = itemText;
+						break;
+					case 'textArea':
+						//add new line between each conditon as property/option
+						var textArea:TextArea = new TextArea();
+						/* textArea.setStyle('borderStyle', 'none'); */
+						textArea.setStyle('borderStyle', 'solid');
+						//textArea.setStyle('contentBackgroundAlpha', '0.0');
+						textArea.setStyle('contentBackgroundColor', 'white');
+						textArea.setStyle('lineBreak', 'toFit');
+						/* textArea.percentWidth = 100; */
+						textArea.height = itemHeight;
+						textArea.width = itemWidth;
+						textArea.minWidth = 0;
+						textArea.wordWrap = true;
+						textArea.setStyle('verticalScrollPolicy', 'auto');
+						textArea.mouseEnabled = mouseIsEnabled;
+						textArea.editable = editable;
+						textArea.text = _itemText;
+						textArea.maxChars = maxChars;
+						this.addElement(textArea);
+						break;
+					case 'checkBox':
+						var cb:CheckBox = new CheckBox();
+						cb.selected = selected;
+						this.addElement(cb);
+						invalidateDisplayList();
+						break;
+					case 'dropDownList':
+						var dropDown:DropDownList = new DropDownList();
+						dropDown.percentWidth = 100;
+						dropDown.dataProvider = dataProvider;
+						dropDown.labelField = labelField;
+						dropDown.selectedIndex = -1;
+						dropDown.prompt = prompt;
+						this.addElement(dropDown);
+						invalidateDisplayList();
+						break;
+					case 'comboBox':
+						var comboBox:ComboBox = new ComboBox();
+						comboBox.percentWidth = 100;
+						this.addElement(comboBox);
+						invalidateDisplayList();
+						break;
+					case 'components.title':
+						var label:Label = new Label();
+						label.text = itemText;
+						this.addElement(label);
+						invalidateDisplayList();
+						break;
+					case 'dateField':
+						//TODO add formatter
+						var dateField:DateField = new DateField();
+						dateField.enabled = false;
+						//dateField.setStyle('chromeColor', 0x808080);
+						this.addElement(dateField);
+						invalidateDisplayList();
+						break;
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+</mx:FormItem>
