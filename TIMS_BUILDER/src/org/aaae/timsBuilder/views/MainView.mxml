@@ -56,7 +56,7 @@
 					workspace.addElement(assessment);
 					assessments.addItem(assessment);
 					assessment.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void { 
-						e.currentTarget.alpha = 0; //create hide() method in Assessment class
+						//e.currentTarget.alpha = 0; //create hide() method in Assessment class
 						isoAssessment = IETAssessment.clone(assessment);
 						selectedAssessmentX = isoAssessment.x = e.currentTarget.x;
 						selectedAssessmentY = isoAssessment.y = e.currentTarget.y;
