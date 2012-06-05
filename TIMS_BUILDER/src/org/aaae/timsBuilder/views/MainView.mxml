@@ -64,6 +64,7 @@
 						clearUnselectedGridElements(e.currentTarget as BorderContainer);
 						isoAssessment.currentState = 'isoView';
 						moveAndCenter.play();
+						Alert.show(String(isoCanvas.numElements));
 					});
 				}
 			}
