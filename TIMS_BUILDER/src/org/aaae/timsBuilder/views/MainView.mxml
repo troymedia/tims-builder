@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
-		 creationComplete="init()" mouseChildren="false" alpha=".45" xmlns:formUtils="com.idxd.components.formUtils.*"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:formUtils="com.idxd.components.formUtils.*" 
+		 xmlns:common="com.idxd.components.common.*"
+		 width="100%" height="100%"
+		 creationComplete="init()" mouseChildren="false" alpha=".45"
 		 >
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
 	
 	<fx:Declarations>
 		<s:VerticalLayout id="vertical" paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10"/>
-		<s:Sequence id="moveAndCenter" target="{isoAssessment}" >
-			<s:Move xFrom="{selectedAssessmentX}" xTo="{thisParent.width/2}" 
-					yFrom="{selectedAssessmentY}" yTo="{thisParent.height/2}" duration="500"/>
+		<s:Parallel id="moveAndCenter" target="{isoAssessment}" duration="300" effectEnd="isoAssessment.currentState='isoView'" startDelay="100">
+			<s:Move xFrom="{selectedAssessmentX}" xTo="0" 
+					yFrom="{selectedAssessmentY}" yTo="0"/>
 			<s:Resize heightFrom="{isoAssessment.height}" heightTo="{stageHeight}" 
 					  widthFrom="{isoAssessment.width}" widthTo="{stageWidth}"
-					  duration="500"/>
-		</s:Sequence>
+					  />
+		</s:Parallel>
 		<s:Fade id="activate" alphaTo="1" duration="1000" startDelay="600" target="{this}"/>
+		<s:Fade id="fadeOut" alphaTo="0" duration="600" startDelay="150"/>
 	</fx:Declarations>
 	
 	<fx:Script>
@@ -55,28 +62,19 @@
 					assessment.width = 160;
 					workspace.addElement(assessment);
 					assessments.addItem(assessment);
-					assessment.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void { 
-						//e.currentTarget.alpha = 0; //create hide() method in Assessment class
-						isoAssessment = IETAssessment.clone(assessment);
-						selectedAssessmentX = isoAssessment.x = e.currentTarget.x;
-						selectedAssessmentY = isoAssessment.y = e.currentTarget.y;
+					assessment.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void 
+					{ 
+						isoAssessment = IETAssessment.clone(e.currentTarget as IETAssessment);
 						isoCanvas.addElement(isoAssessment);
-						clearUnselectedGridElements(e.currentTarget as BorderContainer);
-						isoAssessment.currentState = 'isoView';
+						isoAssessment.addEventListener(MouseEvent.CLICK, resizeThis);
+						//isoAssessment.currentState = 'isoView';
+						currentState = 'isoView';
+						//e.currentTarget.alpha = 0; //create hide() method in Assessment class
+						selectedAssessmentX = isoAssessment.x = e.currentTarget.x;
+						selectedAssessmentY = isoAssessment.y = e.currentTarget.y; 
+						
 						moveAndCenter.play();
-						Alert.show(String(isoCanvas.numElements));
 					});
-				}
-			}
-			
-			protected function clearUnselectedGridElements(elem:BorderContainer):void
-			{
-				for each(var element:BorderContainer in assessments)
-				if(element.id != elem.id)
-				{
-					workspace.layout = vertical;
-					element.visible = false;
-					element.includeInLayout = false;
 				}
 			}
 			
@@ -97,6 +95,11 @@
 				//Alert.show('success!');
 			}
 			
+			protected function resizeThis(e:MouseEvent):void
+			{
+				moveAndCenter.play();
+			}
+			
 		]]>
 	</fx:Script>
 	
@@ -106,7 +109,8 @@
 		<s:State name="isoView"/>
 	</s:states>
 
-	<s:SkinnableContainer id="workspace" height="100%" width="100%" >
+	<s:SkinnableContainer id="workspace" height="100%" width="100%" includeIn="tileView" removedEffect="{fadeOut}">
+		
 		<s:layout>
 			<s:TileLayout paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" 
 						  orientation="rows" columnAlign="justifyUsingWidth" rowAlign="justifyUsingGap"  
@@ -114,6 +118,9 @@
 						  requestedColumnCount="4" horizontalAlign="center" verticalAlign="middle"/>
 		</s:layout>
 	</s:SkinnableContainer>
-	<s:Group id="isoCanvas" height="100%" width="100%" includeIn="isoView"/>
+	<s:SkinnableContainer id="isoCanvas">
+		
+	</s:SkinnableContainer>
+	<common:IDXDActionBar height="42" width="100%"  top="0" backgroundColor="0xcecece"/>
 	
 </s:SkinnableContainer>

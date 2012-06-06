@@ -7,7 +7,6 @@
 					   xmlns:buttons="com.idxd.components.buttons.*"
 					   width="100%" minHeight="0"
 					   borderAlpha="0"
-					   backgroundAlpha="0.5"
 					   creationComplete="buildComponent()" xmlns:formUtils1="com.idxd.components.formUtils.*">
 	<fx:Declarations>
 		<fx:String id="titleText"/>

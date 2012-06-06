@@ -4,15 +4,15 @@
 				   xmlns:mx="library://ns.adobe.com/flex/mx" 
 				   minWidth="320" minHeight="240"
 				   xmlns:idxd="com.idxd.components.common.*"
-				   verticalCenter.isoView="0" horizontalCenter.isoView="0"
 				   >
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		
 	</fx:Declarations>
 	
 	<fx:Script>
 		<![CDATA[
 			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
 			
 			[Bindable] protected var recNumber:String;
 			[Bindable] protected var courseTitle:String;
@@ -39,10 +39,10 @@
 			public static function clone(assessment:IETAssessment):IETAssessment
 			{
 				var clonedAssessment:IETAssessment = new IETAssessment();
-				clonedAssessment.setStyle('backgroundColor', Math.random() * assessment.getStyle('backgroundColor'));
-				clonedAssessment.alpha = assessment.alpha;
-				clonedAssessment.height = assessment.height;
-				clonedAssessment.width = assessment.width;
+				clonedAssessment.id = assessment.id + '_clone';
+				clonedAssessment.setStyle('backgroundColor', 'white');
+				//clonedAssessment.currentState = 'isoView';
+				
 				return clonedAssessment;
 			}
 		]]>
