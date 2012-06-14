@@ -2,7 +2,7 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
-			   xmlns:views="org.aaae.timsBuilder.views.*" 
+			   xmlns:views="org.aaae.iet.timsBuilder.views.*" 
 			   xmlns:mvcs="org.robotlegs.mvcs.*"
 			   xmlns:common="com.idxd.components.common.*"
 			   xmlns:local="*"

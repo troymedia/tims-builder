@@ -79,7 +79,7 @@
 				doesHaveProperties = false;
 			}	  
 			
-			//TODO create methods to set styles, width and height depending on btn label
+			//TODO create methods to set styles, width and height depending on btn label <-- thinking ahead!!
 		]]>
 	</fx:Script>
 </s:Button>
