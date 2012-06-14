@@ -32,15 +32,13 @@
 			{
 				stageHeight = stage.stageHeight;
 				stageWidth = stage.stageWidth;
-				//Alert.show(String(stage.stageHeight));
 			}
 			
-			protected function loginFlyOut():void
+			protected function loginSuccess():void
 			{
 				loginIsSuccess = true;
 				xFadeOut.play();
 				currentState = 'mainView';	
-				//Alert.show('success');
 			}
 			
 		]]>

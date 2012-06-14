@@ -20,11 +20,8 @@
 			
 			public function doLogin():void
 			{
-				//Alert.show('Login was a success!');
 				reset();
 				slideUp.play();
-				//var callout:Callout = new Callout();
-				//callout.open(this);
 			}
 			
 			public function reset():void
