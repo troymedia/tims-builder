@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:SkinnableContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:formUtils="com.idxd.components.formUtils.*" 
+		 xmlns:common="com.idxd.components.common.*"
+		 width="100%" height="100%"
+		 creationComplete="init()" mouseChildren="false" alpha=".45"
+		 >
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	
+	<fx:Style source="styles.css"/>
+	
+	<fx:Declarations>
+		<s:VerticalLayout id="vertical" paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10"/>
+		<s:Parallel id="moveAndCenter" target="{isoAssessment}" duration="300" effectEnd="isoAssessment.currentState='isoView'" startDelay="100">
+			<s:Move xFrom="{selectedAssessmentX}" xTo="0" 
+					yFrom="{selectedAssessmentY}" yTo="0"/>
+			<s:Resize heightFrom="{isoAssessment.height / 2}" heightTo="{stageHeight}" 
+					  widthFrom="{isoAssessment.width / 2}" widthTo="{stageWidth}"
+					  />
+		</s:Parallel>
+		<s:Fade id="activate" alphaTo="1" duration="1000" startDelay="600" target="{this}"/>
+		<s:Fade id="fadeOut" alphaTo="0" duration="600" startDelay="150"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			
+			import org.aaae.iet.timsBuilder.components.Assessment;
+			
+			import spark.components.BorderContainer;
+			
+			[Bindable] protected var thisParent:Object;
+			[Bindable] protected var stageHeight:int;
+			[Bindable] protected var stageWidth:int;
+			[Bindable] protected var selectedAssessmentX:Number;
+			[Bindable] protected var selectedAssessmentY:Number;
+			
+			protected var assessment:Assessment;
+			[Bindable] protected var isoAssessment:Assessment;
+			[Bindable] protected var assessments:ArrayCollection = new ArrayCollection();
+			
+			protected function init():void
+			{
+				buildGrid();
+				thisParent = this.parentApplication;
+				stageHeight = thisParent.height;
+				stageWidth = thisParent.width;
+			}
+			
+			protected function buildGrid():void
+			{
+				for(var i:int=0; i < 12; i++)
+				{
+					assessment = new Assessment;
+					assessment.id = 'assess' + i;
+					assessment.setStyle('backgroundColor', 'gray');
+					assessment.height = 120;
+					assessment.width = 160;
+					workspace.addElement(assessment);
+					assessments.addItem(assessment);
+					assessment.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void 
+					{ 
+						isoAssessment = Assessment.clone(e.currentTarget as Assessment);
+						isoCanvas.addElement(isoAssessment);
+						isoAssessment.addEventListener(MouseEvent.CLICK, resizeThis);
+						//isoAssessment.currentState = 'isoView';
+						currentState = 'isoView';
+						//e.currentTarget.alpha = 0; //create hide() method in Assessment class
+						selectedAssessmentX = isoAssessment.x = e.currentTarget.x;
+						selectedAssessmentY = isoAssessment.y = e.currentTarget.y; 
+						actionBar.visible = false;
+						moveAndCenter.play();
+						removeEventListener(MouseEvent.CLICK, resizeThis);
+					});
+				}
+			}
+			
+			protected function resetGridElements():void
+			{
+				moveAndCenter.reverse();
+			}
+			
+			// public functions
+			public function activateView():void
+			{
+				activate.play();
+				mouseChildren = true;
+			}
+			
+			public function showAlert():void
+			{
+				//Alert.show('success!');
+			}
+			
+			protected function resizeThis(e:MouseEvent):void
+			{
+				moveAndCenter.play();
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="tileView"/>
+		<s:State name="listView"/>
+		<s:State name="isoView"/>
+	</s:states>
+
+	<s:SkinnableContainer id="workspace" height="100%" width="100%" includeIn="tileView" removedEffect="{fadeOut}" 
+						  top="50" bottom="10" left="5" right="5">
+		
+		<s:layout>
+			<s:TileLayout orientation="rows" columnAlign="justifyUsingWidth" rowAlign="justifyUsingHeight"  
+						  horizontalGap="5" verticalGap="5"
+						  requestedColumnCount="4" />
+		</s:layout>
+	</s:SkinnableContainer>
+	<s:SkinnableContainer id="isoCanvas" top="0" bottom="0" left="0" right="0">
+		
+	</s:SkinnableContainer>
+	<common:IDXDActionBar id="actionBar" height="42" width="100%"  top="0" backgroundColor="#cecece" isProductHeader="true" headerText="Assessments"
+						  color="0x333333"
+						  type="main"/>
+	
+</s:SkinnableContainer>

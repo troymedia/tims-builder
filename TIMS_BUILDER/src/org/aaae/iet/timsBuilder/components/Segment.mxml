@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   borderVisible="true" backgroundColor="white"
+				   mouseDown="this.startDrag()" mouseUp="this.stopDrag()"
+				   creationComplete="init()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			
+			protected function init():void
+			{
+				for (var i:int = 0; i < 10; i++)
+				{
+					var qp:QuestionPool = new QuestionPool();
+					qp.height = 100;
+					qp.width = 150;
+					qp.currentState = 'outline';
+					workspace.addElement(qp);
+				}
+			}
+			
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="outline"/>
+		<s:State name="iso"/>
+	</s:states>
+	
+	<s:SkinnableContainer id="workspace" height="100%" width="100%"
+						  top="50" bottom="10" left="5" right="5"
+						  excludeFrom="outline">
+		
+		<s:layout>
+			<s:TileLayout orientation="rows" columnAlign="justifyUsingWidth" rowAlign="justifyUsingHeight"  
+						  horizontalGap="5" verticalGap="5"
+						  requestedColumnCount="4" />
+		</s:layout>
+	</s:SkinnableContainer>
+</s:BorderContainer>

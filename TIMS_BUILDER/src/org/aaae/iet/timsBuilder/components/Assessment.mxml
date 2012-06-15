@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx" 
+				   minWidth="240" minHeight="160"
+				   xmlns:idxd="com.idxd.components.common.*"
+				   borderVisible="true" xmlns:components="org.aaae.iet.timsBuilder.components.*" 
+				   top="0" right="0" bottom="0" left="0">
+	<fx:Declarations>
+		<s:Move id="slideRight"/>
+		<s:Move id="slideUp"/>
+		<s:Move id="slideLeft"/>
+		<s:Move id="slideDown"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			
+			[Bindable] protected var recNumber:String;
+			[Bindable] protected var courseTitle:String;
+			[Bindable] protected var version:String;
+			[Bindable] protected var language:String;
+			[Bindable] protected var numSegment:String;
+			[Bindable] protected var status:String;
+			[Bindable] protected var dateBuilt:String;
+			[Bindable] protected var dateLastModified:String;
+			[Bindable] protected var airports:ArrayCollection;
+			[Bindable] protected var languages:ArrayCollection;
+			
+			[Bindable] protected var currentSegment:int = 0; //captures current user position and passes to SharedObject when session ends
+			
+			
+			protected function view():void{}
+			
+			protected function buildTest():void{}
+			
+			protected function save():void{}
+			
+			protected function reset():void{}
+			
+			protected function updateAssessmentId():void{}
+			
+			public static function clone(assessment:Assessment):Assessment
+			{
+				var clonedAssessment:Assessment = new Assessment();
+				clonedAssessment.id = assessment.id + '_clone';
+				clonedAssessment.setStyle('backgroundColor', 'white');
+				//clonedAssessment.currentState = 'isoView';
+				
+				return clonedAssessment;
+			}
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="tile"/>
+		<s:State name="list"/>
+		<s:State name="isoView"/>
+	</s:states>
+	
+	<!--<s:HGroup width="100%" height="100%" paddingBottom="0" paddingLeft="0" paddingRight="0" paddingTop="0" gap="0"
+			  includeIn="isoView ">-->
+		
+		<!-- IETAssessmentWorkspace -->
+		<s:SkinnableContainer height="100%" width="100%" left="240" backgroundColor="0xdedede" includeIn="isoView">
+			<s:layout>
+				<s:VerticalLayout paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="50" verticalAlign="middle"/>
+			</s:layout>
+			
+			<components:Segment height="100%" width="100%" currentState="iso"/>
+			<s:HGroup width="100%" horizontalAlign="center">
+				<idxd:Carousel/>
+			</s:HGroup>
+		</s:SkinnableContainer>
+	
+		<!-- TODO IETAssessmentMenu -->
+		<s:BorderContainer id="outline" height="100%" width="240" left="0" backgroundColor="gray" includeIn="isoView" dropShadowVisible="true">
+			<s:layout>
+				<s:VerticalLayout paddingTop="50" paddingLeft="10" paddingRight="10" paddingBottom="10" horizontalAlign="center"/>
+			</s:layout>
+			
+			<components:Segment height="120" width="180"/>
+			<components:Segment height="120" width="180"/>
+			<components:Segment height="120" width="180"/>
+			<components:Segment height="120" width="180"/>
+			
+		</s:BorderContainer>
+	<!--</s:HGroup>-->
+	
+	
+	<components:AssessmentActionBar height="32" width="100%" 
+									top="0"
+									headerText="Segments" color="white" backgroundColor="green" 
+									isProductHeader="true"
+									includeIn="isoView"/>
+</s:BorderContainer>
