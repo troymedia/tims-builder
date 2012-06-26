@@ -3,19 +3,19 @@
 	<lesson id="Lesson One">
 		<questionPool number="1">
 			<question type="Multiple Choice" text="I was _________ in New York.">
-				<response text="born" correct="true"/>
-				<response text="name" correct="false"/>
-				<response text="read" correct="false"/>
-				<response text="forget" correct="false"/>
+				<response text="born" correct="1"/>
+				<response text="name" correct="0"/>
+				<response text="read" correct="0"/>
+				<response text="forget" correct="0"/>
 				<feedback audio="audio.mp3" video="video.flv"/>
 			</question>
 		</questionPool>	
 		<questionPool number="2">
 			<question type="Multiple Choice" text="I just _________ about you.">
-				<response text="bold" correct="true"/>
-				<response text="thinking" correct="false"/>
-				<response text="thought" correct="false"/>
-				<response text="eaten" correct="false"/>
+				<response text="bold" correct="1"/>
+				<response text="thinking" correct="0"/>
+				<response text="thought" correct="0"/>
+				<response text="eaten" correct="0"/>
 				<feedback audio="audio.mp3" video="video.flv"/>
 			</question>
 		</questionPool>	

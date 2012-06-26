@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				   xmlns:s="library://ns.adobe.com/flex/spark" 
+				   xmlns:mx="library://ns.adobe.com/flex/mx"
+				   creationComplete="init()">
+	<fx:Declarations>
+		<s:RadioButtonGroup id="questionPool"/>
+		<s:HTTPService id="svc" url="com/ecistm/tlpa/data/lesson.xml" result="onResult(event)" fault="onFault(event)"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.ecistm.tlpa.models.Lesson;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			[Bindable] protected var lessons:ArrayCollection;
+			[Bindable] protected var currentlesson:Lesson;
+			
+			protected function init():void
+			{
+				svc.send();
+			}
+			
+			protected function onResult(e:ResultEvent):void
+			{
+				lessons = svc.lastResult.lessons.lesson.questionPool as ArrayCollection;
+				Alert.show(String(svc.lastResult.lesson.questionPool[0].question.type));
+			}
+			
+			protected function onFault(e:FaultEvent):void
+			{
+				Alert.show(e.fault.faultCode);
+			}
+			
+			protected function stepThroughQuestions():void
+			{
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10"/>
+	</s:layout>
+	
+	<s:Label text="" color="white" fontWeight="bold"/>
+	
+	<s:BorderContainer height="100%" width="100%" backgroundImage="@Embed('assets/images/taxi_dark2.jpg')" borderVisible="true">
+		<s:layout>
+			<s:VerticalLayout paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10"/>
+		</s:layout>
+		
+		<s:Label text="She arrived _________ to the class." color="white" fontWeight="bold"/>
+		
+		<s:VGroup>
+			<s:RadioButton groupName="questionPool"
+						   label="Music"
+						   color="white"/>
+			<s:RadioButton groupName="questionPool"
+						   label="Stepping"
+						   color="white"/>
+			<s:RadioButton groupName="questionPool"
+						   label="Late"
+						   color="white"/>
+			<s:RadioButton groupName="questionPool"
+						   label="Wash"
+						   color="white"/>
+		</s:VGroup>
+		
+	</s:BorderContainer>
+	
+	<s:HGroup width="100%" horizontalAlign="right">
+		<s:Button label="SUBMIT" chromeColor="0x333333" cornerRadius="10" color="white"/>
+	</s:HGroup>
+	
+</s:BorderContainer>
