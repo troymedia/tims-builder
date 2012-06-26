@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<lesson id="Lesson One">
-	<questionPool number="1">
-		<question type="Multiple Choice" text="I was _________ in New York.">
-			<response text="Born" correct="true"/>
-			<response text="Name" correct="false"/>
-			<response text="Read" correct="false"/>
-			<response text="Forget" correct="false"/>
-		</question>
-		<feedback audio="audio.mp3" video="video.flv"/>
-	</questionPool>	
-	<questionPool number="1">
-		<question type="Multiple Choice" text="I was _________ in New York.">
-			<response text="Born" correct="true"/>
-			<response text="Name" correct="false"/>
-			<response text="Read" correct="false"/>
-			<response text="Forget" correct="false"/>
-		</question>
-		<feedback audio="audio.mp3" video="video.flv"/>
-	</questionPool>	
-</lesson>
+<lessons>
+	<lesson id="Lesson One">
+		<questionPool number="1">
+			<question type="Multiple Choice" text="I was _________ in New York.">
+				<response text="Born" correct="true"/>
+				<response text="Name" correct="false"/>
+				<response text="Read" correct="false"/>
+				<response text="Forget" correct="false"/>
+				<feedback audio="audio.mp3" video="video.flv"/>
+			</question>
+		</questionPool>	
+		<questionPool number="1">
+			<question type="Multiple Choice" text="I was _________ in New York.">
+				<response text="Born" correct="true"/>
+				<response text="Name" correct="false"/>
+				<response text="Read" correct="false"/>
+				<response text="Forget" correct="false"/>
+				<feedback audio="audio.mp3" video="video.flv"/>
+			</question>
+		</questionPool>	
+	</lesson>
+</lessons>
