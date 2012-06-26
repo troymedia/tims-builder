@@ -1,11 +1,13 @@
 package
 {
-	import com.ecistm.tlpa.QuizView;
-	import com.ecistm.tlpa.mediators.QuizViewMediator;
+	import com.ecistm.tlpa.views.QuizView;
+	import com.ecistm.tlpa.commands.*;
+	import com.ecistm.tlpa.mediators.*;
 	import com.ecistm.tlpa.services.LessonsService;
 	
 	import flash.display.DisplayObjectContainer;
 	
+	import org.robotlegs.base.ContextEvent;
 	import org.robotlegs.mvcs.Context;
 	
 	
@@ -18,8 +20,11 @@ package
 		
 		override public function startup():void
 		{
+			super.startup();
 			//mediators
-			mediatorMap.mapView(QuizView, QuizViewMediator, QuizView);
+			//mediatorMap.mapView(QuizView, QuizViewMediator, QuizView);
+			
+			//commands
 			
 			injector.mapSingleton(LessonsService);
 		}

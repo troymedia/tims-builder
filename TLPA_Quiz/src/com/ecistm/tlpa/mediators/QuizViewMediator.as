@@ -1,11 +1,15 @@
 package com.ecistm.tlpa.mediators
 {
-	import com.ecistm.tlpa.QuizView;
 	import com.ecistm.tlpa.events.SearchResultEvent;
 	import com.ecistm.tlpa.services.LessonsService;
+	import com.ecistm.tlpa.views.QuizView;
+	
+	import flash.events.MouseEvent;
 	
 	import mx.controls.Alert;
+	import mx.events.FlexEvent;
 	
+	import org.robotlegs.base.ContextEvent;
 	import org.robotlegs.mvcs.Mediator;
 	
 	public class QuizViewMediator extends Mediator
@@ -23,10 +27,17 @@ package com.ecistm.tlpa.mediators
 		
 		override public function onRegister():void
 		{
-			addContextListener(SearchResultEvent.RECEIVED, onSearchResultsReceived, SearchResultEvent);
+			//addContextListener(SearchResultEvent.RECEIVED, onSearchResultsReceived, SearchResultEvent);
+//			addContextListener(ContextEvent.STARTUP_COMPLETE, onStartupComplete, ContextEvent);
+			addViewListener(FlexEvent.CREATION_COMPLETE, onStartupComplete, FlexEvent);
 		}
 		
-		protected function onSearchResultsReceived(e:SearchResultEvent):void
+		protected function onStartupComplete(e:ContextEvent):void
+		{
+			onSearchResultsReceived();
+		}
+		
+		protected function onSearchResultsReceived():void
 		{
 			service.getResults();
 			Alert.show('all night');
