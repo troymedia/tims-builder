@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:formUtils="com.idxd.components.formUtils.*"
+		 minHeight="0" minWidth="0"
+		 height="240" width="320">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10"/>
+	</s:layout>
+	
+	
+	<formUtils:SmartTextInput placeholderText="Assessment ID"/>
+	<formUtils:SmartTextInput placeholderText="Course Title"/>
+	<formUtils:SmartTextArea placeholderText="The purpose of this training is to..."/>
+	<s:ComboBox prompt="Language">
+		<s:dataProvider>
+			<s:ArrayCollection>
+				<fx:String>English</fx:String>
+				<fx:String>Spanish</fx:String>
+			</s:ArrayCollection>
+		</s:dataProvider>
+	</s:ComboBox>
+	<s:ComboBox prompt="Please select Status">
+		<s:dataProvider>
+			<s:ArrayCollection>
+				<fx:String>Active</fx:String>
+				<fx:String>Development</fx:String>
+				<fx:String>Retired</fx:String>
+			</s:ArrayCollection>
+		</s:dataProvider>
+	</s:ComboBox>
+	
+</s:TitleWindow>
