@@ -144,6 +144,7 @@
 	</s:HGroup>
 	<s:HGroup id="actions" width="100%" gap="5" horizontalAlign="right">
 		<!--<buttons:EditButton/>-->
+		<formUtils1:SmartButton label="My TIMS"/>
 		<buttons:ActionsButton height="18" width="18"/>
 		<buttons:SettingsButton height="18" width="18"/>
 	</s:HGroup>

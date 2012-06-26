@@ -1,11 +1,13 @@
 package
 {
+	import com.idxd.components.buttons.AddButton;
 	import com.idxd.components.common.LoginPanel;
 	
 	import flash.display.DisplayObjectContainer;
 	
-	import org.aaae.iet.timsBuilder.mediators.LoginPanelMediator;
-	import org.aaae.iet.timsBuilder.mediators.MainViewMediator;
+	import org.aaae.iet.timsBuilder.commands.CreateNewAssesssmentCommand;
+	import org.aaae.iet.timsBuilder.events.AssessmentEvent;
+	import org.aaae.iet.timsBuilder.mediators.*;
 	import org.aaae.iet.timsBuilder.views.MainView;
 	import org.robotlegs.mvcs.Context;
 	
@@ -20,6 +22,9 @@ package
 		{
 			mediatorMap.mapView(MainView, MainViewMediator, MainView);
 			mediatorMap.mapView(LoginPanel, LoginPanelMediator, LoginPanel);
+			mediatorMap.mapView(AddButton, AddButtonMediator, AddButton);
+			
+			commandMap.mapEvent(AssessmentEvent.CREATE_NEW_ASSESSMENT, CreateNewAssesssmentCommand, AssessmentEvent);
 		}
 	}
 }

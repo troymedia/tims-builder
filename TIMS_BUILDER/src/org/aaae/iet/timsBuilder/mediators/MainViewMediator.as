@@ -23,17 +23,11 @@ package org.aaae.iet.timsBuilder.mediators
 		override public function onRegister():void
 		{
 			addContextListener(LoginSuccessEvent.SUCCESS, onLoginSuccess, LoginSuccessEvent);
-			//addViewEv
 		}
 		
 		protected function onLoginSuccess(e:LoginSuccessEvent):void
 		{
 			view.activateView();
-		}
-		
-		protected function onComplete(e:MouseEvent):void
-		{
-			view.showAlert();
 		}
 	}
 }

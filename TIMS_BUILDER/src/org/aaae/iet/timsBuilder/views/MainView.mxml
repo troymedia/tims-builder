@@ -5,7 +5,8 @@
 		 xmlns:formUtils="com.idxd.components.formUtils.*" 
 		 xmlns:common="com.idxd.components.common.*"
 		 width="100%" height="100%"
-		 creationComplete="init()" mouseChildren="false" alpha=".45"
+		 mouseChildren="false" alpha=".45"
+		 creationComplete="init()"
 		 >
 	<s:layout>
 		<s:BasicLayout/>
@@ -69,13 +70,13 @@
 						isoAssessment = Assessment.clone(e.currentTarget as Assessment);
 						isoCanvas.addElement(isoAssessment);
 						isoAssessment.addEventListener(MouseEvent.CLICK, resizeThis);
-						//isoAssessment.currentState = 'isoView';
+						isoAssessment.currentState = 'isoView';
 						currentState = 'isoView';
 						//e.currentTarget.alpha = 0; //create hide() method in Assessment class
 						selectedAssessmentX = isoAssessment.x = e.currentTarget.x;
 						selectedAssessmentY = isoAssessment.y = e.currentTarget.y; 
 						actionBar.visible = false;
-						moveAndCenter.play();
+//						moveAndCenter.play();
 						removeEventListener(MouseEvent.CLICK, resizeThis);
 					});
 				}
@@ -91,11 +92,6 @@
 			{
 				activate.play();
 				mouseChildren = true;
-			}
-			
-			public function showAlert():void
-			{
-				//Alert.show('success!');
 			}
 			
 			protected function resizeThis(e:MouseEvent):void

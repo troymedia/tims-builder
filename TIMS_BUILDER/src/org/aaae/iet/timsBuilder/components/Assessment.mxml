@@ -5,7 +5,8 @@
 				   minWidth="240" minHeight="160"
 				   xmlns:idxd="com.idxd.components.common.*"
 				   borderVisible="true" xmlns:components="org.aaae.iet.timsBuilder.components.*" 
-				   top="0" right="0" bottom="0" left="0">
+				   top="0" right="0" bottom="0" left="0"
+				   skinClass.tile="org.aaae.iet.timsBuilder.skins.AssessmentSkin">
 	<fx:Declarations>
 		<s:Move id="slideRight"/>
 		<s:Move id="slideUp"/>
