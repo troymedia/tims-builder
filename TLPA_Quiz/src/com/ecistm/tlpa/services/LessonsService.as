@@ -34,7 +34,7 @@ package com.ecistm.tlpa.services
 		
 		private function onServiceResult(e:ResultEvent):void
 		{
-			lesson = service.lastResult.lesson.questionPool.question;
+			lesson = service.lastResult.lessons.lesson.questionPool;
 			dispatch(new SearchResultEvent(SearchResultEvent.RECEIVED, lesson));
 		}
 
