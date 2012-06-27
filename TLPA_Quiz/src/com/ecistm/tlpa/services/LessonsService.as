@@ -26,7 +26,7 @@ package com.ecistm.tlpa.services
 		public function getResults():void
 		{
 			service = new HTTPService();
-			service.url = '../data/lesson.xml';
+			service.url = 'com/ecistm/tlpa/data/lesson.xml';
 			var responder:Responder = new Responder(onServiceResult, onServiceFault);
 			var token:AsyncToken = service.send();
 			token.addResponder(responder);
@@ -36,6 +36,7 @@ package com.ecistm.tlpa.services
 		{
 			lesson = service.lastResult.lessons.lesson.questionPool;
 			dispatch(new SearchResultEvent(SearchResultEvent.RECEIVED, lesson));
+			Alert.show(String(lesson.length));
 		}
 
 		private function onServiceFault(e:FaultEvent):void

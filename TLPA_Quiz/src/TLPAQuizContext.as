@@ -3,6 +3,8 @@ package
 	import com.ecistm.tlpa.commands.*;
 	import com.ecistm.tlpa.events.SearchResultEvent;
 	import com.ecistm.tlpa.mediators.*;
+	import com.ecistm.tlpa.models.QuestionModel;
+	import com.ecistm.tlpa.models.QuestionPoolModel;
 	import com.ecistm.tlpa.services.LessonsService;
 	import com.ecistm.tlpa.views.QuizView;
 	
@@ -22,12 +24,17 @@ package
 		override public function startup():void
 		{
 			super.startup();
+			
 			//mediators
-			//mediatorMap.mapView(QuizView, QuizViewMediator, QuizView);
+			mediatorMap.mapView(QuizView, QuizViewMediator, QuizView);
 			
 			//commands
-			commandMap.mapEvent(SearchResultEvent.RECEIVED, StartupCommand, SearchResultEvent);
+			commandMap.mapEvent(SearchResultEvent.RECEIVED, FetchDataCommand, SearchResultEvent);
+			
+			//injectors
 			injector.mapSingleton(LessonsService);
+			injector.mapSingleton(QuestionPoolModel);
+			injector.mapSingleton(QuestionModel);
 		}
 	}
 }

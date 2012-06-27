@@ -9,6 +9,13 @@
 				<response text="forget" correct="0"/>
 				<feedback audio="audio.mp3" video="video.flv"/>
 			</question>
+			<question type="Multiple Choice With Multiple Answers" text="I just _________ about you.">
+				<response text="bold" correct="1"/>
+				<response text="thinking" correct="0"/>
+				<response text="thought" correct="0"/>
+				<response text="eaten" correct="0"/>
+				<feedback audio="audio.mp3" video="video.flv"/>
+			</question>
 		</questionPool>	
 		<questionPool number="2">
 			<question type="Multiple Choice" text="I just _________ about you.">

@@ -4,6 +4,7 @@ package com.ecistm.tlpa.mediators
 	import com.ecistm.tlpa.services.LessonsService;
 	import com.ecistm.tlpa.views.QuizView;
 	
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import mx.controls.Alert;
@@ -20,6 +21,7 @@ package com.ecistm.tlpa.mediators
 		
 		[Inject]
 		public var service:LessonsService;
+		
 		public function QuizViewMediator()
 		{
 			super();
@@ -27,19 +29,20 @@ package com.ecistm.tlpa.mediators
 		
 		override public function onRegister():void
 		{
-			//addContextListener(SearchResultEvent.RECEIVED, onSearchResultsReceived, SearchResultEvent);
+//			addContextListener(SearchResultEvent.RECEIVED, onSearchResultsReceived, SearchResultEvent);
 //			addContextListener(ContextEvent.STARTUP_COMPLETE, onStartupComplete, ContextEvent);
-			addViewListener(FlexEvent.CREATION_COMPLETE, onStartupComplete, FlexEvent);
+			addViewListener(Event.ADDED_TO_STAGE, onStartupComplete, Event);
 		}
 		
-		protected function onStartupComplete(e:ContextEvent):void
-		{
-			onSearchResultsReceived();
-		}
-		
-		protected function onSearchResultsReceived():void
+		protected function onStartupComplete(e:Event):void
 		{
 			service.getResults();
+			Alert.show('***');
+			//dispatch(new SearchResultEvent(SearchResultEvent.FETCH_DATA, service.lesson));
+		}
+		
+		protected function onSearchResultsReceived(e:SearchResultEvent):void
+		{
 			Alert.show('all night');
 		}
 	}

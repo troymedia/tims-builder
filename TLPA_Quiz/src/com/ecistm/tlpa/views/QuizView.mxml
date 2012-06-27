@@ -5,7 +5,6 @@
 				   backgroundColor="0x333333"
 				   creationComplete="init()">
 	<fx:Declarations>
-		<s:RadioButtonGroup id="questionPool"/>
 		<s:HTTPService id="svc" url="com/ecistm/tlpa/data/lesson.xml" result="onResult(event)" fault="onFault(event)"/>
 	</fx:Declarations>
 	
@@ -20,9 +19,11 @@
 			
 			[Bindable] protected var lessons:ArrayCollection;
 			
+			[Bindable] protected var questions:ArrayCollection;
+			
 			protected function init():void
 			{
-				svc.send();
+				//svc.send();
 			}
 			
 			protected function onResult(e:ResultEvent):void
@@ -36,7 +37,7 @@
 				Alert.show(e.fault.faultCode);
 			}
 			
-			protected function stepThroughQuestions():void
+			protected function showQuestions():void
 			{
 				
 			}
