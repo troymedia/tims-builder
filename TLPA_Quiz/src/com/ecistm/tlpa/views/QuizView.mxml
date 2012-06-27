@@ -11,7 +11,7 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import com.ecistm.tlpa.models.Lesson;
+			import com.ecistm.tlpa.models.LessonModel;
 			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
@@ -48,7 +48,7 @@
 		<s:VerticalLayout paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10"/>
 	</s:layout>
 	
-	<s:Label text="{svc.lastResult.lessons.lesson.id} + '.'" color="white" fontWeight="bold"/>
+	<s:Label text="{svc.lastResult.lessons.lesson.id} Quiz: Question {svc.lastResult.lessons.lesson.questionPool[0].number}" color="white" fontWeight="bold"/>
 	
 	<s:BorderContainer height="100%" width="100%" backgroundImage="@Embed('assets/images/taxi_dark2.jpg')" borderVisible="true">
 		<s:layout>
@@ -59,16 +59,16 @@
 		
 		<s:VGroup>
 			<s:RadioButton groupName="questionPool"
-						   label="Music"
+						   label="music"
 						   color="white"/>
 			<s:RadioButton groupName="questionPool"
-						   label="Stepping"
+						   label="stepping"
 						   color="white"/>
 			<s:RadioButton groupName="questionPool"
-						   label="Late"
+						   label="late"
 						   color="white"/>
 			<s:RadioButton groupName="questionPool"
-						   label="Wash"
+						   label="wash"
 						   color="white"/>
 		</s:VGroup>
 		
