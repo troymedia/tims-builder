@@ -23,8 +23,10 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
-			//for each(var item:Object in event.
-			//answers.answers.addItem(
+//			if(answers.answers.length == 0)
+//				Alert.show('You must enter a selection.', 'Invalid Answer', Alert.OK|Alert.CANCEL);
+//			else
+				Alert.show('ll');
 		}
 	}
 }

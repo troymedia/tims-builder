@@ -5,7 +5,7 @@ package com.ecistm.tlpa.events
 	public class SubmitEvent extends Event
 	{
 		public static const REGISTER_ANSWERS:String = 'submit';
-		public static const VALIDATE_ANSWERS:String = 'validate';
+		public static const SUBMIT_ANSWERS:String = 'validate';
 		
 		[Bindable] public var questionType:String;
 		[Bindable] public var answer:String;

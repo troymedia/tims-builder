@@ -4,11 +4,11 @@ package
 	import com.ecistm.tlpa.components.FeedbackDialogBox;
 	import com.ecistm.tlpa.components.SubmitButton;
 	import com.ecistm.tlpa.components.TLPAQuizTitle;
-	import com.ecistm.tlpa.views.*;
 	import com.ecistm.tlpa.events.*;
 	import com.ecistm.tlpa.mediators.*;
 	import com.ecistm.tlpa.models.*;
 	import com.ecistm.tlpa.services.LessonsService;
+	import com.ecistm.tlpa.views.*;
 	
 	import flash.display.DisplayObjectContainer;
 	
@@ -37,6 +37,7 @@ package
 			//commands
 			commandMap.mapEvent(SearchResultEvent.RECEIVED, FetchDataCommand, SearchResultEvent);
 			commandMap.mapEvent(SubmitEvent.REGISTER_ANSWERS, RegisterAnswersCommand, SubmitEvent);
+			commandMap.mapEvent(SubmitEvent.SUBMIT_ANSWERS, SubmitAnswerCommand, SubmitEvent);
 			
 			//injectors
 			injector.mapSingleton(LessonsService);
