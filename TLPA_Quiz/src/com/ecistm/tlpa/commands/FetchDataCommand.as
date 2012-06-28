@@ -34,10 +34,7 @@ package com.ecistm.tlpa.commands
 		
 		protected function updateQuestionModel():void
 		{
-			for each(var obj:Object in event.results)//questionPools
-			{
-				
-			}
+			Alert.show(String(service.lesson.id));
 		}
 	}
 }

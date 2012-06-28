@@ -13,14 +13,14 @@ package com.ecistm.tlpa.events
 //		public static const LABS_SERVICE_RECEIVED:String = 'labs';
 //		public static const UPDATE_VIEW:String = 'updateView';
 		
-		private var _results:ArrayCollection;
+		private var _results:*;
 		
-		public function get results():ArrayCollection
+		public function get results():*
 		{
 			return _results;
 		}
 		
-		public function SearchResultEvent(type:String, results:ArrayCollection=null)
+		public function SearchResultEvent(type:String, results:*=null)
 		{
 			super(type);
 			_results = results;

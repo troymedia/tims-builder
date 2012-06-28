@@ -6,6 +6,8 @@ package com.ecistm.tlpa.models
 	{
 		[Bindable] public var text:String;
 		[Bindable] public var correct:Boolean;
+		[Bindable] public var answers:Array = [];
+		
 		public function ResponseTextModel()
 		{
 			super();

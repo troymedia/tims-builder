@@ -8,8 +8,39 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
 			
-			[Bindable] protected var answerIsCorrect:Boolean;
+			[Bindable] public var questionType:String;
+			[Bindable]public var registeredAnswer:String;
+			public var selections:ArrayCollection = new ArrayCollection();
+			
+			public function registerSelection():void
+			{
+				if(questionType == 'MCG')
+					registerMultipleAnswers();
+				else
+					registerSingleAnswer(questionPool.selectedValue as String);
+			}
+			
+			public function registerSingleAnswer(selection:String):void
+			{
+				registeredAnswer = selection;
+				Alert.show(registeredAnswer);
+//				if(selections.length > 0)
+//				{
+//					selections.removeAll();
+//					registeredAnswer = '';
+//					registeredAnswer = selection;
+					//selections.addItem(selection);
+//				}
+//				return userSelection;
+			}
+			
+			public function registerMultipleAnswers():void
+			{
+				
+			}
 			
 		]]>
 	</fx:Script>

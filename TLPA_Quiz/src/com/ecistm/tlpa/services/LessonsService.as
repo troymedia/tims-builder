@@ -16,7 +16,7 @@ package com.ecistm.tlpa.services
 	public class LessonsService extends Actor
 	{
 		public var service:HTTPService;
-		public var lesson:ArrayCollection;
+		public var lesson:Object;
 		
 		public function LessonsService()
 		{
@@ -34,9 +34,8 @@ package com.ecistm.tlpa.services
 		
 		private function onServiceResult(e:ResultEvent):void
 		{
-			lesson = service.lastResult.lessons.lesson.questionPool;
+			lesson = service.lastResult.lessons.lesson;
 			dispatch(new SearchResultEvent(SearchResultEvent.RECEIVED, lesson));
-			//Alert.show(String(lesson.length));
 		}
 
 		private function onServiceFault(e:FaultEvent):void
