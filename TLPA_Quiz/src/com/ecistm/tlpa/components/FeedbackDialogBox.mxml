@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Alert xmlns:fx="http://ns.adobe.com/mxml/2009" 
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		  xmlns:s="library://ns.adobe.com/flex/spark" 
-		  xmlns:mx="library://ns.adobe.com/flex/mx" layout="absolute"
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
 		  creationComplete="init()">
 	<fx:Declarations>
-		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<fx:String id="feedbackText"/>
 	</fx:Declarations>
 	
 	<fx:Script>
@@ -12,12 +12,34 @@
 			
 			[Bindable] protected var dialogText:Array = [];
 			
+			[Bindable] protected var audio:Sound;
+			
 			protected function init():void
 			{
-//				dialogText.push({title: 'InvalidAns'
+				var request:URLRequest = new URLRequest('assets/audio/holUp.m4a');
+				var channel:SoundChannel = new SoundChannel();
+				audio.load(request);
+				channel = audio.play();
 			}
 			
 		]]>
 	</fx:Script>
 	
-</mx:Alert>
+	<s:layout>
+		<s:VerticalLayout paddingBottom="5" paddingTop="5" paddingLeft="5" paddingRight="5"/>
+	</s:layout>
+	
+	<s:states>
+		<s:State name="textView"/>
+		<s:State name="videoView"/>
+	</s:states>
+	
+	<s:TextArea contentBackgroundAlpha="0" borderVisible="0" height="240" width="100%" text="{feedbackText}"/>
+	<s:Spacer height="100%"/>
+	<s:HGroup width="100%" horizontalAlign="center">
+		<s:Button id="okButton"/>
+		<s:Button id="cancelButton"/>
+	</s:HGroup>
+	
+	
+</s:TitleWindow>
