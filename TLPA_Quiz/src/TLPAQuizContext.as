@@ -8,7 +8,7 @@ package
 	import com.ecistm.tlpa.models.QuestionModel;
 	import com.ecistm.tlpa.models.QuestionPoolModel;
 	import com.ecistm.tlpa.services.LessonsService;
-	import com.ecistm.tlpa.views.QuestionPool;
+	import com.ecistm.tlpa.views.Question;
 	import com.ecistm.tlpa.views.QuizView;
 	
 	import flash.display.DisplayObjectContainer;
@@ -32,11 +32,11 @@ package
 			mediatorMap.mapView(QuizView, QuizViewMediator, QuizView);
 			mediatorMap.mapView(SubmitButton, SubmitButtonMediator, SubmitButton);
 			mediatorMap.mapView(FeedbackDialogBox, FeedbackDialogBoxMediator, FeedbackDialogBox);
-			mediatorMap.mapView(QuestionPool, QuestionPoolMediator, QuestionPool);
+			mediatorMap.mapView(Question, QuestionMediator, Question);
 			
 			//commands
 			commandMap.mapEvent(SearchResultEvent.RECEIVED, FetchDataCommand, SearchResultEvent);
-			commandMap.mapEvent(SubmitEvent.SUBMIT, SubmitAnswerCommand, SubmitEvent);
+			commandMap.mapEvent(SubmitEvent.SUBMIT_ANSWERS, SubmitAnswerCommand, SubmitEvent);
 			
 			//injectors
 			injector.mapSingleton(LessonsService);
