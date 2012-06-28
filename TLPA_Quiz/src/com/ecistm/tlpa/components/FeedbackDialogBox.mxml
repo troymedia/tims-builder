@@ -34,7 +34,7 @@
 		<s:State name="videoView"/>
 	</s:states>
 	
-	<s:TextArea contentBackgroundAlpha="0" borderVisible="0" height="240" width="100%" text="{feedbackText}"/>
+	<s:TextArea contentBackgroundAlpha="0" borderVisible="false" height="240" width="100%" text="{feedbackText}"/>
 	<s:Spacer height="100%"/>
 	<s:HGroup width="100%" horizontalAlign="center">
 		<s:Button id="okButton"/>

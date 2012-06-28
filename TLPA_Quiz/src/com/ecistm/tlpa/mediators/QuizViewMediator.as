@@ -29,21 +29,12 @@ package com.ecistm.tlpa.mediators
 		
 		override public function onRegister():void
 		{
-//			addContextListener(SearchResultEvent.RECEIVED, onSearchResultsReceived, SearchResultEvent);
-//			addContextListener(ContextEvent.STARTUP_COMPLETE, onStartupComplete, ContextEvent);
 			addViewListener(Event.ADDED_TO_STAGE, onStartupComplete, Event);
 		}
 		
 		protected function onStartupComplete(e:Event):void
 		{
 			service.getResults();
-			Alert.show('***');
-			//dispatch(new SearchResultEvent(SearchResultEvent.FETCH_DATA, service.lesson));
-		}
-		
-		protected function onSearchResultsReceived(e:SearchResultEvent):void
-		{
-			Alert.show('all night');
 		}
 	}
 }

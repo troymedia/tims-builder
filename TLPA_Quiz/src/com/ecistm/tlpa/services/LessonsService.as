@@ -36,7 +36,7 @@ package com.ecistm.tlpa.services
 		{
 			lesson = service.lastResult.lessons.lesson.questionPool;
 			dispatch(new SearchResultEvent(SearchResultEvent.RECEIVED, lesson));
-			Alert.show(String(lesson.length));
+			//Alert.show(String(lesson.length));
 		}
 
 		private function onServiceFault(e:FaultEvent):void

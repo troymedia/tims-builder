@@ -63,11 +63,6 @@
 		<s:VerticalLayout paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10"/>
 	</s:layout>
 	
-	<s:states>
-		<s:State name="textQuestion"/>
-		<s:State name="imageQuestion"/>
-	</s:states>
-	
 	<s:Label text="{svc.lastResult.lessons.lesson.id} Quiz: Question {svc.lastResult.lessons.lesson.questionPool[0].number}" color="white" fontWeight="bold"/>
 	
 	<s:BorderContainer height="100%" width="100%" backgroundImage="@Embed('assets/images/taxi_dark2.jpg')" borderVisible="true"
