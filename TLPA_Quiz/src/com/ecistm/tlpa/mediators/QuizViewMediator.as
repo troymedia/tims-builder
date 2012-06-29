@@ -1,6 +1,7 @@
 package com.ecistm.tlpa.mediators
 {
 	import com.ecistm.tlpa.events.SearchResultEvent;
+	import com.ecistm.tlpa.events.SubmitEvent;
 	import com.ecistm.tlpa.services.LessonsService;
 	import com.ecistm.tlpa.views.QuizView;
 	
@@ -31,6 +32,7 @@ package com.ecistm.tlpa.mediators
 		{
 			addViewListener(Event.ADDED_TO_STAGE, onStartupComplete, Event);
 			addContextListener(SearchResultEvent.RECEIVED, onSearchResultsReceived, SearchResultEvent);
+			addContextListener(SubmitEvent.ANSWER_SUBMITTED, onAnswerSubmitted, SubmitEvent);
 		}
 		
 		protected function onStartupComplete(e:Event):void
@@ -41,6 +43,11 @@ package com.ecistm.tlpa.mediators
 		protected function onSearchResultsReceived(e:SearchResultEvent):void
 		{
 			view.buildQuiz(e.results);
+		}
+		
+		protected function onAnswerSubmitted(e:SubmitEvent):void
+		{
+			view.stepToNextQuestion();
 		}
 	}
 }

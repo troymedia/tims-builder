@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="com.ecistm.tlpa.views.*">
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:views="com.ecistm.tlpa.views.*"
+		 creationComplete="init()">
 	<fx:Declarations>
 		<s:RadioButtonGroup id="questionPool"/>
 		<fx:String id="questionText"/>
@@ -11,14 +13,23 @@
 		<![CDATA[
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
+			import mx.controls.RadioButton;
 			
 			[Bindable] public var type:String;
 			[Bindable] public var text:String;
 			[Bindable] public var audio:String;
 			[Bindable] public var cardinality:String;
-			//[Bindable] public var responses:ArrayCollection;
+			[Bindable] public var responses:ArrayCollection;
 			[Bindable]public var registeredAnswer:String;
 			public var selections:ArrayCollection = new ArrayCollection();
+			
+			protected function init():void
+			{
+				for each(var item:RadioButton in responses)
+				{
+					responsesGroup.addElement(item);
+				}
+			}
 			
 			public function registerSelection():void
 			{
@@ -32,14 +43,6 @@
 			{
 				registeredAnswer = selection;
 				Alert.show(registeredAnswer);
-//				if(selections.length > 0)
-//				{
-//					selections.removeAll();
-//					registeredAnswer = '';
-//					registeredAnswer = selection;
-					//selections.addItem(selection);
-//				}
-//				return userSelection;
 			}
 			
 			public function registerMultipleAnswers():void
@@ -59,7 +62,7 @@
 	
 	<s:Label text="{questionText}" color="white" fontWeight="bold"/>
 	
-	<s:VGroup id="responses" includeIn="textQuestionView">
+	<s:VGroup id="responsesGroup" includeIn="textQuestionView">
 		<!--<s:RadioButton groupName="questionPool"
 					   label="music"
 					   color="white"/>

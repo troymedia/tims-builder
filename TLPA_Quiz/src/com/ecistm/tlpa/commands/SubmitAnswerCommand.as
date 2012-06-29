@@ -32,13 +32,14 @@ package com.ecistm.tlpa.commands
 //			if(answers.answers.length == 0)
 //				Alert.show('You must complete the question before submitting.', 'Invalid Answer', Alert.OK|Alert.CANCEL);
 //			else
-				Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK|Alert.CANCEL); //Continue, Retry Quiz
+				//Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK|Alert.CANCEL); //Continue, Retry Quiz
 			
 //			Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK|Alert.CANCEL); //Next Question
-				var request:URLRequest = new URLRequest('assets/audio/spanish_joint.mp3');
-				var channel:SoundChannel = new SoundChannel();
-				audio.load(request);
-				channel = audio.play();
+//				var request:URLRequest = new URLRequest('assets/audio/spanish_joint.mp3');
+//				var channel:SoundChannel = new SoundChannel();
+//				audio.load(request);
+				//channel = audio.play();
+				dispatch(new SubmitEvent(SubmitEvent.ANSWER_SUBMITTED));
 		}
 	}
 }

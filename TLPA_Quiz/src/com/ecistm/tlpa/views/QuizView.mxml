@@ -47,19 +47,32 @@
 						question.questionText = q.text;
 						question.audio = q.audio;
 						question.cardinality = q.cardinality;
-						navContent.addElement(question);
-//						for each(var r:Object in q.response)
-//						{
-//							var rb:RadioButton = new RadioButton();
+						for each(var r:Object in q.response)
+						{
+//							Alert.show('r');
+							var rb:RadioButton = new RadioButton();
 //							rb.groupName = 'questionPool';
-//							rb.label = r.text;
-//							question.responses.addElement(rb);
-//						}
+							rb.label = r.text;
+							rb.setStyle('color', 'white');
+							question.addElement(rb);
+							//question.responsesGroup.addElement(rb);
+							//Alert.show('r');
+						}
+						
+						navContent.addElement(question);
+						//question.responsesGroup.addElement(rb);
 						stack.addElement(navContent);
+//						Alert.show('yes');
 					}
 				}
 			}
 			
+			public function stepToNextQuestion():void
+			{
+				stack.selectedIndex += 1;;
+//				Alert.show(String(stack.selectedIndex + 1));
+			}
+		
 			public function resetQuiz():void
 			{
 				//restart quiz logic
@@ -83,7 +96,6 @@
 		<mx:ViewStack id="stack" width="100%" height="100%">
 			
 		</mx:ViewStack>
-		<!--<views:Question height="100%" width="100%"/>-->
 		
 	</s:BorderContainer>
 	
