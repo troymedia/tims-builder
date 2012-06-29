@@ -6,49 +6,58 @@
 				   creationComplete="init()" xmlns:views="com.ecistm.tlpa.views.*"
 				   cornerRadius="10" xmlns:components="com.ecistm.tlpa.components.*">
 	<fx:Declarations>
-		<s:HTTPService id="svc" url="com/ecistm/tlpa/data/lesson.xml" result="onResult(event)" fault="onFault(event)"/>
+		
 	</fx:Declarations>
 	
 	<fx:Script>
 		<![CDATA[
 			import com.ecistm.tlpa.models.LessonModel;
 			
+			import flash.media.*;
+			import flash.net.URLRequest;
+			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
+			import mx.controls.RadioButton;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
 			
-			import flash.media.*;
-			import flash.net.URLRequest;
+			import spark.components.NavigatorContent;
 			
 			[Bindable] protected var lessons:ArrayCollection;
 			
 			[Bindable] protected var questions:ArrayCollection;
 			
-			[Bindable] protected var audio:Sound;
 			
 			protected function init():void
 			{
-				var request:URLRequest = new URLRequest('assets/audio/punch.mp3');
-				var channel:SoundChannel = new SoundChannel();
-				audio.load(request);
-				channel = audio.play();
-			}
-			
-			protected function onResult(e:ResultEvent):void
-			{
-				lessons = svc.lastResult.lessons.lesson.questionPool as ArrayCollection;
-				//Alert.show(String(svc.lastResult.lessons.lesson.questionPool[0].question.type));
-			}
-			
-			protected function onFault(e:FaultEvent):void
-			{
-				Alert.show(e.fault.faultCode);
-			}
-			
-			protected function showQuestions():void
-			{
 				
+			}
+			
+			public function buildQuiz(data:*):void
+			{
+				for each(var qp:Object in data.questionPool)
+				{
+					for each(var q:Object in qp.question)
+					{
+						var navContent:NavigatorContent = new NavigatorContent();
+						navContent.percentHeight = navContent.percentWidth = 100;
+						var question:Question = new Question();
+						question.type = q.type;
+						question.questionText = q.text;
+						question.audio = q.audio;
+						question.cardinality = q.cardinality;
+						navContent.addElement(question);
+//						for each(var r:Object in q.response)
+//						{
+//							var rb:RadioButton = new RadioButton();
+//							rb.groupName = 'questionPool';
+//							rb.label = r.text;
+//							question.responses.addElement(rb);
+//						}
+						stack.addElement(navContent);
+					}
+				}
 			}
 			
 			public function resetQuiz():void
@@ -71,7 +80,10 @@
 			<s:VerticalLayout paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10"/>
 		</s:layout>
 		
-		<views:Question height="100%" width="100%"/>
+		<mx:ViewStack id="stack" width="100%" height="100%">
+			
+		</mx:ViewStack>
+		<!--<views:Question height="100%" width="100%"/>-->
 		
 	</s:BorderContainer>
 	

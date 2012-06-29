@@ -30,11 +30,17 @@ package com.ecistm.tlpa.mediators
 		override public function onRegister():void
 		{
 			addViewListener(Event.ADDED_TO_STAGE, onStartupComplete, Event);
+			addContextListener(SearchResultEvent.RECEIVED, onSearchResultsReceived, SearchResultEvent);
 		}
 		
 		protected function onStartupComplete(e:Event):void
 		{
 			service.getResults();
+		}
+		
+		protected function onSearchResultsReceived(e:SearchResultEvent):void
+		{
+			view.buildQuiz(e.results);
 		}
 	}
 }

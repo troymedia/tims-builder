@@ -7,7 +7,7 @@ package com.ecistm.tlpa.models
 	public class LessonModel extends Actor
 	{
 		[Bindable] public var id:String;
-		[Bindable] public var questionPools:ArrayCollection;
+		[Bindable] public var questionPools:ArrayCollection = new ArrayCollection();
 		public function LessonModel()
 		{
 			super();

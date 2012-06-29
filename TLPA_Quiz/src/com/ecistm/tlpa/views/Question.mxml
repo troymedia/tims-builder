@@ -4,6 +4,7 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:views="com.ecistm.tlpa.views.*">
 	<fx:Declarations>
 		<s:RadioButtonGroup id="questionPool"/>
+		<fx:String id="questionText"/>
 	</fx:Declarations>
 	
 	<fx:Script>
@@ -11,13 +12,17 @@
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			
-			[Bindable] public var questionType:String;
+			[Bindable] public var type:String;
+			[Bindable] public var text:String;
+			[Bindable] public var audio:String;
+			[Bindable] public var cardinality:String;
+			//[Bindable] public var responses:ArrayCollection;
 			[Bindable]public var registeredAnswer:String;
 			public var selections:ArrayCollection = new ArrayCollection();
 			
 			public function registerSelection():void
 			{
-				if(questionType == 'MCG')
+				if(type == 'MCG')
 					registerMultipleAnswers();
 				else
 					registerSingleAnswer(questionPool.selectedValue as String);
@@ -52,10 +57,10 @@
 	
 	<s:HGroup height="320" width="100%" includeIn="imageQuestionView"/>
 	
-	<s:Label text="She arrived _________ to the class." color="white" fontWeight="bold"/>
+	<s:Label text="{questionText}" color="white" fontWeight="bold"/>
 	
-	<s:VGroup includeIn="textQuestionView">
-		<s:RadioButton groupName="questionPool"
+	<s:VGroup id="responses" includeIn="textQuestionView">
+		<!--<s:RadioButton groupName="questionPool"
 					   label="music"
 					   color="white"/>
 		<s:RadioButton groupName="questionPool"
@@ -66,7 +71,7 @@
 					   color="white"/>
 		<s:RadioButton groupName="questionPool"
 					   label="wash"
-					   color="white"/>
+					   color="white"/>-->
 	</s:VGroup>
 	
 	

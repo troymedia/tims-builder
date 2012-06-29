@@ -1,9 +1,11 @@
 package com.ecistm.tlpa.commands
 {
 	import com.ecistm.tlpa.events.SearchResultEvent;
+	import com.ecistm.tlpa.models.LessonModel;
 	import com.ecistm.tlpa.models.QuestionModel;
 	import com.ecistm.tlpa.models.QuestionPoolModel;
 	import com.ecistm.tlpa.services.LessonsService;
+	import com.ecistm.tlpa.views.Question;
 	
 	import mx.controls.Alert;
 	
@@ -17,6 +19,8 @@ package com.ecistm.tlpa.commands
 		[Inject]
 		public var service:LessonsService;
 		
+		[Inject]
+		public var lessonModel:LessonModel;
 		
 		[Inject]
 		public var question:QuestionPoolModel;
@@ -28,8 +32,27 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
-			updateQuestionModel()
+			buildLesson();
+			//updateQuestionModel()
 			//dispatch(new SearchResultEvent(SearchResultEvent.POPULATE));
+		}
+		
+		protected function buildLesson():void
+		{
+			for each(var qp:Object in service.lesson.questionPool)
+			{
+				for each(var q:Object in qp.question)
+				{
+					var question:Question = new Question();
+					question.type = q.type;
+					question.text = q.text;
+					question.audio = q.audio;
+					question.cardinality = q.cadinality;
+					Alert.show(question.text);
+				}
+			}
+			
+			lessonModel.questionPools.addItem(qp);
 		}
 		
 		protected function updateQuestionModel():void

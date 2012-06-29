@@ -35,12 +35,13 @@ package
 			mediatorMap.mapView(TLPAQuizTitle, TLPAQuizTitleMediator, TLPAQuizTitle);
 			
 			//commands
-			commandMap.mapEvent(SearchResultEvent.RECEIVED, FetchDataCommand, SearchResultEvent);
+			//commandMap.mapEvent(SearchResultEvent.RECEIVED, FetchDataCommand, SearchResultEvent);
 			commandMap.mapEvent(SubmitEvent.REGISTER_ANSWERS, RegisterAnswersCommand, SubmitEvent);
 			commandMap.mapEvent(SubmitEvent.SUBMIT_ANSWERS, SubmitAnswerCommand, SubmitEvent);
 			
 			//injectors
 			injector.mapSingleton(LessonsService);
+			injector.mapSingleton(LessonModel);
 			injector.mapSingleton(QuestionPoolModel);
 			injector.mapSingleton(QuestionModel);
 			injector.mapSingleton(AnswersModel);
