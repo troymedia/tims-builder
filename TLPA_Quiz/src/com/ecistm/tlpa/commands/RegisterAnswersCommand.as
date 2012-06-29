@@ -2,6 +2,8 @@ package com.ecistm.tlpa.commands
 {
 	import com.ecistm.tlpa.events.SubmitEvent;
 	import com.ecistm.tlpa.models.AnswersModel;
+	import com.ecistm.tlpa.models.QuestionModel;
+	import com.ecistm.tlpa.models.ResponseTextModel;
 	
 	import mx.controls.Alert;
 	
@@ -10,7 +12,10 @@ package com.ecistm.tlpa.commands
 	public class RegisterAnswersCommand extends Command
 	{
 		[Inject]
-		public var model:AnswersModel;
+		public var answersModel:AnswersModel;
+		
+		[Inject]
+		public var responseModel:ResponseTextModel;
 		
 		[Inject]
 		public var event:SubmitEvent;
@@ -22,14 +27,16 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
-			Alert.show('Registered answer: ' + event.answer);
-			if(model.answers.length > 0)
-			{
-				model.removeAnswers();
-				model.registerAnswers(event.answer);
-			}
-			
-			Alert.show(String(model.answers.getItemAt(0)));
+			populateResponseTextModel()
+			answersModel.removeAnswers();
+			answersModel.registerAnswers(event.question.registeredAnswer);
+		}
+		
+		protected function populateResponseTextModel():void
+		{
+
+			responseModel.label = event.question.label;
+			responseModel.correct = (event.question.name == 'false') ? false : true;
 		}
 	}
 }

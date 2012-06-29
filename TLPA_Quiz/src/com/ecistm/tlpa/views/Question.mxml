@@ -3,8 +3,9 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" 
 		 xmlns:views="com.ecistm.tlpa.views.*"
-		 creationComplete="init()">
+		 creationComplete="init()" xmlns:components="com.ecistm.tlpa.components.*">
 	<fx:Declarations>
+		<components:SoundPlayer/>
 		<s:RadioButtonGroup id="questionPool"/>
 		<fx:String id="questionText"/>
 	</fx:Declarations>
@@ -13,22 +14,21 @@
 		<![CDATA[
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
-			import mx.controls.RadioButton;
+			import spark.components.RadioButton;
 			
 			[Bindable] public var type:String;
 			[Bindable] public var text:String;
 			[Bindable] public var audio:String;
 			[Bindable] public var cardinality:String;
 			[Bindable] public var responses:ArrayCollection;
+			public var responsesGroup:VGroup;
+			public var rb:RadioButton;
 			[Bindable]public var registeredAnswer:String;
 			public var selections:ArrayCollection = new ArrayCollection();
 			
 			protected function init():void
 			{
-				for each(var item:RadioButton in responses)
-				{
-					responsesGroup.addElement(item);
-				}
+				
 			}
 			
 			public function registerSelection():void
@@ -42,7 +42,7 @@
 			public function registerSingleAnswer(selection:String):void
 			{
 				registeredAnswer = selection;
-				Alert.show(registeredAnswer);
+//				Alert.show('registered answer: ' + registeredAnswer);
 			}
 			
 			public function registerMultipleAnswers():void
@@ -61,21 +61,7 @@
 	<s:HGroup height="320" width="100%" includeIn="imageQuestionView"/>
 	
 	<s:Label text="{questionText}" color="white" fontWeight="bold"/>
-	
-	<s:VGroup id="responsesGroup" includeIn="textQuestionView">
-		<!--<s:RadioButton groupName="questionPool"
-					   label="music"
-					   color="white"/>
-		<s:RadioButton groupName="questionPool"
-					   label="stepping"
-					   color="white"/>
-		<s:RadioButton groupName="questionPool"
-					   label="late"
-					   color="white"/>
-		<s:RadioButton groupName="questionPool"
-					   label="wash"
-					   color="white"/>-->
-	</s:VGroup>
+
 	
 	
 </s:VGroup>

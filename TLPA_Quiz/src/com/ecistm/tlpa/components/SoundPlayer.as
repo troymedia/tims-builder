@@ -5,7 +5,7 @@ package com.ecistm.tlpa.components
 
 	public class SoundPlayer
 	{
-		var sound:Sound = new Sound();
+		public var sound:Sound = new Sound();
 		public function SoundPlayer()
 		{
 			var request:URLRequest = new URLRequest();

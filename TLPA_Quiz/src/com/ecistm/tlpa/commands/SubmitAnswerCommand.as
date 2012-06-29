@@ -18,6 +18,9 @@ package com.ecistm.tlpa.commands
 		public var answers:AnswersModel;
 		
 		[Inject]
+		public var responseModel:ResponseTextModel;
+		
+		[Inject]
 		public var event:SubmitEvent;
 		
 		[Bindable] protected var audio:Sound = new Sound();
@@ -39,7 +42,7 @@ package com.ecistm.tlpa.commands
 //				var channel:SoundChannel = new SoundChannel();
 //				audio.load(request);
 				//channel = audio.play();
-				dispatch(new SubmitEvent(SubmitEvent.ANSWER_SUBMITTED));
+				dispatch(new SubmitEvent(SubmitEvent.ANSWER_SUBMITTED, String(responseModel.correct)));
 		}
 	}
 }

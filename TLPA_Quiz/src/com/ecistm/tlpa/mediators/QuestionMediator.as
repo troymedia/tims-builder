@@ -25,9 +25,9 @@ package com.ecistm.tlpa.mediators
 		
 		protected function onItemClick(e:ItemClickEvent):void
 		{
+			view.registeredAnswer = view.questionPool.selectedValue as String;
 			view.registerSelection();
-			Alert.show(view.questionPool.selectedValue as String);
-			dispatch(new SubmitEvent(SubmitEvent.REGISTER_ANSWERS, 'MC', view.registeredAnswer));//convert to function that retrieves necessary data
+			dispatch(new SubmitEvent(SubmitEvent.REGISTER_ANSWERS, 'MC', e.currentTarget.selection, view.registeredAnswer));//convert to function that retrieves necessary data
 		}
 		
 		protected function onSubmit(e:SubmitEvent):void
