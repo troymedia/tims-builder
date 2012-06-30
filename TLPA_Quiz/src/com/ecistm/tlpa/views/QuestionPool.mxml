@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx" 
+		  xmlns:views="com.ecistm.tlpa.views.*"
+		  creationComplete="init()" xmlns:components="com.ecistm.tlpa.components.*">
+	<fx:Declarations>
+		<components:SoundPlayer/>
+		<s:RadioButtonGroup id="questionPool"/>
+		<fx:String id="questionText"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import spark.components.RadioButton;
+			
+			[Bindable] public var type:String;
+			[Bindable] public var text:String;
+			[Bindable] public var audio:String;
+			[Bindable] public var cardinality:String;
+			[Bindable] public var responses:ArrayCollection;
+			public var responsesGroup:VGroup;
+			public var rb:RadioButton;
+			[Bindable]public var registeredAnswer:String;
+			public var selections:ArrayCollection = new ArrayCollection();
+			
+			protected function init():void
+			{
+				
+			}
+			
+			public function registerSelection():void
+			{
+				if(type == 'MCG')
+					registerMultipleAnswers();
+				else
+					registerSingleAnswer(questionPool.selectedValue as String);
+			}
+			
+			public function registerSingleAnswer(selection:String):void
+			{
+				registeredAnswer = selection;
+				//				Alert.show('registered answer: ' + registeredAnswer);
+			}
+			
+			public function registerMultipleAnswers():void
+			{
+				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="textQuestionView"/>
+		<s:State name="imageQuestionView"/>
+	</s:states>
+	
+	<mx:ViewStack id="pool" height="100%" width="100%"/>
+	
+	
+	
+</s:VGroup>

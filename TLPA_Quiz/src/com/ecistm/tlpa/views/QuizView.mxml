@@ -40,10 +40,11 @@
 			{
 				for each(var qp:Object in data.questionPool)
 				{
+					var navContent:NavigatorContent = new NavigatorContent();
+					navContent.percentHeight = navContent.percentWidth = 100;
+					var questionPool:QuestionPool = new QuestionPool();
 					for each(var q:Object in qp.question)
 					{
-						var navContent:NavigatorContent = new NavigatorContent();
-						navContent.percentHeight = navContent.percentWidth = 100;
 						var question:Question = new Question();
 						question.type = q.type;
 						question.questionText = q.text;
@@ -58,11 +59,13 @@
 							question.rb.name = (r.correct == 0) ? 'false' : 'true';
 							question.addElement(question.rb);
 						}
-						
-						navContent.addElement(question);
+						questionPool.addElement(question);
+						navContent.addElement(questionPool);
 						stack.addElement(navContent);
 					}
+					Alert.show('num of questions: ' + String(questionPool.numElements));
 				}
+				//Alert.show(String(stack.numElements));
 			}
 			
 			public function stepToNextQuestion():void
@@ -93,6 +96,7 @@
 		<mx:ViewStack id="stack" width="100%" height="100%">
 			
 		</mx:ViewStack>
+		<!--<views:QuestionPool height="100%" width="100%"/>-->
 		
 	</s:BorderContainer>
 	
