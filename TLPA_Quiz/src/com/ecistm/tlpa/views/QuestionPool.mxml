@@ -13,22 +13,39 @@
 	<fx:Script>
 		<![CDATA[
 			import mx.collections.ArrayCollection;
+			import mx.containers.ViewStack;
 			import mx.controls.Alert;
+			
+			import spark.components.NavigatorContent;
 			import spark.components.RadioButton;
 			
 			[Bindable] public var type:String;
 			[Bindable] public var text:String;
 			[Bindable] public var audio:String;
 			[Bindable] public var cardinality:String;
-			[Bindable] public var responses:ArrayCollection;
+			[Bindable] public var questions:ArrayCollection = new ArrayCollection();
 			public var responsesGroup:VGroup;
 			public var rb:RadioButton;
 			[Bindable]public var registeredAnswer:String;
+			public var questionStack:ViewStack;
 			public var selections:ArrayCollection = new ArrayCollection();
+			
+			override protected function createChildren():void
+			{
+				questionStack = new ViewStack();
+				questionStack.percentHeight = questionStack.percentWidth = 100;
+				this.addElement(questionStack);
+			}
 			
 			protected function init():void
 			{
-				
+				for each(var question:Question in questions)
+				{
+					var navContent:NavigatorContent = new NavigatorContent();
+					navContent.percentHeight = navContent.percentWidth = 100;
+					navContent.addElement(question);
+					questionStack.addElement(navContent);
+				}
 			}
 			
 			public function registerSelection():void
@@ -57,9 +74,5 @@
 		<s:State name="textQuestionView"/>
 		<s:State name="imageQuestionView"/>
 	</s:states>
-	
-	<mx:ViewStack id="pool" height="100%" width="100%"/>
-	
-	
 	
 </s:VGroup>

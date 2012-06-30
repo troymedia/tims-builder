@@ -3,8 +3,10 @@
 				   xmlns:s="library://ns.adobe.com/flex/spark" 
 				   xmlns:mx="library://ns.adobe.com/flex/mx"
 				   backgroundColor="0x333333"
-				   creationComplete="init()" xmlns:views="com.ecistm.tlpa.views.*"
-				   cornerRadius="10" xmlns:components="com.ecistm.tlpa.components.*">
+				   xmlns:components="com.ecistm.tlpa.components.*"
+				   xmlns:views="com.ecistm.tlpa.views.*"
+				   creationComplete="init()"
+				   cornerRadius="10" >
 	<fx:Declarations>
 		
 	</fx:Declarations>
@@ -25,7 +27,7 @@
 			import spark.components.NavigatorContent;
 			import spark.components.RadioButton;
 			
-			[Bindable] protected var lessons:ArrayCollection;
+			[Bindable] public var lessons:ArrayCollection;
 			
 			[Bindable] protected var questions:ArrayCollection;
 			public var rb:spark.components.RadioButton;
@@ -59,13 +61,14 @@
 							question.rb.name = (r.correct == 0) ? 'false' : 'true';
 							question.addElement(question.rb);
 						}
-						questionPool.addElement(question);
+//						questionPool.addElement(question);
+						questionPool.questions.addItem(question);
 						navContent.addElement(questionPool);
 						stack.addElement(navContent);
 					}
 					Alert.show('num of questions: ' + String(questionPool.numElements));
 				}
-				//Alert.show(String(stack.numElements));
+				Alert.show('number of question pools: ' + String(stack.numElements) + '\n' + 'number of questions: ' + String(questionPool.questions.length));
 			}
 			
 			public function stepToNextQuestion():void
