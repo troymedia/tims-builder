@@ -51,6 +51,8 @@ package com.ecistm.tlpa.mediators
 				Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK, null, function():void{ view.stepToNextQuestion() });
 			else if(e.questionType == 'true')
 				Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK|Alert.CANCEL, null, function():void{ view.stepToNextQuestion() });
+			else if(e.questionType == null)
+				Alert.show('You must complete the question before submitting.', 'Invalid Answer', Alert.OK, null);
 		}
 	}
 }

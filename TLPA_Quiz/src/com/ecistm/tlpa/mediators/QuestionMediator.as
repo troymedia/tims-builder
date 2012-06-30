@@ -1,5 +1,6 @@
 package com.ecistm.tlpa.mediators
 {
+	import com.ecistm.tlpa.events.AnswerSelectionEvent;
 	import com.ecistm.tlpa.events.SubmitEvent;
 	import com.ecistm.tlpa.views.Question;
 	
@@ -28,6 +29,7 @@ package com.ecistm.tlpa.mediators
 			view.registeredAnswer = view.questionPool.selectedValue as String;
 			view.registerSelection();
 			dispatch(new SubmitEvent(SubmitEvent.REGISTER_ANSWERS, 'MC', e.currentTarget.selection, view.registeredAnswer));//convert to function that retrieves necessary data
+			dispatch(new AnswerSelectionEvent(AnswerSelectionEvent.ANSWER_SELECTED));
 		}
 		
 		protected function onSubmit(e:SubmitEvent):void
