@@ -3,10 +3,8 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" 
 		 xmlns:views="com.ecistm.tlpa.views.*"
-		 xmlns:components="com.ecistm.tlpa.components.*"
-		 show="Alert.show('addedToStage')" hide="Alert.show('removedFromStage')" 
-		 creationComplete="init()"
-		 >
+		 xmlns:components="com.ecistm.tlpa.components.*" 
+		 creationComplete="init()">
 	<!--show="Alert.show('show')" hide="Alert.show('hide')" 
 	added="Alert.show('added')" removed="Alert.show('removed')"-->
 	<fx:Declarations>
@@ -35,22 +33,18 @@
 			public var label:Label;
 			public var selections:ArrayCollection = new ArrayCollection();
 			
-			override protected function createChildren():void
+			protected function init():void
 			{
-//				super.createChildren();
+				super.createChildren();
 				label = new Label();
 				label.setStyle('color', 'white');
 				label.setStyle('fontWeight', 'bold');
 				label.setStyle('fontSize', 12);
 				label.text = questionText;
 				this.addElementAt(label, 0);
-			}
-			
-			protected function init():void
-			{
 				//Alert.show(this.audio);
 //				this.addEventListener(FlexEvent.SHOW, function():void { 
-					soundPlayer.play();
+//					soundPlayer.play();
 //					this.addEventListener(FlexEvent.HIDE, function():void{
 //						soundPlayer.stop();
 //					});

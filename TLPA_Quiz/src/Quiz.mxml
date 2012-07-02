@@ -10,6 +10,8 @@
 		<local:TLPAQuizContext contextView="{this}"/>
 	</fx:Declarations>
 	
+	<fx:Style source="styles.css"/>
+	
 	<s:layout>
 		<s:HorizontalLayout paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10"/>
 	</s:layout>

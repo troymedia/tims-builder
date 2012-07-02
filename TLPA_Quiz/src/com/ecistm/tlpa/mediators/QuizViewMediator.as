@@ -24,6 +24,8 @@ package com.ecistm.tlpa.mediators
 		[Inject]
 		public var service:LessonsService;
 		
+		protected var alert:Alert;
+		
 		public function QuizViewMediator()
 		{
 			super();
@@ -51,7 +53,7 @@ package com.ecistm.tlpa.mediators
 			if(e.questionType == 'false')
 			{
 				Alert.okLabel = "Next Question";
-				Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK, null, function(e:CloseEvent):void{ 
+				alert = Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK, null, function(e:CloseEvent):void{ 
 					view.stepToNextQuestion() 
 				});
 			}
@@ -59,13 +61,14 @@ package com.ecistm.tlpa.mediators
 			{
 				Alert.okLabel = 'Continue';
 				Alert.cancelLabel = 'Retry Quiz';
-				Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK|Alert.CANCEL, null, function(e:CloseEvent):void{ 
+				alert = Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK|Alert.CANCEL, null, function(e:CloseEvent):void{ 
 					if(e.detail == Alert.OK)
 						view.stepToNextQuestionPool();
 					if(e.detail == Alert.CANCEL)
 						view.resetQuiz();
 				});
 			}
+			alert.setStyle('buttonStyleName', 'styledAlertButtons');
 		}
 	}
 }
