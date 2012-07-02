@@ -102,7 +102,7 @@
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
 				SoundMixer.stopAll();
 				currentQuestion.soundPlayer.play();
-				Alert.show(String(currentQuestionPool) + '\n' + String(currentQuestion.audio));
+//				Alert.show(String(currentQuestionPool) + '\n' + String(currentQuestion.audio));
 			}
 			
 		]]>
