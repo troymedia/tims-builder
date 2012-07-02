@@ -3,9 +3,14 @@
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
 		 xmlns:mx="library://ns.adobe.com/flex/mx" 
 		 xmlns:views="com.ecistm.tlpa.views.*"
-		 creationComplete="init()" xmlns:components="com.ecistm.tlpa.components.*">
+		 xmlns:components="com.ecistm.tlpa.components.*"
+		 show="Alert.show('addedToStage')" hide="Alert.show('removedFromStage')" 
+		 creationComplete="init()"
+		 >
+	<!--show="Alert.show('show')" hide="Alert.show('hide')" 
+	added="Alert.show('added')" removed="Alert.show('removed')"-->
 	<fx:Declarations>
-		<components:SoundPlayer/>
+		<components:SoundPlayer id="soundPlayer" url="{audio}"/>
 		<s:RadioButtonGroup id="questionPool"/>
 		<fx:String id="questionText"/>
 	</fx:Declarations>
@@ -14,21 +19,42 @@
 		<![CDATA[
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			import spark.components.Label;
 			import spark.components.RadioButton;
 			
 			[Bindable] public var type:String;
 			[Bindable] public var text:String;
-			[Bindable] public var audio:String;
+			[Bindable] public var audio:String = 'assets/audio/spanish_joint.mp3';
 			[Bindable] public var cardinality:String;
 			[Bindable] public var responses:ArrayCollection;
 			public var responsesGroup:VGroup;
 			public var rb:RadioButton;
 			[Bindable]public var registeredAnswer:String;
+			public var label:Label;
 			public var selections:ArrayCollection = new ArrayCollection();
+			
+			override protected function createChildren():void
+			{
+//				super.createChildren();
+				label = new Label();
+				label.setStyle('color', 'white');
+				label.setStyle('fontWeight', 'bold');
+				label.setStyle('fontSize', 12);
+				label.text = questionText;
+				this.addElementAt(label, 0);
+			}
 			
 			protected function init():void
 			{
-				
+				//Alert.show(this.audio);
+//				this.addEventListener(FlexEvent.SHOW, function():void { 
+					soundPlayer.play();
+//					this.addEventListener(FlexEvent.HIDE, function():void{
+//						soundPlayer.stop();
+//					});
+//				});
 			}
 			
 			public function registerSelection():void
@@ -42,12 +68,11 @@
 			public function registerSingleAnswer(selection:String):void
 			{
 				registeredAnswer = selection;
-//				Alert.show('registered answer: ' + registeredAnswer);
 			}
 			
 			public function registerMultipleAnswers():void
 			{
-				
+				//coming soon...
 			}
 			
 		]]>
@@ -58,10 +83,7 @@
 		<s:State name="imageQuestionView"/>
 	</s:states>
 	
-	<s:HGroup height="320" width="100%" includeIn="imageQuestionView"/>
-	
-	<s:Label text="{questionText}" color="white" fontWeight="bold"/>
-
-	
+	<!--<s:HGroup height="320" width="100%" includeIn="imageQuestionView"/>-->
+	<!--<s:Label text="{questionText}" color="white"/>-->
 	
 </s:VGroup>

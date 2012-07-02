@@ -9,6 +9,7 @@ package com.ecistm.tlpa.mediators
 	import flash.events.MouseEvent;
 	
 	import mx.controls.Alert;
+	import mx.events.CloseEvent;
 	import mx.events.FlexEvent;
 	
 	import org.robotlegs.base.ContextEvent;
@@ -48,11 +49,23 @@ package com.ecistm.tlpa.mediators
 		protected function onAnswerSubmitted(e:SubmitEvent):void
 		{
 			if(e.questionType == 'false')
-				Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK, null, function():void{ view.stepToNextQuestion() });
+			{
+				Alert.okLabel = "Next Question";
+				Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK, null, function(e:CloseEvent):void{ 
+					view.stepToNextQuestion() 
+				});
+			}
 			else if(e.questionType == 'true')
-				Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK|Alert.CANCEL, null, function():void{ view.stepToNextQuestion() });
-			else if(e.questionType == null)
-				Alert.show('You must complete the question before submitting.', 'Invalid Answer', Alert.OK, null);
+			{
+				Alert.okLabel = 'Continue';
+				Alert.cancelLabel = 'Retry Quiz';
+				Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK|Alert.CANCEL, null, function(e:CloseEvent):void{ 
+					if(e.detail == Alert.OK)
+						view.stepToNextQuestionPool();
+					if(e.detail == Alert.CANCEL)
+						view.resetQuiz();
+				});
+			}
 		}
 	}
 }
