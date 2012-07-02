@@ -31,14 +31,12 @@
 			
 			[Bindable] protected var questions:ArrayCollection;
 			public var rb:spark.components.RadioButton;
-			protected var currentQuestionPool:QuestionPool;
-			
+			[Bindable] protected var currentQuestionPool:QuestionPool;
+			[Bindable] protected var currentQuestion:Question;
 			public function buildQuiz(data:*):void
 			{
 				for each(var qp:Object in data.questionPool)
 				{
-//					var navContent:NavigatorContent = new NavigatorContent();
-//					navContent.percentHeight = navContent.percentWidth = 100;
 					var questionPool:QuestionPool = new QuestionPool();
 					for each(var q:Object in qp.question)
 					{
@@ -47,10 +45,9 @@
 						var question:Question = new Question();
 						question.type = q.type;
 						question.questionText = q.text;
-//						question.audio = q.audio;
+						question.audio = q.audio;
 						question.cardinality = q.cardinality;
 						nav.addElement(question);
-//						Alert.show(q.text);
 						for each(var r:Object in q.response)
 						{
 							question.rb = new spark.components.RadioButton();
@@ -63,27 +60,34 @@
 							
 						}
 						questionPool.addElement(nav);
-//						questionPool.questions.addItem(question);
-//						navContent.addElement(questionPool);
 						stack.addElement(questionPool);
 					}
-//					Alert.show('num of questions: ' + String(questionPool.numElements));
 				}
-//				Alert.show('number of question pools: ' + String(stack.numElements) + '\n' + 'number of questions: ' + String(questionPool.questions.length));
+				currentQuestionPool = QuestionPool(stack.selectedChild);
+				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
+				currentQuestion.soundPlayer.play();
 			}
 			
 			public function stepToNextQuestionPool():void
 			{
 				stack.selectedIndex += 1;
+				currentQuestionPool = QuestionPool(stack.selectedChild);
+				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
+				SoundMixer.stopAll();
+				currentQuestion.soundPlayer.play();
 			}
 			
 			public function stepToNextQuestion():void
 			{
+				
 				if(numOfIncorrectAnswers < 2)
 				{
 					numOfIncorrectAnswers++;
-					currentQuestionPool = QuestionPool(stack.selectedChild) as QuestionPool;
 					currentQuestionPool.selectedIndex += 1;
+					currentQuestionPool = QuestionPool(stack.selectedChild);
+					currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
+					SoundMixer.stopAll();
+					currentQuestion.soundPlayer.play();
 				}	
 				else if(numOfIncorrectAnswers == 3)
 				{	
@@ -94,6 +98,11 @@
 			public function resetQuiz():void
 			{
 				stack.selectedIndex = 0;
+				currentQuestionPool = QuestionPool(stack.selectedChild);
+				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
+				SoundMixer.stopAll();
+				currentQuestion.soundPlayer.play();
+				Alert.show(String(currentQuestionPool) + '\n' + String(currentQuestion.audio));
 			}
 			
 		]]>

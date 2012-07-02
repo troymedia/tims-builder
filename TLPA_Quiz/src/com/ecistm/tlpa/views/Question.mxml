@@ -4,7 +4,8 @@
 		 xmlns:mx="library://ns.adobe.com/flex/mx" 
 		 xmlns:views="com.ecistm.tlpa.views.*"
 		 xmlns:components="com.ecistm.tlpa.components.*" 
-		 creationComplete="init()">
+		 creationComplete="init()"
+		 >
 	<!--show="Alert.show('show')" hide="Alert.show('hide')" 
 	added="Alert.show('added')" removed="Alert.show('removed')"-->
 	<fx:Declarations>
@@ -42,6 +43,7 @@
 				label.setStyle('fontSize', 12);
 				label.text = questionText;
 				this.addElementAt(label, 0);
+				//Alert.show(this.audio);
 				//Alert.show(this.audio);
 //				this.addEventListener(FlexEvent.SHOW, function():void { 
 //					soundPlayer.play();
