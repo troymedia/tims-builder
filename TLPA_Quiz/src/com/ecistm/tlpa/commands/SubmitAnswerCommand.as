@@ -1,5 +1,6 @@
 package com.ecistm.tlpa.commands
 {
+	import com.ecistm.tlpa.components.FeedbackDialogBox;
 	import com.ecistm.tlpa.events.SubmitEvent;
 	import com.ecistm.tlpa.models.AnswersModel;
 	import com.ecistm.tlpa.models.ResponseTextModel;
@@ -9,6 +10,7 @@ package com.ecistm.tlpa.commands
 	import flash.net.URLRequest;
 	
 	import mx.controls.Alert;
+	import mx.managers.PopUpManager;
 	
 	import org.robotlegs.mvcs.Command;
 	
@@ -32,17 +34,13 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
-//			if(answers.answers.length == 0)
-//				Alert.show('You must complete the question before submitting.', 'Invalid Answer', Alert.OK|Alert.CANCEL);
-//			else
-				//Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK|Alert.CANCEL); //Continue, Retry Quiz
-			
-//			Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK|Alert.CANCEL); //Next Question
-//				var request:URLRequest = new URLRequest('assets/audio/spanish_joint.mp3');
-//				var channel:SoundChannel = new SoundChannel();
-//				audio.load(request);
-				//channel = audio.play();
-				dispatch(new SubmitEvent(SubmitEvent.ANSWER_SUBMITTED, String(responseModel.correct)));
+			var feedback:FeedbackDialogBox = new FeedbackDialogBox();
+			feedback.height = contextView.height / 2;
+			feedback.width = contextView.width / 2;
+			PopUpManager.addPopUp(feedback, contextView);
+			PopUpManager.centerPopUp(feedback);
+			mediatorMap.createMediator(feedback);
+			dispatch(new SubmitEvent(SubmitEvent.ANSWER_SUBMITTED, String(responseModel.correct)));
 		}
 	}
 }

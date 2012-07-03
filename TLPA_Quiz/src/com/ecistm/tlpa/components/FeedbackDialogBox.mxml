@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		  xmlns:s="library://ns.adobe.com/flex/spark" 
 		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  xmlns:components="com.ecistm.tlpa.components.*"
+		  cornerRadius="10"
+		  backgroundColor="0x1e1e1e"
 		  creationComplete="init()">
 	<fx:Declarations>
+		<components:SoundPlayer url="{audio}"/>
 		<fx:String id="feedbackText"/>
 	</fx:Declarations>
 	
@@ -12,14 +16,11 @@
 			
 			[Bindable] protected var dialogText:Array = [];
 			
-			[Bindable] protected var audio:Sound;
+			[Bindable] protected var audio:String = '';
 			
 			protected function init():void
 			{
-				var request:URLRequest = new URLRequest('assets/audio/holUp.m4a');
-				var channel:SoundChannel = new SoundChannel();
-				audio.load(request);
-				channel = audio.play();
+				
 			}
 			
 		]]>
@@ -30,16 +31,21 @@
 	</s:layout>
 	
 	<s:states>
-		<s:State name="textView"/>
-		<s:State name="videoView"/>
+		<s:State name="correctView"/>
+		<s:State name="incorrectTextView"/>
+		<s:State name="incorrectImageView"/>
 	</s:states>
 	
-	<s:TextArea contentBackgroundAlpha="0" borderVisible="false" height="240" width="100%" text="{feedbackText}"/>
-	<s:Spacer height="100%"/>
+	<s:BitmapImage width="100%" height="100%" excludeFrom="correctView, incorrectTextView"/>
+	<s:TextArea contentBackgroundAlpha="0" borderVisible="false" height="100%" width="100%" text="{feedbackText}" includeIn="correctView, incorrectTextView"/>
+	<!--<s:Spacer height="100%"/>-->
 	<s:HGroup width="100%" horizontalAlign="center">
-		<s:Button id="okButton"/>
-		<s:Button id="cancelButton"/>
+		<s:Button id="okButton" 
+				  label.correctView="Continue"
+				  label="Next Question"/>
+		<s:Button id="cancelButton" 
+				  label.correctView="Retry Quiz"
+				  includeIn="correctView"/>
 	</s:HGroup>
 	
-	
-</s:TitleWindow>
+</s:BorderContainer>
