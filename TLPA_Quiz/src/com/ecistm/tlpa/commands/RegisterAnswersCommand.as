@@ -3,6 +3,7 @@ package com.ecistm.tlpa.commands
 	import com.ecistm.tlpa.events.SubmitEvent;
 	import com.ecistm.tlpa.models.AnswersModel;
 	import com.ecistm.tlpa.models.QuestionModel;
+	import com.ecistm.tlpa.models.QuestionPoolModel;
 	import com.ecistm.tlpa.models.ResponseTextModel;
 	
 	import mx.controls.Alert;
@@ -16,6 +17,9 @@ package com.ecistm.tlpa.commands
 		
 		[Inject]
 		public var responseModel:ResponseTextModel;
+		
+		[Inject]
+		public var questionPoolModel:QuestionPoolModel;
 		
 		[Inject]
 		public var event:SubmitEvent;
@@ -34,9 +38,16 @@ package com.ecistm.tlpa.commands
 		
 		protected function populateResponseTextModel():void
 		{
-
 			responseModel.label = event.question.label;
 			responseModel.correct = (event.question.name == 'false') ? false : true;
+//			responseModel.audio = event.question.incorrectAudio;
+//			responseModel.video = event.question.incorrectVideo;
+//			responseModel.image = event.question.incorrectImage;
+		}
+		
+		protected function populateQuestionPoolModel():void
+		{
+			
 		}
 	}
 }

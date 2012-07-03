@@ -7,6 +7,9 @@ package com.ecistm.tlpa.models
 		[Bindable] public var label:String = '';
 		[Bindable] public var correct:Boolean = false;
 		[Bindable] public var answers:Array = [];
+		[Bindable] public var audio:String;
+		[Bindable] public var video:String;
+		[Bindable] public var image:String;
 		
 		public function ResponseTextModel()
 		{
@@ -15,8 +18,6 @@ package com.ecistm.tlpa.models
 		
 		public function resetModel():void
 		{
-//			label = null;
-//			correct = null;
 			
 		}
 	}

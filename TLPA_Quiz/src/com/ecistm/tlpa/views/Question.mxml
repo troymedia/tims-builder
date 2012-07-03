@@ -33,6 +33,12 @@
 			[Bindable]public var registeredAnswer:String;
 			public var label:Label;
 			public var selections:ArrayCollection = new ArrayCollection();
+			[Bindable] public var pool:String;
+			[Bindable] public var correctAudio:String;
+			[Bindable] public var correctText:String;
+			[Bindable] public var incorrectAudio:String;
+			[Bindable] public var incorrectVideo:String;
+			[Bindable] public var incorrectImage:String;
 			
 			protected function init():void
 			{
@@ -80,6 +86,5 @@
 	</s:states>
 	
 	<!--<s:HGroup height="320" width="100%" includeIn="imageQuestionView"/>-->
-	<!--<s:Label text="{questionText}" color="white"/>-->
 	
 </s:VGroup>

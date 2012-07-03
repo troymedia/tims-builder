@@ -47,7 +47,14 @@
 						question.questionText = q.text;
 						question.audio = q.audio;
 						question.cardinality = q.cardinality;
+						question.pool = qp.number;
+						question.correctAudio = qp.correctResponse.audio;
+						question.correctText = qp.correctResponse.text;
+//						question.incorrectAudio = qp.incorrectResponse.audio;
+//						question.incorrectVideo = qp.incorrectResponse.video;
+//						question.incorrectImage = qp.incorrectResponse.image;
 						nav.addElement(question);
+						//Alert.show(question.incorrectImage);
 						for each(var r:Object in q.response)
 						{
 							question.rb = new spark.components.RadioButton();
@@ -102,7 +109,6 @@
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
 				SoundMixer.stopAll();
 				currentQuestion.soundPlayer.play();
-//				Alert.show(String(currentQuestionPool) + '\n' + String(currentQuestion.audio));
 			}
 			
 		]]>

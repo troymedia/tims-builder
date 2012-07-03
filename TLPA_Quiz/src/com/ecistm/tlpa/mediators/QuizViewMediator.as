@@ -39,6 +39,7 @@ package com.ecistm.tlpa.mediators
 			addViewListener(Event.ADDED_TO_STAGE, onStartupComplete, Event);
 			addContextListener(SearchResultEvent.RECEIVED, onSearchResultsReceived, SearchResultEvent);
 			addContextListener(SubmitEvent.ANSWER_SUBMITTED, onAnswerSubmitted, SubmitEvent);
+			addContextListener(SubmitEvent.CLOSE_FEEDBACK, closeFeedback, SubmitEvent);
 		}
 		
 		protected function onStartupComplete(e:Event):void
@@ -75,6 +76,11 @@ package com.ecistm.tlpa.mediators
 				});
 			}
 			alert.setStyle('buttonStyleName', 'styledAlertButtons');
+		}
+		
+		protected function closeFeedback(e:SubmitEvent):void
+		{
+			view.stepToNextQuestion();
 		}
 	}
 }

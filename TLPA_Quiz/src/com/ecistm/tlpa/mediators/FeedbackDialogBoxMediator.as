@@ -27,6 +27,7 @@ package com.ecistm.tlpa.mediators
 		
 		protected function okButtonHandler(e:MouseEvent):void
 		{
+			dispatch(new SubmitEvent(SubmitEvent.CLOSE_FEEDBACK));
 			view.close();
 		}
 		

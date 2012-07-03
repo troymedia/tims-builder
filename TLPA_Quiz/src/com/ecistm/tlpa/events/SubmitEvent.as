@@ -9,6 +9,7 @@ package com.ecistm.tlpa.events
 		public static const REGISTER_ANSWERS:String = 'submit';
 		public static const SUBMIT_ANSWERS:String = 'validate';
 		public static const ANSWER_SUBMITTED:String = 'submitted';
+		public static const CLOSE_FEEDBACK:String = 'closeFeedback';
 		
 		[Bindable] public var question:*;
 		[Bindable] public var questionType:String;
