@@ -16,11 +16,11 @@ package com.ecistm.tlpa.commands
 		override public function execute():void
 		{
 			var feedback:FeedbackDialogBox = new FeedbackDialogBox();
+			feedback.verticalCenter = feedback.horizontalCenter = 0;
 			PopUpManager.addPopUp(feedback, contextView);
-			PopUpManager.centerPopUp(feedback);
+//			PopUpManager.centerPopUp(feedback);
 			mediatorMap.createMediator(feedback);
-			
-			//dispatch(new 
+			feedback.currentState = 'incorrectImageView';
 		}
 	}
 }

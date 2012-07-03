@@ -1,6 +1,11 @@
 package com.ecistm.tlpa.mediators
 {
 	import com.ecistm.tlpa.components.FeedbackDialogBox;
+	import com.ecistm.tlpa.events.SubmitEvent;
+	
+	import flash.events.MouseEvent;
+	
+	import mx.controls.Alert;
 	
 	import org.robotlegs.mvcs.Mediator;
 	
@@ -15,6 +20,17 @@ package com.ecistm.tlpa.mediators
 		}
 		
 		override public function onRegister():void
+		{
+			eventMap.mapListener(view.okButton, MouseEvent.CLICK, okButtonHandler, MouseEvent);
+			eventMap.mapListener(view.cancelButton, MouseEvent.CLICK, cancelButtonHandler, MouseEvent);
+		}
+		
+		protected function okButtonHandler(e:MouseEvent):void
+		{
+			view.close();
+		}
+		
+		protected function cancelButtonHandler(e:MouseEvent):void
 		{
 			
 		}

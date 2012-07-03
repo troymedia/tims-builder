@@ -28,7 +28,6 @@ package com.ecistm.tlpa.mediators
 		
 		protected function onClick(e:MouseEvent):void
 		{
-			//view.alpha = .2;
 			dispatch(new SubmitEvent(SubmitEvent.SUBMIT_ANSWERS, null, null, null));
 			view.enabled = false;
 		}

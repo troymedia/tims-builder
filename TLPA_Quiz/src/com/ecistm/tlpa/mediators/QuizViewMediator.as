@@ -1,6 +1,7 @@
 package com.ecistm.tlpa.mediators
 {
 	import com.ecistm.tlpa.components.FeedbackDialogBox;
+	import com.ecistm.tlpa.events.LaunchFeedbackEvent;
 	import com.ecistm.tlpa.events.SearchResultEvent;
 	import com.ecistm.tlpa.events.SubmitEvent;
 	import com.ecistm.tlpa.services.LessonsService;
@@ -52,16 +53,15 @@ package com.ecistm.tlpa.mediators
 		
 		protected function onAnswerSubmitted(e:SubmitEvent):void
 		{
+			Alert.buttonWidth = 120;
 			if(e.questionType == 'false')
 			{
-//				Alert.okLabel = "Next Question";
-//				alert = Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK, null, function(e:CloseEvent):void{ 
-//					view.stepToNextQuestion() 
-//				});
-//				var feedback:FeedbackDialogBox = new FeedbackDialogBox();
-//				PopUpManager.addPopUp(feedback, contextView);
-//				PopUpManager.centerPopUp(feedback);
-//				mediatorMap.createMediator(feedback);
+				Alert.okLabel = "Show Feedback";
+				alert = Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK, null, function(e:CloseEvent):void{
+					dispatch(new LaunchFeedbackEvent(LaunchFeedbackEvent.LAUNCH));
+					//view.stepToNextQuestion() 
+				});
+				
 			}
 			else if(e.questionType == 'true')
 			{

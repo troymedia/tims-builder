@@ -9,6 +9,7 @@
 	<fx:Declarations>
 		<components:SoundPlayer url="{audio}"/>
 		<fx:String id="feedbackText"/>
+		<fx:String id="titleText"/>
 	</fx:Declarations>
 	
 	<fx:Script>
@@ -23,23 +24,37 @@
 				
 			}
 			
+			public function close():void
+			{
+				this.visible = false;
+			}
+			
 		]]>
 	</fx:Script>
 	
 	<s:layout>
-		<s:VerticalLayout paddingBottom="5" paddingTop="5" paddingLeft="5" paddingRight="5"/>
+		<s:VerticalLayout paddingLeft="5" paddingBottom="5" paddingRight="5" paddingTop="5" gap="5" horizontalAlign="center" verticalAlign="middle"/>
 	</s:layout>
 	
 	<s:states>
+		<s:State name="incorrectImageView"/>
 		<s:State name="correctView"/>
 		<s:State name="incorrectTextView"/>
-		<s:State name="incorrectImageView"/>
 	</s:states>
 	
-	<s:BitmapImage width="100%" height="100%" excludeFrom="correctView, incorrectTextView"/>
-	<s:TextArea contentBackgroundAlpha="0" borderVisible="false" height="100%" width="100%" text="{feedbackText}" includeIn="correctView, incorrectTextView"/>
-	<!--<s:Spacer height="100%"/>-->
-	<s:HGroup width="100%" horizontalAlign="center">
+	<s:BitmapImage width="100%" height="100%"
+				   source="assets/images/tlpa09_pool03_feedback01.png"
+				   excludeFrom="correctView, incorrectTextView"/>
+	<!--<s:VGroup paddingLeft="5" paddingRight="5" paddingTop="5" paddingBottom="5" 
+			  includeIn="correctView, incorrectTextView">
+		<s:Label color="white" fontWeight="bold" text="{titleText}"/>
+		<s:Line width="100%"/>
+		<s:TextArea left="0" top="10" right="0"
+					contentBackgroundAlpha="0" borderVisible="false" height="100" width="300" text="{feedbackText}"/>
+	</s:VGroup>-->
+	
+	<s:HGroup width="100%" horizontalAlign="center" 
+			  paddingBottom="5" paddingTop="5">
 		<s:Button id="okButton" 
 				  label.correctView="Continue"
 				  label="Next Question"/>

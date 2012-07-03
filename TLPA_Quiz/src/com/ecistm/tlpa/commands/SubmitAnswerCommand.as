@@ -34,12 +34,6 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
-			var feedback:FeedbackDialogBox = new FeedbackDialogBox();
-			feedback.height = contextView.height / 2;
-			feedback.width = contextView.width / 2;
-			PopUpManager.addPopUp(feedback, contextView);
-			PopUpManager.centerPopUp(feedback);
-			mediatorMap.createMediator(feedback);
 			dispatch(new SubmitEvent(SubmitEvent.ANSWER_SUBMITTED, String(responseModel.correct)));
 		}
 	}

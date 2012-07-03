@@ -38,6 +38,7 @@ package
 			//commandMap.mapEvent(SearchResultEvent.RECEIVED, FetchDataCommand, SearchResultEvent);
 			commandMap.mapEvent(SubmitEvent.REGISTER_ANSWERS, RegisterAnswersCommand, SubmitEvent);
 			commandMap.mapEvent(SubmitEvent.SUBMIT_ANSWERS, SubmitAnswerCommand, SubmitEvent);
+			commandMap.mapEvent(LaunchFeedbackEvent.LAUNCH, FeedbackDialogCommand, LaunchFeedbackEvent);
 			
 			//injectors
 			injector.mapSingleton(LessonsService);
