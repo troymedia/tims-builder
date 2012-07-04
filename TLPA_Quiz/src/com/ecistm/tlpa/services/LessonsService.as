@@ -27,6 +27,7 @@ package com.ecistm.tlpa.services
 		{
 			service = new HTTPService();
 			service.url = 'com/ecistm/tlpa/data/tlpa-c9.xml';
+			service.resultFormat = 'object';
 			var responder:Responder = new Responder(onServiceResult, onServiceFault);
 			var token:AsyncToken = service.send();
 			token.addResponder(responder);
