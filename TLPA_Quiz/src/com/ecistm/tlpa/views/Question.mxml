@@ -39,6 +39,7 @@
 			[Bindable] public var incorrectAudio:String;
 			[Bindable] public var incorrectVideo:String;
 			[Bindable] public var incorrectImage:String;
+			public var feedbackImages:Array = [];
 			
 			protected function init():void
 			{

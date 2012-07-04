@@ -7,7 +7,10 @@
 	<lesson id="Lesson One">
 		<questionPool number="1">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
-			<incorrectResponse audio="OICED_132_incorrect.mp3" video="" image="tlpa09_pool01_feedback01.png"/>
+			<incorrectResponse audio="OICED_132_incorrect.mp3" video=""/>
+			<feedbackImages>
+				<image source="tlpa09_pool01_feedback01.png"/>
+			</feedbackImages>
 			<question type="TF" text="It is your responsibility to decide your status within the taxicab company" audio="OICED_132a.mp3" cardinality="single">
 				<response text="True" correct="1" randomize="0"/>
 				<response text="False" correct="0" randomize="0"/>
@@ -26,7 +29,12 @@
 
 		<questionPool number="2">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
-			<incorrectResponse audio="OICED_133_incorrect.mp3" video="" image="TLPA09_pool02_feedback01.png|TLPA09_pool02_feedback02.png|TLPA09_pool02_feedback01.png"/> 
+			<incorrectResponse audio="OICED_133_incorrect.mp3" video=""/> 
+			<feedbackImages>
+				<image source="tlpa09_pool02_feedback01.png"/>
+				<image source="tlpa09_pool02_feedback02.png"/>
+				<image source="tlpa09_pool02_feedback03.png"/>
+			</feedbackImages>
 			<question type="MCT" text="Why does your employment status matter?" audio="OICED_133a.mp3" cardinality="single">
 				<response text="Legal liability" correct="1" randomize="1"/>
 				<response text="Social status" correct="0" randomize="1"/>
@@ -48,6 +56,9 @@
 		<questionPool number="3">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
 			<incorrectResponse audio="OICED_134_incorrect.mp3" video="" image="tlpa09_pool03_feedback01.png"/>
+			<feedbackImages>
+				<image source="tlpa09_pool03_feedback01.png"/>
+			</feedbackImages>
 			<question type="MCT" text="If you own your own vehicle or lease it from an independent party, you're probably an ________." audio="OICED_134a.mp3" cardinality="single">
 				<response text="Employee" correct="0" randomize="1"/>
 				<response text="Independent contractor" correct="1" randomize="1"/>
@@ -67,6 +78,9 @@
 		<questionPool number="4">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
 			<incorrectResponse audio="OICED_135_incorrect.mp3" video="" image="tlpa09_pool04_feedback01.png"/>
+			<feedbackImages>
+				<image source="tlpa09_pool04_feedback01.png"/>
+			</feedbackImages>
 			<question type="MCT" text="An independent contractor is ________." audio="OICED_135a.mp3" cardinality="single">
 				<response text="Responsible for reporting his/her taxes to the cab company" correct="0" randomize="1"/>
 				<response text="Responsible for all tax reporting" correct="1" randomize="1"/>
@@ -87,7 +101,10 @@
 
 		<questionPool number="5">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
-			<incorrectResponse audio="OICED_136_incorrect.mp3" video="" image="tlpa09_pool05_feedback01.png"/>
+			<incorrectResponse audio="OICED_136_incorrect.mp3" video=""/>
+			<feedbackImages>
+				<image source="tlpa09_pool05_feedback01.png"/>
+			</feedbackImages>
 			<question type="TF" text="As an employee, the taxicab company is required to withhold federal and state income tax, and FICA and Medicare taxes, from your compensation." audio="OICED_136a.mp3" cardinality="single">
 				<response text="True" correct="1" randomize="0"/>
 				<response text="False" correct="0" randomize="0"/>
@@ -109,6 +126,10 @@
 		<questionPool number="6">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
 			<incorrectResponse audio="OICED_137_incorrect.mp3" video="" image="TLPA09_pool06_feedback01.png|TLPA09_pool06_feedback02.png"/> 
+			<feedbackImages>
+				<image source="tlpa09_pool06_feedback01.png"/>
+				<image source="tlpa09_pool06_feedback02.png"/>
+			</feedbackImages>
 			<question type="TF" text="If you are an employee, you are entitled to unemployment and worker's compensation." audio="OICED_137a.mp3" cardinality="single">
 				<response text="True" correct="1" randomize="0"/>
 				<response text="False" correct="0" randomize="0"/>

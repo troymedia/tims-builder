@@ -50,6 +50,16 @@
 						question.pool = qp.number;
 						question.correctAudio = qp.correctResponse.audio;
 						question.correctText = qp.correctResponse.text;
+//						for each(var image:Object in qp.feedbackImages)
+//						{
+//							Alert.show('object01: ' + image);
+//							for each(var o:Object in image)
+//							{
+//								if
+//								Alert.show('object02: ' + String(o));
+//							}
+//						}
+//							question.feedbackImages.push(image.source);
 //						question.incorrectAudio = qp.incorrectResponse.audio;
 //						question.incorrectVideo = qp.incorrectResponse.video;
 //						question.incorrectImage = qp.incorrectResponse.image;
