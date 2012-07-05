@@ -4,6 +4,7 @@ package com.ecistm.tlpa.models
 	
 	public class ResponseTextModel extends Actor
 	{
+		[Bindable] public var pool:String = '';
 		[Bindable] public var label:String = '';
 		[Bindable] public var correct:Boolean = false;
 		[Bindable] public var answers:Array = [];

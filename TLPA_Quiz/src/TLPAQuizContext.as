@@ -47,6 +47,7 @@ package
 			injector.mapSingleton(QuestionModel);
 			injector.mapSingleton(AnswersModel);
 			injector.mapSingleton(ResponseTextModel);
+			injector.mapSingleton(FeedbackImagesModel);
 		}
 	}
 }

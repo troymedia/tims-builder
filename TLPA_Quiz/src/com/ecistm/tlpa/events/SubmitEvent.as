@@ -13,10 +13,10 @@ package com.ecistm.tlpa.events
 		
 		[Bindable] public var question:*;
 		[Bindable] public var questionType:String;
-		[Bindable] public var answer:String;
+		[Bindable] public var answer:Question;
 		private var answers:Array = [];
 
-		public function SubmitEvent(type:String, questionType:String='', question:*=null, answer:String='', answers:Array=null)
+		public function SubmitEvent(type:String, questionType:String='', question:*=null, answer:Question=null, answers:Array=null)
 		{
 			super(type);
 			this.question = question;

@@ -12,6 +12,7 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.ecistm.tlpa.models.FeedbackImagesModel;
 			import com.ecistm.tlpa.models.LessonModel;
 			
 			import flash.media.*;
@@ -35,6 +36,12 @@
 			[Bindable] protected var currentQuestion:Question;
 			public function buildQuiz(data:*):void
 			{
+				for each(var image:Object in data.feedbackImages.image)
+				{
+					FeedbackImagesModel.addImage(image.source, image.pool);
+//					Alert.show(image.source + ' ' + image.pool + '\n');
+				}
+//				Alert.show(String(FeedbackImagesModel.images.length));
 				for each(var qp:Object in data.questionPool)
 				{
 					var questionPool:QuestionPool = new QuestionPool();
@@ -50,30 +57,18 @@
 						question.pool = qp.number;
 						question.correctAudio = qp.correctResponse.audio;
 						question.correctText = qp.correctResponse.text;
-						for each(var image:Object in qp.feedbackImages)
-						{
-							Alert.show('object01: ' + image);
-							for each(var o:Object in image)
-							{
-								Alert.show('object02: ' + String(o));
-							}
-						}
-//							question.feedbackImages.push(image.source);
-//						question.incorrectAudio = qp.incorrectResponse.audio;
-//						question.incorrectVideo = qp.incorrectResponse.video;
-//						question.incorrectImage = qp.incorrectResponse.image;
+						question.incorrectAudio = qp.incorrectResponse.audio;
+						question.incorrectVideo = qp.incorrectResponse.video;
 						nav.addElement(question);
-						//Alert.show(question.incorrectImage);
 						for each(var r:Object in q.response)
 						{
 							question.rb = new spark.components.RadioButton();
 							question.rb.groupName = 'questionPool';
 							question.rb.label = r.text;
 							question.rb.setStyle('color', 'white');
-							question.rb.setStyle('fontSize', 12);
+							question.rb.setStyle('fontSize', 14);
 							question.rb.name = (r.correct == 0) ? 'false' : 'true';
 							question.addElement(question.rb);
-							
 						}
 						questionPool.addElement(nav);
 						stack.addElement(questionPool);

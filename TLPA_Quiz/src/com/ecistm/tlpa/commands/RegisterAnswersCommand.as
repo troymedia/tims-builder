@@ -38,8 +38,10 @@ package com.ecistm.tlpa.commands
 		
 		protected function populateResponseTextModel():void
 		{
+			responseModel.pool = event.answer.pool;
 			responseModel.label = event.question.label;
 			responseModel.correct = (event.question.name == 'false') ? false : true;
+			Alert.show(event.question.name + '\n' + responseModel.pool);
 //			responseModel.audio = event.question.incorrectAudio;
 //			responseModel.video = event.question.incorrectVideo;
 //			responseModel.image = event.question.incorrectImage;
