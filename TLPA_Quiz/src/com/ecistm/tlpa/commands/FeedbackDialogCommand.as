@@ -32,20 +32,19 @@ package com.ecistm.tlpa.commands
 			feedback.videoSource = responseModel.video;
 			PopUpManager.addPopUp(feedback, contextView);
 			mediatorMap.createMediator(feedback);
-			addFeedbackImages();
 			feedback.currentState = 'incorrectImageView';
+			addFeedbackImages();
 		}
 		
 		protected function addFeedbackImages():void
 		{
 			var obj:Object;
-			for each(obj in FeedbackImagesModel.images)
+			for each(obj in feedbackModel.images)
 			{
-				if(obj.pool === responseModel.pool)
+				if(obj.pool == responseModel.pool)
 					feedback.feedbackImages.addItem(obj);
 			}
 			feedback.populateImageStack(feedback.feedbackImages);
-//			Alert.show(String(feedback.feedbackImages.length));
 		}
 	}	
 }

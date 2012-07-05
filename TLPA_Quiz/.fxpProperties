@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fxpProperties abbreviated="false" authoringTool="Flex Builder" compiles="true" parentProject="788d17c8-37a8-4a81-bfe1-db3de7f9ac68" projectUUID="788d17c8-37a8-4a81-bfe1-db3de7f9ac68" pureCatalystProject="false" sdkVersion="4.6.0" uuid="9f1beb21-e5b9-4f9b-be7b-7a7d64b740bd" version="15">
+  <projects/>
+  <src/>
+  <swc>
+    <linked location="sdkPlaceHolder" path="sdkPlaceHolder" position="0" uuid="9f1beb21-e5b9-4f9b-be7b-7a7d64b740bd"/>
+    <linked location="/libs" path="\libs" position="1" uuid="9f1beb21-e5b9-4f9b-be7b-7a7d64b740bd"/>
+  </swc>
+  <misc>
+    <linked location="/Users/troymedia/Desktop/tlpa_quiz" path="/bin-release" position="0" uuid="9f1beb21-e5b9-4f9b-be7b-7a7d64b740bd"/>
+  </misc>
+  <theme/>
+  <mxmlFormattingPrefs groupAttributesByState="true" maxLineWidth="100" mxmlAlignAttributes="true" mxmlAttributeOrder="id,userLabel,includeIn,excludeFrom,visible,x,y,z,left,right,top,bottom,width,height,minWidth,minHeight,maxWidth,maxHeight,label" mxmlKeepAttributeValuesOrganized="true"/>
+</fxpProperties>

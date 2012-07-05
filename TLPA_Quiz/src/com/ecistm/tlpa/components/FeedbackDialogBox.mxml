@@ -20,34 +20,52 @@
 			import spark.components.NavigatorContent;
 			import spark.primitives.BitmapImage;
 			
+			[Bindable] protected var isAtBeginning:Boolean;
+			[Bindable] protected var isAtEnd:Boolean;
+			
 			[Bindable] protected var hasMultipleFeedbackImages:Boolean;
 			[Bindable] protected var dialogText:Array = [];
 			
 			[Bindable] public var audio:String = '';
 			[Bindable] public var videoSource:String = '';
 			[Bindable] public var imageSource:String = '';
-			public var feedbackImages:ArrayCollection = new ArrayCollection();
+			[Bindable] public var feedbackImages:ArrayCollection = new ArrayCollection();
+			
+			protected var currentIndex:int = 0;
 			
 			protected function init():void
 			{
 				soundPlayer.play();
-				hasMultipleFeedbackImages = Boolean(feedbackImages.length > 1);
-				populateImageStack(feedbackImages);
 			}
 			
 			public function populateImageStack(images:ArrayCollection):void
 			{
+//				Alert.show('numImages: ' + String(images.length));
 				for each(var img:Object in images)
 				{
 					var navContent:NavigatorContent = new NavigatorContent();
 					navContent.percentHeight = navContent.percentWidth = 100;
 					var image:BitmapImage = new BitmapImage();
 					image.source = img.source;
-					navContent.addElement(image);
 					stack.addElement(navContent);
+					navContent.addElement(image);
+//					Alert.show('hu');
 				}
-				
-				Alert.show(String(stack.numElements));
+			}
+			
+			protected function navigate(delta:Number):void
+			{	
+				currentIndex += delta;
+				if (currentIndex < 0)
+					currentIndex = 0;
+				isAtBeginning = currentIndex == 0;
+				var max:int = stack.numElements - 1;
+				if (currentIndex > max)
+					currentIndex = max;
+				isAtEnd = currentIndex == max;					
+				//currentItem = mediaList.getItemAt(currentIndex) as Media;
+				//media = currentItem;
+				//checkMediaType();
 			}
 			
 			public function close():void
@@ -72,9 +90,6 @@
 		<mx:ViewStack id="stack" width="100%" height="100%">
 			
 		</mx:ViewStack>
-		<!--<s:BitmapImage width="100%" height="100%"
-					   source="{imageSource}"
-					   excludeFrom="correctView, incorrectTextView"/>-->
 		
 		<s:HGroup width="100%" horizontalAlign="center" 
 				  paddingBottom="5" paddingTop="5">
@@ -87,7 +102,7 @@
 		</s:HGroup>
 	</s:VGroup>
 	
-	<s:HGroup width="100%" height="100%" verticalAlign="middle" paddingLeft="5" paddingRight="5" visible="{hasMultipleFeedbackImages}">
+	<s:HGroup width="100%" height="100%" verticalAlign="middle" paddingLeft="5" paddingRight="5" visible="{feedbackImages.length > 1}">
 		<s:Button label="Back"/>
 		<s:Spacer width="100%"/>
 		<s:Button label="Next"/>

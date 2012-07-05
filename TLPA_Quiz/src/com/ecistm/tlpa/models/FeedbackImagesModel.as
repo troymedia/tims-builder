@@ -8,14 +8,14 @@ package com.ecistm.tlpa.models
 	{
 		[Bindable] public var source:String;
 		[Bindable] public var pool:String;
-		[Bindable] public static var images:ArrayCollection = new ArrayCollection();
+		[Bindable] public var images:ArrayCollection = new ArrayCollection();
 		
 		public function FeedbackImagesModel()
 		{
 			super();
 		}
 		
-		public static function addImage(source:String, pool:String):void
+		public function addImage(source:String, pool:String):void
 		{
 			images.addItem( {source: source, pool: pool} );
 		}

@@ -38,7 +38,7 @@
 			{
 				for each(var image:Object in data.feedbackImages.image)
 				{
-					FeedbackImagesModel.addImage(image.source, image.pool);
+					//FeedbackImagesModel.addImage(image.source, image.pool);
 //					Alert.show(image.source + ' ' + image.pool + '\n');
 				}
 //				Alert.show(String(FeedbackImagesModel.images.length));

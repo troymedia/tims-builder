@@ -41,7 +41,7 @@ package com.ecistm.tlpa.commands
 			responseModel.pool = event.answer.pool;
 			responseModel.label = event.question.label;
 			responseModel.correct = (event.question.name == 'false') ? false : true;
-			Alert.show(event.question.name + '\n' + responseModel.pool);
+//			Alert.show('correct: ' + event.question.name + '\npool: ' + responseModel.pool);
 //			responseModel.audio = event.question.incorrectAudio;
 //			responseModel.video = event.question.incorrectVideo;
 //			responseModel.image = event.question.incorrectImage;
