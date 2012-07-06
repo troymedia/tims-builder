@@ -60,7 +60,6 @@ package com.ecistm.tlpa.mediators
 				Alert.okLabel = "Show Feedback";
 				alert = Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK, null, function(e:CloseEvent):void{
 					dispatch(new LaunchFeedbackEvent(LaunchFeedbackEvent.LAUNCH));
-					//view.stepToNextQuestion() 
 				});
 				
 			}

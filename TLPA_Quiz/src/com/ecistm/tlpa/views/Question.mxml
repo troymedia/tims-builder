@@ -45,6 +45,9 @@
 			{
 				super.createChildren();
 				label = new Label();
+				label.percentWidth = label.percentHeight = 100;
+				label.setStyle('lineBreak', 'explicit');
+				label.maxDisplayedLines = 2;
 				label.setStyle('color', 'white');
 				label.setStyle('fontWeight', 'bold');
 				label.setStyle('fontSize', 14);

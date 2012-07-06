@@ -84,20 +84,21 @@
 			
 			public function stepToNextQuestion():void
 			{
-				
+				numOfIncorrectAnswers++;
 				if(numOfIncorrectAnswers < 2)
 				{
-					numOfIncorrectAnswers++;
 					currentQuestionPool.selectedIndex += 1;
 					currentQuestionPool = QuestionPool(stack.selectedChild);
 					currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
 					SoundMixer.stopAll();
 					currentQuestion.soundPlayer.play();
 				}	
-				else if(numOfIncorrectAnswers == 3)
+				else
 				{	
-					stepToNextQuestion();
+//					stepToNextQuestionPool();
+					Alert.show('You will now be locked out.');
 				}
+				Alert.show(String(numOfIncorrectAnswers));
 			}
 		
 			public function resetQuiz():void

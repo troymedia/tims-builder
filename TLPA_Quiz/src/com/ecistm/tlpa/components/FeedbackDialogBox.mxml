@@ -97,7 +97,7 @@
 				  paddingBottom="5" paddingTop="5">
 			<s:Button id="okButton" 
 					  label.correctView="Continue"
-					  label="Next Question"/>
+					  label="Next Question" color="white" fontWeight="bold" chromeColor="green"/>
 			<s:Button id="cancelButton" 
 					  label.correctView="Retry Quiz"
 					  includeIn="correctView"/>
@@ -105,9 +105,15 @@
 	</s:VGroup>
 	
 	<s:HGroup width="100%" height="100%" verticalAlign="middle" paddingLeft="5" paddingRight="5" visible="{feedbackImages.length > 1}">
-		<s:Button label="Back" click="stepTo(-1)" enabled="{!isAtBeginning}"/>
+		<s:Button label="Back" click="stepTo(-1)" 
+				  enabled="{!isAtBeginning}"
+				  alpha="{!isAtBeginning ? 1 : .5}"
+				  skinClass="com.ecistm.tlpa.skins.BackButtonSkin"/>
 		<s:Spacer width="100%"/>
-		<s:Button label="Next" click="stepTo(1)" enabled="{!isAtEnd}"/>
+		<s:Button label="Next" click="stepTo(1)"
+				  enabled="{!isAtEnd}"
+				  alpha="{!isAtEnd ? 1 : .5}"
+				  skinClass="com.ecistm.tlpa.skins.NextButtonSkin"/>
 	</s:HGroup>
 	
 </s:BorderContainer>
