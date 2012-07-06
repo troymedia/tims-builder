@@ -84,21 +84,25 @@
 			
 			public function stepToNextQuestion():void
 			{
-				numOfIncorrectAnswers++;
-				if(numOfIncorrectAnswers < 2)
-				{
+				//numOfIncorrectAnswers++;
+//				if(numOfIncorrectAnswers < 2)
+//				{
 					currentQuestionPool.selectedIndex += 1;
 					currentQuestionPool = QuestionPool(stack.selectedChild);
 					currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
 					SoundMixer.stopAll();
 					currentQuestion.soundPlayer.play();
-				}	
-				else
-				{	
+//				}	
+//				else
+//				{	
 //					stepToNextQuestionPool();
-					Alert.show('You will now be locked out.');
-				}
-				Alert.show(String(numOfIncorrectAnswers));
+//				}
+//				Alert.show(String(numOfIncorrectAnswers));
+			}
+			
+			public function lockoutUser():void
+			{
+				Alert.show("This course cannot be successfully'\n'completed today because there are more'\n' incorrect question answers than allowed.'\n'The system is now locked until 8am tomorrow morning.'\n'After that time, you will be able to enter the system and retake this course or begin another one.", 'Lockout', Alert.OK);
 			}
 		
 			public function resetQuiz():void
