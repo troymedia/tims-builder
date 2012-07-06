@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%" xmlns:components="com.ecistm.tlpa.components.*">
+	<fx:Declarations>
+		<components:SoundPlayer id="soundPlayer" url="{audioSource}"/>
+		<fx:String id="imageSource"/>
+		<fx:String id="audioSource"/>
+	</fx:Declarations>
+	
+	<s:BitmapImage height="100%" width="100%" source="{imageSource}"/>
+	
+</s:NavigatorContent>

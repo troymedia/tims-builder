@@ -36,12 +36,6 @@
 			[Bindable] protected var currentQuestion:Question;
 			public function buildQuiz(data:*):void
 			{
-				for each(var image:Object in data.feedbackImages.image)
-				{
-					//FeedbackImagesModel.addImage(image.source, image.pool);
-//					Alert.show(image.source + ' ' + image.pool + '\n');
-				}
-//				Alert.show(String(FeedbackImagesModel.images.length));
 				for each(var qp:Object in data.questionPool)
 				{
 					var questionPool:QuestionPool = new QuestionPool();

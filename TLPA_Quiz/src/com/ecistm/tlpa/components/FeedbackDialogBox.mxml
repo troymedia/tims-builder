@@ -5,7 +5,7 @@
 		  xmlns:components="com.ecistm.tlpa.components.*"
 		  cornerRadius="10"
 		  backgroundColor="0x1e1e1e"
-		  creationComplete="init()">
+		  >
 	<fx:Declarations>
 		<components:SoundPlayer id="soundPlayer" url="{audio}"/>
 		<fx:String id="feedbackText"/>
@@ -32,28 +32,30 @@
 			[Bindable] public var feedbackImages:ArrayCollection = new ArrayCollection();
 			
 			protected var currentIndex:int = 0;
-			
-			protected function init():void
-			{
-				soundPlayer.play();
-			}
+			protected var currentSlide:FeedbackDialogBoxSlide;
 			
 			public function populateImageStack(images:ArrayCollection):void
 			{
-//				Alert.show('numImages: ' + String(images.length));
 				for each(var img:Object in images)
 				{
-					var navContent:NavigatorContent = new NavigatorContent();
-					navContent.percentHeight = navContent.percentWidth = 100;
-					var image:BitmapImage = new BitmapImage();
-					image.source = img.source;
-					stack.addElement(navContent);
-					navContent.addElement(image);
-//					Alert.show('hu');
+					var feedbackSlide:FeedbackDialogBoxSlide = new FeedbackDialogBoxSlide();
+					feedbackSlide.percentHeight = feedbackSlide.percentWidth = 100;
+					feedbackSlide.imageSource = img.source;
+					feedbackSlide.audioSource = img.audio;
+					stack.addElement(feedbackSlide);
 				}
+				
+				stepThroughSlides();
 			}
 			
-			protected function navigate(delta:Number):void
+			protected function stepThroughSlides():void
+			{
+				SoundMixer.stopAll();
+				currentSlide.soundPlayer.play();
+//				Alert.show('audio: ' + currentSlide.audioSource + '\ncurrent slide: ' + currentSlide.imageSource);
+			}
+			
+			protected function stepTo(delta:Number):void
 			{	
 				currentIndex += delta;
 				if (currentIndex < 0)
@@ -62,10 +64,10 @@
 				var max:int = stack.numElements - 1;
 				if (currentIndex > max)
 					currentIndex = max;
-				isAtEnd = currentIndex == max;					
-				//currentItem = mediaList.getItemAt(currentIndex) as Media;
-				//media = currentItem;
-				//checkMediaType();
+				isAtEnd = currentIndex == max;	
+				currentSlide = FeedbackDialogBoxSlide(stack.getItemAt(currentIndex));
+				stepThroughSlides();
+//				Alert.show('current index: ' + String(currentIndex));
 			}
 			
 			public function close():void
@@ -103,9 +105,9 @@
 	</s:VGroup>
 	
 	<s:HGroup width="100%" height="100%" verticalAlign="middle" paddingLeft="5" paddingRight="5" visible="{feedbackImages.length > 1}">
-		<s:Button label="Back"/>
+		<s:Button label="Back" click="stepTo(-1)" enabled="{!isAtBeginning}"/>
 		<s:Spacer width="100%"/>
-		<s:Button label="Next"/>
+		<s:Button label="Next" click="stepTo(1)" enabled="{!isAtEnd}"/>
 	</s:HGroup>
 	
 </s:BorderContainer>

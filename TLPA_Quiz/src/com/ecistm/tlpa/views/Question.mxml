@@ -6,8 +6,7 @@
 		 xmlns:components="com.ecistm.tlpa.components.*" 
 		 creationComplete="init()"
 		 >
-	<!--show="Alert.show('show')" hide="Alert.show('hide')" 
-	added="Alert.show('added')" removed="Alert.show('removed')"-->
+
 	<fx:Declarations>
 		<components:SoundPlayer id="soundPlayer" url="{audio}"/>
 		<s:RadioButtonGroup id="questionPool"/>
@@ -25,7 +24,7 @@
 			
 			[Bindable] public var type:String;
 			[Bindable] public var text:String;
-			[Bindable] public var audio:String = 'assets/audio/spanish_joint.mp3';
+			[Bindable] public var audio:String;
 			[Bindable] public var cardinality:String;
 			[Bindable] public var responses:ArrayCollection;
 			public var responsesGroup:VGroup;
@@ -51,6 +50,9 @@
 				label.setStyle('fontSize', 14);
 				label.text = questionText;
 				this.addElementAt(label, 0);
+//				var metrics:TextLineMetrics = label.measureText(label.text);
+//				label.width = metrics.width;
+//				label.height = metrics.height;
 			}
 			
 			public function registerSelection():void
@@ -68,7 +70,7 @@
 			
 			public function registerMultipleAnswers():void
 			{
-				//coming soon...
+				//TODO
 			}
 			
 		]]>

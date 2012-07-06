@@ -21,7 +21,7 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
-			for each(var obj:Object in event.results.feedbackImages.image)
+			for each(var obj:Object in event.results.incorrectFeedback.image)
 			{
 				feedbackModel.images.addItem(obj);
 			}
