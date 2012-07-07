@@ -34,6 +34,9 @@ package com.ecistm.tlpa.commands
 				feedback.verticalCenter = feedback.horizontalCenter = 0;
 				feedback.audio = responseModel.audio;
 				feedback.videoSource = responseModel.video;
+				feedback.y = feedback.x = 0;
+				feedback.height = 540
+				feedback.width = 760;
 				PopUpManager.addPopUp(feedback, contextView, true);
 				mediatorMap.createMediator(feedback);
 				feedback.currentState = 'incorrectImageView';
