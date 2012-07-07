@@ -4,6 +4,7 @@ package com.ecistm.tlpa.mediators
 	import com.ecistm.tlpa.events.LaunchFeedbackEvent;
 	import com.ecistm.tlpa.events.SearchResultEvent;
 	import com.ecistm.tlpa.events.SubmitEvent;
+	import com.ecistm.tlpa.models.ResponseTextModel;
 	import com.ecistm.tlpa.services.LessonsService;
 	import com.ecistm.tlpa.views.QuizView;
 	
@@ -23,6 +24,9 @@ package com.ecistm.tlpa.mediators
 		
 		[Inject]
 		public var view:QuizView;
+		
+		[Inject]
+		public var responseModel:ResponseTextModel;
 		
 		[Inject]
 		public var service:LessonsService;
@@ -67,11 +71,11 @@ package com.ecistm.tlpa.mediators
 			{
 				Alert.okLabel = 'Continue';
 				Alert.cancelLabel = 'Retry Quiz';
-				alert = Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK|Alert.CANCEL, null, function(e:CloseEvent):void{ 
+				alert = Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK, null, function(e:CloseEvent):void{ 
 					if(e.detail == Alert.OK)
-						view.stepToNextQuestionPool();
-					if(e.detail == Alert.CANCEL)
-						view.resetQuiz();
+						view.stepToNextQuestionPool(responseModel);
+//					if(e.detail == Alert.CANCEL)
+//						view.resetQuiz();
 				});
 			}
 			alert.setStyle('buttonStyleName', 'styledAlertButtons');

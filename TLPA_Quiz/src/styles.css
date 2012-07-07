@@ -13,5 +13,6 @@ mx|Alert{
 
 .styledAlertButtons{
 	cornerRadius: 5;
+	fontSize: 14;
 }
 

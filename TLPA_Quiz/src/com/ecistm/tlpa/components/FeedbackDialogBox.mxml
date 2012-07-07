@@ -96,8 +96,7 @@
 		<s:HGroup width="100%" horizontalAlign="center" 
 				  paddingBottom="5" paddingTop="5">
 			<s:Button id="okButton" 
-					  label.correctView="Continue"
-					  label="Next Question" color="white" fontWeight="bold" chromeColor="green"/>
+					  label="Continue" color="white" chromeColor="green"/>
 			<s:Button id="cancelButton" 
 					  label.correctView="Retry Quiz"
 					  includeIn="correctView"/>

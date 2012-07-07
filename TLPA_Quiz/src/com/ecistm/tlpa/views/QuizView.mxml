@@ -14,6 +14,7 @@
 		<![CDATA[
 			import com.ecistm.tlpa.models.FeedbackImagesModel;
 			import com.ecistm.tlpa.models.LessonModel;
+			import com.ecistm.tlpa.models.ResponseTextModel;
 			
 			import flash.media.*;
 			import flash.net.URLRequest;
@@ -73,13 +74,14 @@
 				currentQuestion.soundPlayer.play();
 			}
 			
-			public function stepToNextQuestionPool():void
+			public function stepToNextQuestionPool(model:ResponseTextModel):void
 			{
 				stack.selectedIndex += 1;
 				currentQuestionPool = QuestionPool(stack.selectedChild);
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
 				SoundMixer.stopAll();
 				currentQuestion.soundPlayer.play();
+				model.numIncorrectAnswers = 0;
 			}
 			
 			public function stepToNextQuestion():void
