@@ -40,7 +40,7 @@
 				{
 					var feedbackSlide:FeedbackDialogBoxSlide = new FeedbackDialogBoxSlide();
 					feedbackSlide.percentHeight = feedbackSlide.percentWidth = 100;
-					feedbackSlide.imageSource = 'assets/images/tlpa09_pool03_feedback01.png';
+					feedbackSlide.imageSource = img.imageSource;
 					feedbackSlide.audioSource = img.audio;
 					stack.addElement(feedbackSlide);
 				}
