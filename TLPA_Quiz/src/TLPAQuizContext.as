@@ -28,7 +28,7 @@ package
 			super.startup();
 			
 			//mediators
-			mediatorMap.mapView(QuizView, QuizViewMediator, QuizView);
+			mediatorMap.mapView(QuizView_old, QuizViewMediator, QuizView_old);
 			mediatorMap.mapView(SubmitButton, SubmitButtonMediator, SubmitButton);
 			mediatorMap.mapView(FeedbackDialogBox, FeedbackDialogBoxMediator, FeedbackDialogBox);
 			mediatorMap.mapView(Question, QuestionMediator, Question);

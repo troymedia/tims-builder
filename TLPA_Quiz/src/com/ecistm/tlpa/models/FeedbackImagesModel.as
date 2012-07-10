@@ -1,6 +1,7 @@
 package com.ecistm.tlpa.models
 {
 	import mx.collections.ArrayCollection;
+	import mx.controls.Alert;
 	
 	import org.robotlegs.mvcs.Actor;
 	
@@ -18,6 +19,7 @@ package com.ecistm.tlpa.models
 		public function addImage(source:String, pool:String):void
 		{
 			images.addItem( {source: source, pool: pool} );
+			Alert.show('..');
 		}
 	}
 }

@@ -14,5 +14,8 @@ mx|Alert{
 .styledAlertButtons{
 	cornerRadius: 5;
 	fontSize: 14;
+	chromeColor: #ee4000;
+	color: #cccccc;
+	
 }
 

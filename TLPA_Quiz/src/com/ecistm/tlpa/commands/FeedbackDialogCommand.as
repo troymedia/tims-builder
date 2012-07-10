@@ -35,8 +35,8 @@ package com.ecistm.tlpa.commands
 				feedback.audio = responseModel.audio;
 				feedback.videoSource = responseModel.video;
 				feedback.y = feedback.x = 0;
-				feedback.height = 540
-				feedback.width = 720;
+				feedback.height = contextView.height;
+				feedback.width = contextView.width;
 				PopUpManager.addPopUp(feedback, contextView, true);
 				mediatorMap.createMediator(feedback);
 				feedback.currentState = 'incorrectImageView';
@@ -60,10 +60,15 @@ package com.ecistm.tlpa.commands
 			var obj:Object;
 			for each(obj in feedbackModel.images)
 			{
+				
 				if(obj.pool == responseModel.pool)
+				{
 					feedback.feedbackImages.addItem(obj);
+					Alert.show(obj.source);
+				}
 			}
 			feedback.populateImageStack(feedback.feedbackImages);
+//			Alert.show('length: ');
 		}
 	}	
 }

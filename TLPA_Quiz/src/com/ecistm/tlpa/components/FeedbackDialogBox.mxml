@@ -36,13 +36,15 @@
 			
 			public function populateImageStack(images:ArrayCollection):void
 			{
+//				Alert.show('length: ' + String(images.length));
 				for each(var img:Object in images)
 				{
 					var feedbackSlide:FeedbackDialogBoxSlide = new FeedbackDialogBoxSlide();
 					feedbackSlide.percentHeight = feedbackSlide.percentWidth = 100;
-					feedbackSlide.imageSource = img.imageSource;
+					feedbackSlide.imageSource = img.source;
 					feedbackSlide.audioSource = img.audio;
 					stack.addElement(feedbackSlide);
+//					Alert.show(img.source);
 				}
 				
 				stepThroughSlides();
@@ -58,6 +60,7 @@
 			protected function stepTo(delta:Number):void
 			{	
 				currentIndex += delta;
+				stack.selectedIndex = currentIndex;
 				if (currentIndex < 0)
 					currentIndex = 0;
 				isAtBeginning = currentIndex == 0;
@@ -67,7 +70,7 @@
 				isAtEnd = currentIndex == max;	
 				currentSlide = FeedbackDialogBoxSlide(stack.getItemAt(currentIndex));
 				stepThroughSlides();
-//				Alert.show('current index: ' + String(currentIndex));
+				Alert.show('current index: ' + String(stack.selectedIndex));
 			}
 			
 			public function close():void

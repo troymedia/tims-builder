@@ -6,7 +6,7 @@ package com.ecistm.tlpa.mediators
 	import com.ecistm.tlpa.events.SubmitEvent;
 	import com.ecistm.tlpa.models.ResponseTextModel;
 	import com.ecistm.tlpa.services.LessonsService;
-	import com.ecistm.tlpa.views.QuizView;
+	import com.ecistm.tlpa.views.QuizView_old;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -23,7 +23,7 @@ package com.ecistm.tlpa.mediators
 	{
 		
 		[Inject]
-		public var view:QuizView;
+		public var view:QuizView_old;
 		
 		[Inject]
 		public var responseModel:ResponseTextModel;
@@ -58,10 +58,10 @@ package com.ecistm.tlpa.mediators
 		
 		protected function onAnswerSubmitted(e:SubmitEvent):void
 		{
-			Alert.buttonWidth = 120;
+			Alert.buttonWidth = 180;
 			if(e.questionType == 'false')
 			{
-				Alert.okLabel = "Show Feedback";
+				Alert.okLabel = "Review Information";
 				alert = Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK, null, function(e:CloseEvent):void{
 					dispatch(new LaunchFeedbackEvent(LaunchFeedbackEvent.LAUNCH));
 				});
