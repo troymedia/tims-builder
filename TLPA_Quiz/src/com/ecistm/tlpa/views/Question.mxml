@@ -15,6 +15,8 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.ecistm.tlpa.components.SmartCheckboxGroup;
+			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
 			import mx.events.FlexEvent;
@@ -22,16 +24,19 @@
 			import spark.components.Label;
 			import spark.components.RadioButton;
 			
+			public var cbGroup:SmartCheckboxGroup;
+			
 			[Bindable] public var type:String;
 			[Bindable] public var text:String;
 			[Bindable] public var audio:String;
 			[Bindable] public var cardinality:String;
-			[Bindable] public var responses:ArrayCollection;
+			[Bindable] public var responses:ArrayCollection = new ArrayCollection();
 			public var responsesGroup:VGroup;
 			public var rb:RadioButton;
 			[Bindable]public var registeredAnswer:String;
 			public var label:Label;
 			public var selections:ArrayCollection = new ArrayCollection();
+		
 			
 			[Bindable] public var pool:String;
 			[Bindable] public var correctAudio:String;
@@ -53,9 +58,10 @@
 				label.setStyle('fontSize', 14);
 				label.text = questionText;
 				this.addElementAt(label, 0);
-//				var metrics:TextLineMetrics = label.measureText(label.text);
-//				label.width = metrics.width;
-//				label.height = metrics.height;
+				
+				cbGroup = new SmartCheckboxGroup();
+				cbGroup.checkBoxGroup = responses;
+				this.addElementAt(cbGroup, 1);
 			}
 			
 			public function registerSelection():void
@@ -83,6 +89,8 @@
 		<s:State name="textQuestionView"/>
 		<s:State name="imageQuestionView"/>
 	</s:states>
+	
+	<!--<components:SmartCheckboxGroup id="cbGroup" checkBoxGroup="{responses}"/>-->
 	
 	<!--<s:HGroup height="320" width="100%" includeIn="imageQuestionView"/>-->
 	

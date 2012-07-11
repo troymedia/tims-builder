@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  borderVisible="false" backgroundAlpha="0">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import flash.events.MouseEvent;
+			
+			import mx.collections.ArrayCollection;
+			import mx.collections.IList;
+			import mx.controls.Alert;
+			
+			import spark.components.CheckBox;
+			import spark.layouts.HorizontalLayout;
+			import spark.layouts.TileLayout;
+			import spark.layouts.TileOrientation;
+			import spark.layouts.VerticalLayout;
+			
+			public var c:CheckBox;
+			
+			[Bindable] public var items:ArrayCollection = new ArrayCollection();
+			[Bindable] private var _multiSelect:Boolean = false;
+			[Bindable] private var _checkBoxGroup:ArrayCollection = new ArrayCollection;
+			private var tile:TileLayout = new TileLayout();
+			private var horiz:HorizontalLayout = new HorizontalLayout();
+			private var vert:VerticalLayout
+			
+			protected function checkForProperLayout():void
+			{
+				if(items.length <= 5)
+				{
+					layout = tile;
+					tile.orientation = TileOrientation.COLUMNS;
+				}
+				else
+				{
+					layout = tile;
+					tile.requestedColumnCount = 3;
+				}
+			}
+			
+			protected function enforceSelectStatus(e:Event):void
+			{
+				if (!multiSelect)
+				{
+					for(var i:int = 0; i<this.numElements; i++)
+					{
+						var cb:CheckBox = this.getElementAt(i) as CheckBox;
+						if(cb != e.currentTarget )
+						{
+							cb.selected = false;
+						}
+							
+					}
+				}
+			}
+			
+			public function get multiSelect():Boolean
+			{
+				return _multiSelect;
+			}
+			
+			public function set multiSelect(v:Boolean):void
+			{
+				_multiSelect = v;
+			}
+			
+			public function get checkBoxGroup():ArrayCollection
+			{
+				return _checkBoxGroup;
+			}
+			
+			 public function set checkBoxGroup(list:ArrayCollection):void
+			{
+				for each(var i:String in list)
+				{
+					c = new CheckBox();
+					c.label = i;
+					c.setStyle('color', 'white');
+					c.setStyle('fontSize', 14);
+					items.addItem(c);
+					this.addElement(c);
+					c.addEventListener(MouseEvent.CLICK, enforceSelectStatus);
+				}
+				checkForProperLayout();
+			}  
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:HorizontalLayout/>
+	</s:layout>
+	
+</s:BorderContainer>

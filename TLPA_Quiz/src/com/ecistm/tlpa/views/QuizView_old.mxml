@@ -54,17 +54,19 @@
 						question.correctText = qp.correctResponse.text;
 						question.incorrectAudio = qp.incorrectResponse.audio;
 						question.incorrectVideo = qp.incorrectResponse.video;
-						nav.addElement(question);
 						for each(var r:Object in q.response)
 						{
-							question.rb = new spark.components.RadioButton();
-							question.rb.groupName = 'questionPool';
-							question.rb.label = r.text;
-							question.rb.setStyle('color', 'white');
-							question.rb.setStyle('fontSize', 14);
-							question.rb.name = (r.correct == 0) ? 'false' : 'true';
-							question.addElement(question.rb);
+							question.responses.addItem(r.text);
+//							question.cbGroup.multiSelect = (question.cardinality == 'single') ? false : true;
+//							question.rb = new spark.components.RadioButton();
+//							question.rb.groupName = 'questionPool';
+//							question.rb.label = r.text;
+//							question.rb.setStyle('color', 'white');
+//							question.rb.setStyle('fontSize', 14);
+//							question.cbGroup.c.name = (r.correct == 0) ? 'false' : 'true';
+//							question.addElement(question.rb);
 						}
+						nav.addElement(question);
 						questionPool.addElement(nav);
 						stack.addElement(questionPool);
 					}
