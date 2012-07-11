@@ -6,6 +6,7 @@
 			   xmlns:tlpa="com.ecistm.tlpa.*" 
 			   xmlns:views="com.ecistm.tlpa.views.*"
 			   minWidth="0" minHeight="0"
+			   height="100%" width="100%"
 			   backgroundColor="black"
 			   >
 	

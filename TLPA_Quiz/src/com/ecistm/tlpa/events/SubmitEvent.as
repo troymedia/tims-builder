@@ -10,6 +10,7 @@ package com.ecistm.tlpa.events
 		public static const SUBMIT_ANSWERS:String = 'validate';
 		public static const ANSWER_SUBMITTED:String = 'submitted';
 		public static const CLOSE_FEEDBACK:String = 'closeFeedback';
+		public static const NEXT_QUESTION:String = 'nextQuestion';
 		
 		[Bindable] public var question:*;
 		[Bindable] public var questionType:String;

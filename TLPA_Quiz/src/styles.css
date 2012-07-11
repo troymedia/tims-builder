@@ -8,6 +8,7 @@ mx|Alert{
 	headerHeight: 24;
 	chromeColor: #333333;
 	cornerRadius: 10;
+	buttonStyleName: styledAlertButtons;
 	
 }
 

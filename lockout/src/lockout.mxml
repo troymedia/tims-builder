@@ -2,10 +2,11 @@
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
-			   width="1027" height="636" minWidth="955" minHeight="600" creationComplete="initVars()">
-	
+			   xmlns:killsession="services.killsession.*"
+			   width="569" height="468" minWidth="955" minHeight="600"
+			   creationComplete="initVars()" backgroundColor="#000000">
+	<fx:Style source="lockout.css"/>
 	<fx:Script><![CDATA[
-//		import com.abdulqabiz.utils.QueryString;
 		
 		import mx.collections.ArrayCollection;
 		import mx.collections.XMLListCollection;
@@ -16,19 +17,12 @@
 		import mx.rpc.events.ResultEvent;
 		import mx.rpc.http.mxml.HTTPService;
 		
-	//	import flash.external.ExternalInterface;
 		
 		[Bindable]
 		public var userID:String;
 		[Bindable]
 		public var lockoutStamp;
 		
-		
-	
-		
-		
-		
-//		private var qs:QueryString;
 		
 		// Assign values to new properties.
 		private function initVars():void {
@@ -40,19 +34,9 @@
 			//Timezone offset returns the minutes and multiply by 60 to convert to seconds to use for timestamp
 			lockoutStamp = localTimestamp + timzoneOffset;
 			
-			
-			
-			
-//			qs = new QueryString();
-//			userID = qs.parameters.userID;
-			insertLockoutUser();
-			updateUser();
-			updateTimestamp();
-			
+			getUserId();
 			showUsers();
 			
-		//	var result:String = ExternalInterface.call("getMyVar");
-		//	Alert.show(result);
 			
 		}
 		//Actionscript for database connection to dokeos
@@ -68,9 +52,9 @@
 		public var mysql_db:String = "dokeos_main"; 
 		
 		//Enter the url to the php file you placed on your MySQL webserver
-		public var mysql_url:String = "http://tlpadev.ecistm.com/main/flex_mysql/flexmysqlconn.php"; 
+		public var mysql_url:String = "http://tlpa.ecistm.com/main/flex_mysql/flexmysqlconn.php"; 
 		
-
+		
 		// Enter your sql passcode this should be a 10 digit string of letter and numbers
 		// that you make up to minimize the risk of SQL injection against your PHP script.
 		// This can be anything you want. You will also use this same code in your PHP file. 
@@ -81,7 +65,7 @@
 		
 		/********************************************************
 		 * MySQL Query Function
-		 *********************************************************/
+		 ********************************************************/
 		public function mysqlQuery(sql:String,fid:String):void 
 		{
 			var http:HTTPService = new HTTPService;
@@ -132,19 +116,19 @@
 					break;	
 				
 				case "updateUser":
-					//showUsers();
-					//updateNewUser();
+					
 					
 					break;
 				
 				case "getUserFromUserId":
-					//getUserFromUserId();
 					
 					
 					break;
 				case "insertLockoutUser":
 					
 					break;
+				
+				
 				
 			}	
 		}
@@ -169,106 +153,94 @@
 			
 		}
 		
-		public function getUserFromUserId():void{
-			mysqlQuery("SELECT * FROM user WHERE user_id = " + userID, 'getUserFromUserId');
-			
+		/*	public function getUserFromUserId():void{
+		mysqlQuery("SELECT * FROM user WHERE user_id = " + userID, 'getUserFromUserId');
+		
 		}
-		
-		
+		*/	
 		public function updateUser():void
 		{
-			mysqlQuery("UPDATE user SET active ='0' WHERE user_id = '" + userID +"'"  , 'updateUser');
+			mysqlQuery("UPDATE user SET active=0, course_timestamp ='"+ lockoutStamp +"' WHERE user_id = '" + userID +"'"  , 'updateTimestamp');
 			
 		}
-		
-		public function updateTimestamp():void
-		{
-			mysqlQuery("UPDATE user SET course_timestamp ='"+ lockoutStamp +"' WHERE user_id = '" + userID +"'"  , 'updateTimestamp');
-			
-		}
-		
 		
 		
 		public function insertLockoutUser():void {
-			
 			
 			mysqlQuery("INSERT INTO user_lockout (user_id) " + 
 				"VALUES " + 
 				"('" + userID+ "')", "InsertLockoutUser");
 			
-			
 		}
 		
 		public function lockoutUser():void{
+			
 			insertLockoutUser();
 			updateUser();
 		}
 		
 		
-		protected var mailService:HTTPService;
-		
-		public function EmailConfirmService()
-		{
-			mailService = new HTTPService();
-			mailService.url = 'mail.php';
-			mailService.method = 'POST';
-			mailService.resultFormat = 'text';
-			mailService.addEventListener(ResultEvent.RESULT, onResult);
-			mailService.addEventListener(FaultEvent.FAULT, onFault);
-		}
-		
-		public function sendConfirmation(data:Object=null):void
-		{
-			var vars:Object = {};
-			//vars.user = iUser;
-			//vars.pass = iPass;
-			//vars.email = iEmail;
-			
-			//			mailService.request = vars;
-			mailService.send(vars);
-		}
-		
-		protected function onResult(e:ResultEvent):void
-		{
-			
-			Alert.show('You have incorrectly answered the questions and will be locked out of the system till tomorrow morning till 8:00am');	
-		}
-		
-		protected function onFault(e:FaultEvent):void
-		{
-			Alert.show(e.fault.faultString);
-		}
-		
 		protected function refresh(event:MouseEvent):void
 		{
-			// TODO Auto-generated method stub
 			showUsers();
 		}
 		
 		protected function undo(event:MouseEvent):void
 		{
-			mysqlQuery("UPDATE user SET active ='1' WHERE user_id = '" + userID +"'"  , 'updateUser');
-			
+			mysqlQuery("UPDATE user SET active ='1' WHERE user_id = '" + 5 +"'"  , 'updateUser');	
+			mysqlQuery("UPDATE user SET course_timestamp ='"+ null +"' WHERE user_id = '" + userID +"'"  , 'updateTimestamp');
 		}
+		
+		public function getUserId():void
+		{
+			var Obj:Object=new Object();
+			kill_HttpServ.method="POST";
+			kill_HttpServ.send();
+		}
+		
+		
+		protected function getUserIdfromSession(event:MouseEvent):void
+		{	
+			getUserId();
+			Alert.show(userID+" = User ID");
+		}
+		
+		protected function lockoutBtn(event:MouseEvent):void
+		{
+			lockoutUser();
+		}
+		
+		
+		private function fnHandleFault(event:FaultEvent):void{
+			Alert.show("Error ID="+event.fault.errorID+"  faultString="+event.fault.faultString);
+		}
+		
+		private function fnDiplayResult(event:ResultEvent):void{
+			
+			userID=event.result.toString();
+			lockoutUser();
+		//	Alert.show(userID+"User ID if this is null, you are not logged into tlpa.ecistm.com");
+		}
+		
+		
+		
+		
 		
 	]]></fx:Script>
 	<fx:Declarations>
 		
+		<mx:HTTPService id="kill_HttpServ" url="http://tlpa.ecistm.com/main/flex_mysql/killSession.php" result="fnDiplayResult(event)" fault="fnHandleFault(event)"/>	
 		
 	</fx:Declarations>
 	
 	
 	
-	
-	
-	
-	
 	<mx:HRule width="100%"/>
-	<s:Label id="title2" x="20" y="37" width="524" height="158"
-			 text=" Lockout of the TLPA program.  ">
+	<s:Label id="title2" x="20" y="37" width="524" height="60"
+			 text=" This course cannot be successfully completed today because there are more incorrect question answers than allowed. The system is now locked until 8am tomorrow morning.  After that time, you will be able to enter the system and retake this course or begin another one. ">
 		
 	</s:Label>
-	<s:DataGrid id="dgUsers" x="37" y="107" width="886" height="468">
+	<s:DataGrid id="dgUsers" x="18" y="160" width="534" height="274">
 		<s:columns>
 			<s:ArrayList>
 				<s:GridColumn dataField="user_id" headerText="User ID"></s:GridColumn>
@@ -279,7 +251,10 @@
 		</s:columns>
 		
 	</s:DataGrid>
-	<s:Label id="usernameTxt" x="20" y="10" text=""/>
-	<s:Button x="20" y="65" label="refresh" click="refresh(event)"/>
-	<s:Button x="107" y="65" label="Undo" click="undo(event)"/>
+	
+	<s:Button x="20" y="105" label="refresh" click="refresh(event)"/>
+	<s:Button x="107" y="105" label="Undo" click="undo(event)"/>
+	<s:Button x="199" y="105" label="Get User ID" click="getUserIdfromSession(event)"/>
+	<s:Button x="298" y="105" label="Lockout User ID" click="lockoutBtn(event)"/>
+	<s:Button x="436" y="105" label="test close"/>
 </s:Application>

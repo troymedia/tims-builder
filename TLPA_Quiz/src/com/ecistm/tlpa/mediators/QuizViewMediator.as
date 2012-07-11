@@ -42,7 +42,7 @@ package com.ecistm.tlpa.mediators
 		{
 			addViewListener(Event.ADDED_TO_STAGE, onStartupComplete, Event);
 			addContextListener(SearchResultEvent.RECEIVED, onSearchResultsReceived, SearchResultEvent);
-			addContextListener(SubmitEvent.ANSWER_SUBMITTED, onAnswerSubmitted, SubmitEvent);
+			addContextListener(SubmitEvent.NEXT_QUESTION, onAnswerSubmitted, SubmitEvent);
 			addContextListener(SubmitEvent.CLOSE_FEEDBACK, closeFeedback, SubmitEvent);
 		}
 		
@@ -58,27 +58,7 @@ package com.ecistm.tlpa.mediators
 		
 		protected function onAnswerSubmitted(e:SubmitEvent):void
 		{
-			Alert.buttonWidth = 180;
-			if(e.questionType == 'false')
-			{
-				Alert.okLabel = "Review Information";
-				alert = Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK, null, function(e:CloseEvent):void{
-					dispatch(new LaunchFeedbackEvent(LaunchFeedbackEvent.LAUNCH));
-				});
-				
-			}
-			else if(e.questionType == 'true')
-			{
-				Alert.okLabel = 'Continue';
-				Alert.cancelLabel = 'Retry Quiz';
-				alert = Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK, null, function(e:CloseEvent):void{ 
-					if(e.detail == Alert.OK)
-						view.stepToNextQuestionPool(responseModel);
-//					if(e.detail == Alert.CANCEL)
-//						view.resetQuiz();
-				});
-			}
-			alert.setStyle('buttonStyleName', 'styledAlertButtons');
+			view.stepToNextQuestionPool(responseModel);
 		}
 		
 		protected function closeFeedback(e:SubmitEvent):void
