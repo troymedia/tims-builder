@@ -20,5 +20,5 @@
 	name=labelDisplay, type=spark.core.IDisplayText, required=false
 	-->
 	
-	<s:BitmapImage source="@Embed('assets/images/arrow_right.png')"/>
+	<s:BitmapImage source="@Embed('assets/images/common/arrow_right.png')"/>
 </s:Skin>

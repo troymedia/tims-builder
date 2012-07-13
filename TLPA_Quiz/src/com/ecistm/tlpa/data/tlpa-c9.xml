@@ -6,13 +6,13 @@
 <!-- TF   true/false -->
 	<lesson id="Lesson One">
 		<incorrectFeedback>
-			<image source="assets/images/tlpa09_pool01_101.png" audio="OICED_101.mp3" video="" pool="1"/>
-			<image source="assets/images/tlpa09_pool02_103.png" audio="OICED_103.mp3" video="" pool="2"/>
-			<image source="assets/images/tlpa09_pool03_111.png" audio="OICED_111.mp3" video="" pool="3"/>
-			<image source="assets/images/tlpa09_pool04_121.png" audio="OICED_121.mp3" video="" pool="4"/>
-			<image source="assets/images/tlpa09_pool05_127.png" audio="OICED_127.mp3" video="" pool="5"/>
-			<image source="assets/images/tlpa09_pool06_112.png" audio="OICED_112.mp3" video="" pool="6"/>
-			<image source="assets/images/tlpa09_pool06_129.png" audio="OICED_129.mp3" video="" pool="6"/>
+			<image source="assets/images/course09/tlpa09_pool01_101.png" audio="OICED_101.mp3" video="" pool="1"/>
+			<image source="assets/images/course09/tlpa09_pool02_103.png" audio="OICED_103.mp3" video="" pool="2"/>
+			<image source="assets/images/course09/tlpa09_pool03_111.png" audio="OICED_111.mp3" video="" pool="3"/>
+			<image source="assets/images/course09/tlpa09_pool04_121.png" audio="OICED_121.mp3" video="" pool="4"/>
+			<image source="assets/images/course09/tlpa09_pool05_127.png" audio="OICED_127.mp3" video="" pool="5"/>
+			<image source="assets/images/course09/tlpa09_pool06_112.png" audio="OICED_112.mp3" video="" pool="6"/>
+			<image source="assets/images/course09/tlpa09_pool06_129.png" audio="OICED_129.mp3" video="" pool="6"/>
 		</incorrectFeedback>
 		<questionPool number="1">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>

@@ -2,6 +2,7 @@ package com.ecistm.tlpa.commands
 {
 	import com.ecistm.tlpa.events.SearchResultEvent;
 	import com.ecistm.tlpa.models.FeedbackImagesModel;
+	import com.ecistm.tlpa.models.QuestionPoolModel;
 	
 	import mx.controls.Alert;
 	
@@ -13,6 +14,9 @@ package com.ecistm.tlpa.commands
 		public var feedbackModel:FeedbackImagesModel;
 		
 		[Inject]
+		public var questionPoolModel:QuestionPoolModel;
+		
+		[Inject]
 		public var event:SearchResultEvent;
 		public function PopulateFeedbackImagesModelCommand()
 		{
@@ -21,10 +25,22 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
-			for each(var obj:Object in event.results.incorrectFeedback.image)
+			populateFeedbackImages();
+			populateQuestionPoolModel();
+		}
+		
+		protected function populateFeedbackImages():void
+		{
+			for each(var obj:Object in event.results.lesson.incorrectFeedback.image)
 			{
 				feedbackModel.images.addItem(obj);
 			}
+		}
+		
+		protected function populateQuestionPoolModel():void
+		{
+			for each(var pool:Object in event.results.lesson.questionPool)
+				questionPoolModel.questionPools.addItem(pool);
 		}
 	}
 }

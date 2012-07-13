@@ -22,7 +22,7 @@ package com.ecistm.tlpa.mediators
 		
 		protected function initializeTitleText(e:SearchResultEvent):void
 		{
-			view.text = e.results.id + ': Quiz '; 
+			view.text = e.results.lesson.id; 
 		}
 			
 	}

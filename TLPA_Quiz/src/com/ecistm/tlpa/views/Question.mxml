@@ -5,12 +5,14 @@
 		 xmlns:views="com.ecistm.tlpa.views.*"
 		 xmlns:components="com.ecistm.tlpa.components.*" 
 		 creationComplete="init()"
-		 >
+		 width="100%" height="100%"
+		 showEffect="{fadeIn}" addedEffect="{fadeIn}">
 
 	<fx:Declarations>
 		<components:SoundPlayer id="soundPlayer" url="{audio}"/>
 		<s:RadioButtonGroup id="questionPool"/>
 		<fx:String id="questionText"/>
+		<s:Fade id="fadeIn" startDelay="500" duration="400" alphaFrom="0" alphaTo="1"/>
 	</fx:Declarations>
 	
 	<fx:Script>
@@ -24,6 +26,7 @@
 			import spark.components.HGroup;
 			import spark.components.Label;
 			import spark.components.RadioButton;
+			import spark.components.TextArea;
 			
 			public var cbGroup:SmartCheckboxGroup;
 			
@@ -36,8 +39,7 @@
 			public var responsesGroup:VGroup;
 			public var rb:RadioButton;
 			[Bindable]public var registeredAnswer:String;
-			public var label:Label;
-			public var hGroup:HGroup;
+			public var label:TextArea;
 			public var selections:ArrayCollection = new ArrayCollection();
 		
 			[Bindable] public var pool:String;
@@ -51,19 +53,28 @@
 			protected function init():void
 			{
 				super.createChildren();
-				label = new Label();
-				label.percentWidth = label.percentHeight = 100;
-				label.setStyle('lineBreak', 'explicit');
-				label.maxDisplayedLines = 2;
+				label = new TextArea();
+				label.percentWidth = 100;
+				//label.height = 24;
+				label.minHeight = 0;
+				label.setStyle('contentBackgroundAlpha', 0);
+				label.setStyle('borderVisible', false);
+				label.editable = false;
 				label.setStyle('color', 'white');
 				label.setStyle('fontWeight', 'bold');
 				label.setStyle('fontSize', 14);
 				label.text = questionText;
 				this.addElementAt(label, 0);
+				label.addEventListener(FlexEvent.UPDATE_COMPLETE, function():void{
+					label.height = label.scroller.viewport.contentHeight + 2;
+				});
 				
-				hGroup = new HGroup();
-				hGroup.percentWidth = 100;
-				this.addElementAt(hGroup, 1);
+				fadeIn.play();
+				
+//				hGroup = new HGroup();
+//				hGroup.percentWidth = 100;
+//				this.addElementAt(hGroup, 1);
+				
 //				cbGroup = new SmartCheckboxGroup();
 //				cbGroup.checkBoxGroup = responses;
 //				this.addElementAt(cbGroup, 1);
@@ -91,14 +102,21 @@
 	</fx:Script>
 	
 	<s:states>
-		<s:State name="textQuestionView"/>
-		<s:State name="imageQuestionView"/>
-		<s:State name="textWithImageQuestionView"/>
+		<s:State name="TF"/>
+		<s:State name="MCT"/>
+		<s:State name="MCG"/>
+		<s:State name="MCTI"/>
 	</s:states>
 	
 	<!--<components:SmartCheckboxGroup id="cbGroup" checkBoxGroup="{responses}"/>-->
+	<s:HGroup id="outerShell">
+		<s:VGroup id="btnContainer" width="100%"/>
+		<s:VGroup id="picContainer" includeIn="MCTI" horizontalAlign="right">
+			<s:Image source="assets/images/tlpa09_pool01_101.png"/>
+		</s:VGroup>
+	</s:HGroup>
 	
-	<!--<s:HGroup height="320" width="100%" includeIn="imageQuestionView"/>-->
+	<s:HGroup id="imgWithAnswerContainer" includeIn="MCG"/>
 	
 	
 </s:VGroup>

@@ -28,9 +28,10 @@
 			import spark.components.Button;
 			import spark.components.NavigatorContent;
 			import spark.components.RadioButton;
+			
 			[Bindable] protected var numOfIncorrectAnswers:int = 0;
 			[Bindable] public var lessons:ArrayCollection;
-			
+			protected var question:Question;
 			[Bindable] protected var questions:ArrayCollection;
 			public var rb:spark.components.RadioButton;
 			[Bindable] protected var currentQuestionPool:QuestionPool;
@@ -40,14 +41,13 @@
 //				for each(var qp:Object in data.questionPool)
 				for each(var qp:Object in data.lesson.questionPool)
 				{
-//					Alert.show('pool#' + qp.number);
 					var questionPool:QuestionPool = new QuestionPool();
 					for each(var q:Object in qp.question)
 					{
-						Alert.show(q.text);
+//						Alert.show(q.text);
 						var nav:NavigatorContent = new NavigatorContent();
 						nav.percentHeight = nav.percentWidth = 100;
-						var question:Question = new Question();
+						question = new Question();
 						question.type = q.type;
 						question.questionText = q.text;
 						question.audio = q.audio;
@@ -56,8 +56,6 @@
 						question.randomize = q.randomize;
 						question.correctAudio = qp.correctResponse.audio;
 						question.correctText = qp.correctResponse.text;
-//						question.incorrectAudio = qp.incorrectResponse.audio;
-//						question.incorrectVideo = qp.incorrectResponse.video;
 						nav.addElement(question);
 						for each(var r:Object in q.response)
 						{
@@ -69,7 +67,7 @@
 							question.rb.setStyle('color', 'white');
 							question.rb.setStyle('fontSize', 14);
 							question.rb.name = (r.correct == 0) ? 'false' : 'true';
-							question.addElement(question.rb);
+							question.btnContainer.addElement(question.rb);
 						}
 						questionPool.addElement(nav);
 						stack.addElement(questionPool);
@@ -78,6 +76,8 @@
 				currentQuestionPool = QuestionPool(stack.selectedChild);
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
 				currentQuestion.soundPlayer.play();
+				currentQuestion.currentState = currentQuestion.type;
+//				Alert.show(currentQuestion.currentState);
 			}
 			
 			public function stepToNextQuestionPool(model:ResponseTextModel):void
@@ -88,31 +88,21 @@
 				SoundMixer.stopAll();
 				currentQuestion.soundPlayer.play();
 				model.numIncorrectAnswers = 0;
+				currentQuestion.currentState = currentQuestion.type;
+//				Alert.show(currentQuestion.currentState);
 			}
 			
 			public function stepToNextQuestion():void
 			{
-				//numOfIncorrectAnswers++;
-//				if(numOfIncorrectAnswers < 2)
-//				{
-					currentQuestionPool.selectedIndex += 1;
-					currentQuestionPool = QuestionPool(stack.selectedChild);
-					currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
-					SoundMixer.stopAll();
-					currentQuestion.soundPlayer.play();
-//				}	
-//				else
-//				{	
-//					stepToNextQuestionPool();
-//				}
-//				Alert.show(String(numOfIncorrectAnswers));
+				currentQuestionPool.selectedIndex += 1;
+				currentQuestionPool = QuestionPool(stack.selectedChild);
+				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
+				SoundMixer.stopAll();
+				currentQuestion.soundPlayer.play();
+				currentQuestion.currentState = currentQuestion.type;
+//				Alert.show(currentQuestion.currentState);
 			}
 			
-			public function lockoutUser():void
-			{
-				Alert.show("This course cannot be successfully'\n'completed today because there are more'\n' incorrect question answers than allowed.'\n'The system is now locked until 8am tomorrow morning.'\n'After that time, you will be able to enter the system and retake this course or begin another one.", 'Lockout', Alert.OK);
-			}
-		
 			public function resetQuiz():void
 			{
 				stack.selectedIndex = 0;
@@ -123,6 +113,11 @@
 				currentQuestion.soundPlayer.play();
 			}
 			
+			public function showSuccessView():void
+			{
+				currentState = 'quizSuccessView';
+			}
+			
 		]]>
 	</fx:Script>
 	
@@ -130,17 +125,27 @@
 		<s:VerticalLayout paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10"/>
 	</s:layout>
 	
+	<s:states>
+		<s:State name="quizView"/>
+		<s:State name="quizSuccessView"/>
+		
+	</s:states>
+	
 	<components:TLPAQuizTitle/>
 	
-	<s:BorderContainer height="100%" width="100%" backgroundImage="@Embed('assets/images/taxi_dark2.jpg')" borderVisible="true"
-					   cornerRadius="10">
+	<s:BorderContainer height="100%" width="100%" backgroundImage="@Embed('assets/images/common/taxi_dark2.jpg')" borderVisible="true"
+					   cornerRadius="10"
+					   >
 		<s:layout>
-			<s:VerticalLayout paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10"/>
+			<s:VerticalLayout paddingTop="10" paddingLeft="10" paddingRight="10" paddingBottom="10"
+							  />
 		</s:layout>
 		
-		<mx:ViewStack id="stack" width="100%" height="100%">
+		<mx:ViewStack id="stack" width="100%" height="100%" includeIn="quizView">
 			
 		</mx:ViewStack>
+		
+		<views:SuccessView includeIn="quizSuccessView"/>
 		
 	</s:BorderContainer>
 	

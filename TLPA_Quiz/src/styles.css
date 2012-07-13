@@ -20,3 +20,11 @@ mx|Alert{
 	
 }
 
+.styledAlertButtonsIncorrect{
+	cornerRadius: 5;
+	fontSize: 14;
+	chromeColor: #ff0000;
+	color: #ffffff;
+	
+}
+

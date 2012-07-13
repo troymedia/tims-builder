@@ -30,8 +30,7 @@ package com.ecistm.tlpa.mediators
 		{
 			view.registeredAnswer = view.questionPool.selectedValue as String;
 			view.registerSelection();
-//			Alert.show(view.registeredAnswer);
-			dispatch(new SubmitEvent(SubmitEvent.REGISTER_ANSWERS, 'MC', e.currentTarget.selection, view));//convert to function that retrieves necessary data
+			dispatch(new SubmitEvent(SubmitEvent.REGISTER_ANSWERS, view.type, e.currentTarget.selection, view));//convert to function that retrieves necessary data
 			dispatch(new AnswerSelectionEvent(AnswerSelectionEvent.ANSWER_SELECTED));
 		}
 		

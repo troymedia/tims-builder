@@ -26,8 +26,8 @@ package com.ecistm.tlpa.services
 		public function getResults():void
 		{
 			service = new HTTPService();
-//			service.url = 'com/ecistm/tlpa/data/tlpa-c9.xml';
-			service.url = 'com/ecistm/tlpa/data/tlpa01-lesson2-quiz.xml';
+			service.url = 'com/ecistm/tlpa/data/tlpa-c9.xml';
+//			service.url = 'com/ecistm/tlpa/data/tlpa01-lesson4-quiz.xml';
 			service.resultFormat = 'object';
 			var responder:Responder = new Responder(onServiceResult, onServiceFault);
 			var token:AsyncToken = service.send();

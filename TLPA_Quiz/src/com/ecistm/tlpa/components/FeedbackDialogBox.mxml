@@ -68,7 +68,6 @@
 				isAtEnd = currentIndex == max;	
 				currentSlide = FeedbackDialogBoxSlide(stack.getItemAt(currentIndex));
 				stepThroughSlides();
-//				Alert.show('current index: ' + String(stack.selectedIndex));
 			}
 			
 			public function close():void
