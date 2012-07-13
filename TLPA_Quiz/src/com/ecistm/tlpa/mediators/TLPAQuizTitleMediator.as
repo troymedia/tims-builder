@@ -17,10 +17,10 @@ package com.ecistm.tlpa.mediators
 		
 		override public function onRegister():void
 		{
-			addContextListener(SearchResultEvent.RECEIVED, onSearchResultsReceived, SearchResultEvent);
+			addContextListener(SearchResultEvent.RECEIVED, initializeTitleText, SearchResultEvent);
 		}
 		
-		protected function onSearchResultsReceived(e:SearchResultEvent):void
+		protected function initializeTitleText(e:SearchResultEvent):void
 		{
 			view.text = e.results.id + ': Quiz '; 
 		}

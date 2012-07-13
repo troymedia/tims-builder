@@ -53,6 +53,8 @@ package com.ecistm.tlpa.mediators
 		
 		protected function onSearchResultsReceived(e:SearchResultEvent):void
 		{
+//			for each(var lesson:Object in e.results)
+//				Alert.show(lesson.id);
 			view.buildQuiz(e.results);
 		}
 		

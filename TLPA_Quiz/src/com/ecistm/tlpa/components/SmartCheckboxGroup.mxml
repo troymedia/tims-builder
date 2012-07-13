@@ -21,14 +21,25 @@
 			import spark.layouts.TileOrientation;
 			import spark.layouts.VerticalLayout;
 			
-			public var c:CheckBox;
+			public var cb:CheckBox;
 			
 			[Bindable] public var items:ArrayCollection = new ArrayCollection();
 			[Bindable] private var _multiSelect:Boolean = false;
 			[Bindable] private var _checkBoxGroup:ArrayCollection = new ArrayCollection;
 			private var tile:TileLayout = new TileLayout();
 			private var horiz:HorizontalLayout = new HorizontalLayout();
-			private var vert:VerticalLayout
+			private var vert:VerticalLayout = new VerticalLayout();
+			
+			override protected function commitProperties():void
+			{
+				super.commitProperties();
+				invalidateDisplayList();
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void
+			{
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+			}
 			
 			protected function checkForProperLayout():void
 			{
@@ -79,15 +90,16 @@
 			{
 				for each(var i:String in list)
 				{
-					c = new CheckBox();
-					c.label = i;
-					c.setStyle('color', 'white');
-					c.setStyle('fontSize', 14);
-					items.addItem(c);
-					this.addElement(c);
-					c.addEventListener(MouseEvent.CLICK, enforceSelectStatus);
+					cb = new CheckBox();
+					cb.label = i;
+					cb.setStyle('color', 'white');
+					cb.setStyle('fontSize', 14);
+					items.addItem(cb);
+					this.addElement(cb);
+					cb.addEventListener(MouseEvent.CLICK, enforceSelectStatus);
 				}
 				checkForProperLayout();
+				invalidateProperties();
 			}  
 			
 		]]>

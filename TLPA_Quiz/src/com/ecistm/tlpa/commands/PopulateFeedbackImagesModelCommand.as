@@ -24,7 +24,6 @@ package com.ecistm.tlpa.commands
 			for each(var obj:Object in event.results.incorrectFeedback.image)
 			{
 				feedbackModel.images.addItem(obj);
-//				Alert.show('..');
 			}
 		}
 	}

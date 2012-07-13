@@ -4,7 +4,7 @@
 		xmlns:mx="library://ns.adobe.com/flex/mx">
 	<!-- host component -->
 	<fx:Metadata>
-		[HostComponent("spark.components.BorderContainer")]
+		[HostComponent("spark.components.SkinnableContainer")]
 	</fx:Metadata>
 	
 	<!-- states -->
@@ -21,11 +21,11 @@
 			topLeftRadiusX="10" topLeftRadiusY="10" topRightRadiusX="10" topRightRadiusY="10"
 			bottomLeftRadiusX="10" bottomLeftRadiusY="10" bottomRightRadiusX="10" bottomRightRadiusY="10">
 		<s:fill>
-			<s:SolidColor color="0x333333"/>
+			<s:SolidColor color="black"/>
 		</s:fill>
-		<s:stroke>
+		<!--<s:stroke>
 			<s:SolidColorStroke color="0xdedede" weight="2"/>
-		</s:stroke>
+		</s:stroke>-->
 	</s:Rect>
 	
 </s:Skin>

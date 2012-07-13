@@ -13,7 +13,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.ecistm.tlpa.models.FeedbackImagesModel;
-			import com.ecistm.tlpa.models.LessonModel;
+			import com.ecistm.tlpa.models.LessonsModel;
 			import com.ecistm.tlpa.models.ResponseTextModel;
 			
 			import flash.media.*;
@@ -37,11 +37,14 @@
 			[Bindable] protected var currentQuestion:Question;
 			public function buildQuiz(data:*):void
 			{
-				for each(var qp:Object in data.questionPool)
+//				for each(var qp:Object in data.questionPool)
+				for each(var qp:Object in data.lesson.questionPool)
 				{
+//					Alert.show('pool#' + qp.number);
 					var questionPool:QuestionPool = new QuestionPool();
 					for each(var q:Object in qp.question)
 					{
+						Alert.show(q.text);
 						var nav:NavigatorContent = new NavigatorContent();
 						nav.percentHeight = nav.percentWidth = 100;
 						var question:Question = new Question();
@@ -50,23 +53,24 @@
 						question.audio = q.audio;
 						question.cardinality = q.cardinality;
 						question.pool = qp.number;
+						question.randomize = q.randomize;
 						question.correctAudio = qp.correctResponse.audio;
 						question.correctText = qp.correctResponse.text;
-						question.incorrectAudio = qp.incorrectResponse.audio;
-						question.incorrectVideo = qp.incorrectResponse.video;
+//						question.incorrectAudio = qp.incorrectResponse.audio;
+//						question.incorrectVideo = qp.incorrectResponse.video;
+						nav.addElement(question);
 						for each(var r:Object in q.response)
 						{
-							question.responses.addItem(r.text);
+//							question.responses.addItem(r.text);
 //							question.cbGroup.multiSelect = (question.cardinality == 'single') ? false : true;
-//							question.rb = new spark.components.RadioButton();
-//							question.rb.groupName = 'questionPool';
-//							question.rb.label = r.text;
-//							question.rb.setStyle('color', 'white');
-//							question.rb.setStyle('fontSize', 14);
-//							question.cbGroup.c.name = (r.correct == 0) ? 'false' : 'true';
-//							question.addElement(question.rb);
+							question.rb = new spark.components.RadioButton();
+							question.rb.groupName = 'questionPool';
+							question.rb.label = r.text;
+							question.rb.setStyle('color', 'white');
+							question.rb.setStyle('fontSize', 14);
+							question.rb.name = (r.correct == 0) ? 'false' : 'true';
+							question.addElement(question.rb);
 						}
-						nav.addElement(question);
 						questionPool.addElement(nav);
 						stack.addElement(questionPool);
 					}

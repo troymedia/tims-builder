@@ -3,9 +3,9 @@
 		  xmlns:s="library://ns.adobe.com/flex/spark" 
 		  xmlns:mx="library://ns.adobe.com/flex/mx"
 		  xmlns:components="com.ecistm.tlpa.components.*"
-		  cornerRadius="10"
-		  backgroundColor="0x1e1e1e"
-		  height="320" width="240">
+		  backgroundColor="black"
+		  minHeight="0" minWidth="0"
+		  >
 	<fx:Declarations>
 		<components:SoundPlayer id="soundPlayer" url="{audio}"/>
 		<fx:String id="feedbackText"/>
@@ -39,7 +39,8 @@
 				for each(var img:Object in images)
 				{
 					var feedbackSlide:FeedbackDialogBoxSlide = new FeedbackDialogBoxSlide();
-					feedbackSlide.percentHeight = feedbackSlide.percentWidth = 100;
+					feedbackSlide.percentHeight = 100
+					feedbackSlide.percentWidth = 100;
 					feedbackSlide.imageSource = img.source;
 					feedbackSlide.audioSource = img.audio;
 					stack.addElement(feedbackSlide);
@@ -88,15 +89,15 @@
 		<s:State name="incorrectTextView"/>
 	</s:states>
 	
-	<s:VGroup height="100%" width="100%" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" verticalAlign="middle" horizontalAlign="center">
-		<mx:ViewStack id="stack" width="100%" height="100%">
+	<s:VGroup height="100%" width="100%" verticalAlign="middle" horizontalAlign="center" gap="0">
+		<mx:ViewStack id="stack" width="576" height="436">
 			
 		</mx:ViewStack>
 		
 		<s:HGroup width="100%" horizontalAlign="center" 
-				  paddingBottom="5" paddingTop="5">
+				  paddingBottom="10" paddingTop="5">
 			<s:Button id="okButton" 
-					  label="Continue" color="white" chromeColor="green"/>
+					  label="Continue" color="0x333333" chromeColor="0x00ff00" width="120"/>
 			<s:Button id="cancelButton" 
 					  label.correctView="Retry Quiz"
 					  includeIn="correctView"/>

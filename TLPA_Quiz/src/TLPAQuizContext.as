@@ -2,10 +2,12 @@ package
 {
 	import com.ecistm.tlpa.commands.*;
 	import com.ecistm.tlpa.components.FeedbackDialogBox;
+	import com.ecistm.tlpa.components.SmartCheckboxGroup;
 	import com.ecistm.tlpa.components.SubmitButton;
 	import com.ecistm.tlpa.components.TLPAQuizTitle;
 	import com.ecistm.tlpa.events.*;
 	import com.ecistm.tlpa.mediators.*;
+	import com.ecistm.tlpa.mediators.SmartCheckboxGroupMediator;
 	import com.ecistm.tlpa.models.*;
 	import com.ecistm.tlpa.services.LessonsService;
 	import com.ecistm.tlpa.views.*;
@@ -29,6 +31,7 @@ package
 			
 			//mediators
 			mediatorMap.mapView(QuizView_old, QuizViewMediator, QuizView_old);
+			//mediatorMap.mapView(SmartCheckboxGroup, SmartCheckboxGroupMediator, SmartCheckboxGroup);
 			mediatorMap.mapView(SubmitButton, SubmitButtonMediator, SubmitButton);
 			mediatorMap.mapView(FeedbackDialogBox, FeedbackDialogBoxMediator, FeedbackDialogBox);
 			mediatorMap.mapView(Question, QuestionMediator, Question);
@@ -39,11 +42,10 @@ package
 			commandMap.mapEvent(SubmitEvent.REGISTER_ANSWERS, RegisterAnswersCommand, SubmitEvent);
 			commandMap.mapEvent(SubmitEvent.SUBMIT_ANSWERS, SubmitAnswerCommand, SubmitEvent);
 			commandMap.mapEvent(SubmitEvent.ANSWER_SUBMITTED, FeedbackDialogCommand, SubmitEvent);
-//			commandMap.mapEvent(LaunchFeedbackEvent.LAUNCH, FeedbackDialogCommand, LaunchFeedbackEvent);
 			
 			//injectors
 			injector.mapSingleton(LessonsService);
-			injector.mapSingleton(LessonModel);
+			injector.mapSingleton(LessonsModel);
 			injector.mapSingleton(QuestionPoolModel);
 			injector.mapSingleton(QuestionModel);
 			injector.mapSingleton(AnswersModel);

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lessons>
+<!-- Valid Question Types -->
+<!-- MCT    multiple choice with text answers -->
+<!-- MCG    multiple choice with image answers -->
+<!-- TF     true/false -->
+<!-- MCTI   multiple choice with text answers and graphic image -->
+	<lesson id="Lesson One">
+		<incorrectFeedback>
+			<image source="assets/images/tlpa01_102.jpg" audio="psd1-02.mp3" video="" pool="1"/>
+			<image source="assets/images/tlpa01_109.jpg" audio="psd1-09.mp3" video="" pool="2"/>
+			<image source="assets/images/tlpa01_113.jpg" audio="psd1-13.mp3" video="" pool="3"/>
+			<image source="assets/images/tlpa01_118.jpg" audio="psd1-18.mp3" video="" pool="4"/>
+			<image source="assets/images/tlpa01_121.jpg" audio="psd1-23.mp3" video="" pool="5"/>
+			<image source="assets/images/tlpa01_130.jpg" audio="psd1-29.mp3" video="" pool="6"/>
+		</incorrectFeedback>
+		<questionPool number="1">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCT" text="What is professionalism?" audio="1-35a.mp3" cardinality="single">
+				<response text="Always respect the customer, and strive to make a good impression" correct="1" randomize="1"/>
+				<response text="Always taking care of your needs first" correct="0" randomize="1"/>
+				<response text="Wearing a suit" correct="0" randomize="1"/>
+				<response text="None of the above" correct="0" randomize="1"/>
+			</question>
+			<question type="TF" text="Professionalism means always respecting the customer, and striving to make a good impression." audio="1-35b.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+			<question type="TF" text="The definition of professionalism is to always wear a suit." audio="1-35c.mp3" cardinality="single">
+				<response text="True" correct="0" randomize="0"/>
+				<response text="False" correct="1" randomize="0"/>
+			</question>
+		</questionPool>	
+		<questionPool number="2">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCT" text="Which of the following is an example of professionalism?" audio="1-36a.mp3" cardinality="single">
+				<response text="Keeping your personal life separate" correct="1" randomize="1"/>
+				<response text="Using mind-altering substances on the job" correct="0" randomize="1"/>
+				<response text="Disobeying traffic signs" correct="0" randomize="1"/>
+				<response text="None of the above" correct="0" randomize="1"/>
+			</question>
+			<question type="TF" text="Keeping your personal life separate is an example of professionalism." audio="1-36b.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+			<question type="TF" text="Being well-rested is an important part of being professional." audio="1-36c.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+		</questionPool>	
+		<questionPool number="3">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCG" text="Which driver do you think will receive the bigger tip and repeat business?" audio="1-37a.mp3" cardinality="single">
+				<response image="tlpa01-lesson1-pool3-q1-itemA.jpg" text="A" correct="0" x="78" y="76" randomize="0"/>
+				<response image="tlpa01-lesson1-pool3-q1-itemB.jpg" text="B" correct="1" x="363" y="76" randomize="0"/>
+			</question>
+			<question type="MCTI" text="Is this driver dressed like a professional?" audio="1-37b.mp3" image="tlpa01-lesson1-pool3-q2.jpg" x="320" y="80" cardinality="single">
+				<response text="Yes" correct="1" randomize="0"/>
+				<response text="No" correct="0" randomize="0"/>
+			</question>
+			<question type="MCTI" text="Is this driver dressed like a professional?" audio="1-37c.mp3" image="tlpa01-lesson1-pool3-q3.jpg" x="320" y="80" cardinality="single">
+				<response text="Yes" correct="0" randomize="0"/>
+				<response text="No" correct="1" randomize="0"/>
+			</question>
+		</questionPool>	
+		<questionPool number="4">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCG" text="Which cab belongs to the more professional driver?" audio="1-38a.mp3" cardinality="single">
+				<response image="tlpa01-lesson1-pool4-q1-itemA.jpg" text="A" correct="0" x="48" y="106" randomize="0"/>
+				<response image="tlpa01-lesson1-pool4-q1-itemB.jpg" text="B" correct="1" x="390" y="106" randomize="0"/>
+			</question>
+			<question type="TF" text="Keeping your vehicle in good condition is an important aspect of appearing professional." audio="1-38b.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+			<question type="MCT" text="How do you maintain a professional-looking cab?" audio="1-38c.mp3" cardinality="single">
+				<response text="Clean out your cab at the end of each shift" correct="0" randomize="1"/>
+				<response text="Vacuum the interior often" correct="0" randomize="1"/>
+				<response text="Visit the car wash frequently" correct="0" randomize="1"/>
+				<response text="All of the above" correct="1" randomize="0"/>
+			</question>
+		</questionPool>	
+		<questionPool number="5">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="TF" text="Business cards are one of the easiest and cheapest ways to market taxicab service." audio="1-39a.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+			<question type="TF" text="Business cards will help your customers to remember you, and may result in future business." audio="1-39b.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+			<question type="TF" text="Handing out a business card to a satisfied customer will make you seem 'pushy.'" audio="1-39c.mp3" cardinality="single">
+				<response text="True" correct="0" randomize="0"/>
+				<response text="False" correct="1" randomize="0"/>
+			</question>
+		</questionPool>	
+		<questionPool number="6">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="TF" text="Don't speed or use your horn unless absolutely necessary." audio="1-40a.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+			<question type="MCT" text="When is it appropriate to beep your horn?" audio="1-40b.mp3" cardinality="single">
+				<response text="In an emergency" correct="1" randomize="1"/>
+				<response text="To hurry traffic along" correct="0" randomize="1"/>
+				<response text="To get a good-looking person's attention on the street" correct="0" randomize="1"/>
+				<response text="None of the above" correct="0" randomize="0"/>
+			</question>
+			<question type="TF" text="You should always speed if you want bigger tips from passengers." audio="1-40c.mp3" cardinality="single">
+				<response text="True" correct="0" randomize="0"/>
+				<response text="False" correct="1" randomize="0"/>
+			</question>
+		</questionPool>
+	</lesson>
+<!-- End Lesson One -->
+
+</lessons>

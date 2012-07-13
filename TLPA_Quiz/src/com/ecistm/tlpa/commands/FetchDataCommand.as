@@ -1,7 +1,7 @@
 package com.ecistm.tlpa.commands
 {
 	import com.ecistm.tlpa.events.SearchResultEvent;
-	import com.ecistm.tlpa.models.LessonModel;
+	import com.ecistm.tlpa.models.LessonsModel;
 	import com.ecistm.tlpa.models.QuestionModel;
 	import com.ecistm.tlpa.models.QuestionPoolModel;
 	import com.ecistm.tlpa.services.LessonsService;
@@ -20,7 +20,7 @@ package com.ecistm.tlpa.commands
 		public var service:LessonsService;
 		
 		[Inject]
-		public var lessonModel:LessonModel;
+		public var lessonModel:LessonsModel;
 		
 		[Inject]
 		public var question:QuestionPoolModel;

@@ -23,14 +23,14 @@ package com.ecistm.tlpa.mediators
 		
 		override public function onRegister():void
 		{
-			eventMap.mapListener(view.cbGroup, MouseEvent.CLICK, onItemClick, ItemClickEvent);
+			eventMap.mapListener(view.questionPool, ItemClickEvent.ITEM_CLICK, onItemClick, ItemClickEvent);
 		}
 		
-		protected function onItemClick(e:MouseEvent):void
+		protected function onItemClick(e:ItemClickEvent):void
 		{
-			view.registeredAnswer = e.currentTarget.label as String;
+			view.registeredAnswer = view.questionPool.selectedValue as String;
 			view.registerSelection();
-			Alert.show('answer: ');
+//			Alert.show(view.registeredAnswer);
 			dispatch(new SubmitEvent(SubmitEvent.REGISTER_ANSWERS, 'MC', e.currentTarget.selection, view));//convert to function that retrieves necessary data
 			dispatch(new AnswerSelectionEvent(AnswerSelectionEvent.ANSWER_SELECTED));
 		}

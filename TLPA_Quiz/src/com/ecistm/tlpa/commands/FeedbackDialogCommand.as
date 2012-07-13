@@ -55,10 +55,13 @@ package com.ecistm.tlpa.commands
 						feedback.verticalCenter = feedback.horizontalCenter = 0;
 						feedback.audio = responseModel.audio;
 						feedback.videoSource = responseModel.video;
-						feedback.y = feedback.x = 0;
-						feedback.height = contextView.height;
-						feedback.width = contextView.width;
+						feedback.y = 135;
+						feedback.x = 360;
+						feedback.percentHeight = feedback.percentWidth = 100;
+//						feedback.height = 540;
+//						feedback.width = 720;
 						PopUpManager.addPopUp(feedback, contextView, true);
+//						PopUpManager.centerPopUp(feedback);
 						mediatorMap.createMediator(feedback);
 						feedback.currentState = 'incorrectImageView';
 						addFeedbackImages();
@@ -79,12 +82,9 @@ package com.ecistm.tlpa.commands
 						"incorrect question answers than allowed. The system" + '\n' + 
 						"is now locked until 8am tomorrow morning." + '\n' + 
 						"After that time, you will be able to enter the system" + '\n' + 
-						"and retake this course or begin another one.", 'Lockout', Alert.OK, null, function(e:CloseEvent):void{
-							//insert lockout code here
-						});
+						"and retake this course or begin another one.", 'Lockout');
 				}
 			}
-			
 			alert.setStyle('buttonStyleName', 'styledAlertButtons');
 		}
 		

@@ -21,6 +21,7 @@
 			import mx.controls.Alert;
 			import mx.events.FlexEvent;
 			
+			import spark.components.HGroup;
 			import spark.components.Label;
 			import spark.components.RadioButton;
 			
@@ -30,14 +31,15 @@
 			[Bindable] public var text:String;
 			[Bindable] public var audio:String;
 			[Bindable] public var cardinality:String;
+			[Bindable] public var randomize:String;
 			[Bindable] public var responses:ArrayCollection = new ArrayCollection();
 			public var responsesGroup:VGroup;
 			public var rb:RadioButton;
 			[Bindable]public var registeredAnswer:String;
 			public var label:Label;
+			public var hGroup:HGroup;
 			public var selections:ArrayCollection = new ArrayCollection();
 		
-			
 			[Bindable] public var pool:String;
 			[Bindable] public var correctAudio:String;
 			[Bindable] public var correctText:String;
@@ -59,9 +61,12 @@
 				label.text = questionText;
 				this.addElementAt(label, 0);
 				
-				cbGroup = new SmartCheckboxGroup();
-				cbGroup.checkBoxGroup = responses;
-				this.addElementAt(cbGroup, 1);
+				hGroup = new HGroup();
+				hGroup.percentWidth = 100;
+				this.addElementAt(hGroup, 1);
+//				cbGroup = new SmartCheckboxGroup();
+//				cbGroup.checkBoxGroup = responses;
+//				this.addElementAt(cbGroup, 1);
 			}
 			
 			public function registerSelection():void
@@ -88,10 +93,12 @@
 	<s:states>
 		<s:State name="textQuestionView"/>
 		<s:State name="imageQuestionView"/>
+		<s:State name="textWithImageQuestionView"/>
 	</s:states>
 	
 	<!--<components:SmartCheckboxGroup id="cbGroup" checkBoxGroup="{responses}"/>-->
 	
 	<!--<s:HGroup height="320" width="100%" includeIn="imageQuestionView"/>-->
+	
 	
 </s:VGroup>

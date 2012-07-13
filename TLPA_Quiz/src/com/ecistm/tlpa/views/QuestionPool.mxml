@@ -5,9 +5,7 @@
 		  xmlns:views="com.ecistm.tlpa.views.*"
 		  xmlns:components="com.ecistm.tlpa.components.*">
 	<fx:Declarations>
-		<!--<components:SoundPlayer/>-->
 		<s:RadioButtonGroup id="questionPool"/>
-		<!--<fx:String id="questionText"/>-->
 	</fx:Declarations>
 	
 	<fx:Script>

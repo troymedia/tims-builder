@@ -1,7 +1,6 @@
 package com.ecistm.tlpa.services
 {
 	import com.ecistm.tlpa.events.SearchResultEvent;
-
 	
 	import mx.collections.ArrayCollection;
 	import mx.controls.Alert;
@@ -17,6 +16,7 @@ package com.ecistm.tlpa.services
 	{
 		public var service:HTTPService;
 		public var lesson:Object;
+		public var numberOfLessons:int;
 		
 		public function LessonsService()
 		{
@@ -26,7 +26,8 @@ package com.ecistm.tlpa.services
 		public function getResults():void
 		{
 			service = new HTTPService();
-			service.url = 'com/ecistm/tlpa/data/tlpa-c9.xml';
+//			service.url = 'com/ecistm/tlpa/data/tlpa-c9.xml';
+			service.url = 'com/ecistm/tlpa/data/tlpa01-lesson2-quiz.xml';
 			service.resultFormat = 'object';
 			var responder:Responder = new Responder(onServiceResult, onServiceFault);
 			var token:AsyncToken = service.send();
@@ -35,7 +36,12 @@ package com.ecistm.tlpa.services
 		
 		private function onServiceResult(e:ResultEvent):void
 		{
-			lesson = service.lastResult.lessons.lesson;
+			//course1
+			lesson = service.lastResult.lessons;
+			//course9
+//			lesson = service.lastResult.lessons.lesson;
+//			for each(var o:Object in lesson)
+//				Alert.show(o.number);
 			dispatch(new SearchResultEvent(SearchResultEvent.RECEIVED, lesson));
 		}
 
