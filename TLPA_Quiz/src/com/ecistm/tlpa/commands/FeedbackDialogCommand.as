@@ -66,8 +66,8 @@ package com.ecistm.tlpa.commands
 						feedback.verticalCenter = feedback.horizontalCenter = 0;
 						feedback.audio = responseModel.audio;
 						feedback.videoSource = responseModel.video;
-						//feedback.y = 135;
-						//feedback.x = 360;
+						feedback.y = 135;
+						feedback.x = 360;
 						feedback.percentHeight = feedback.percentWidth = 100;
 						feedback.height = 530;
 						feedback.width = 720;
