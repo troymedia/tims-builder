@@ -6,6 +6,8 @@ package com.ecistm.tlpa.commands
 	import com.ecistm.tlpa.models.ResponseTextModel;
 	import com.ecistm.tlpa.views.LockoutView;
 	
+	import flash.net.*;
+	
 	import mx.controls.Alert;
 	import mx.events.CloseEvent;
 	import mx.managers.PopUpManager;
@@ -55,11 +57,11 @@ package com.ecistm.tlpa.commands
 						feedback.verticalCenter = feedback.horizontalCenter = 0;
 						feedback.audio = responseModel.audio;
 						feedback.videoSource = responseModel.video;
-						feedback.y = 135;
-						feedback.x = 360;
+						//feedback.y = 135;
+						//feedback.x = 360;
 						feedback.percentHeight = feedback.percentWidth = 100;
-//						feedback.height = 540;
-//						feedback.width = 720;
+						feedback.height = 530;
+						feedback.width = 720;
 						PopUpManager.addPopUp(feedback, contextView, true);
 //						PopUpManager.centerPopUp(feedback);
 						mediatorMap.createMediator(feedback);
@@ -69,22 +71,30 @@ package com.ecistm.tlpa.commands
 				}
 				else
 				{
-					var lockout:LockoutView = new LockoutView();
-					lockout.x = lockout.y = 0;
-					lockout.height = contextView.height;
-					lockout.width = contextView.width;
-					PopUpManager.addPopUp(lockout, contextView, true);
-					mediatorMap.createMediator(lockout);
-					Alert.buttonWidth = 87;
-					Alert.okLabel = 'OK';
-					Alert.show("This course cannot be successfully" + '\n' + 
-						"completed today because there are more" + '\n' + 
-						"incorrect question answers than allowed. The system" + '\n' + 
-						"is now locked until 8am tomorrow morning." + '\n' + 
-						"After that time, you will be able to enter the system" + '\n' + 
-						"and retake this course or begin another one.", 'Lockout');
+					
+					var a:URLRequest = new URLRequest("http://tlpa.ecistm.com/testLockout/lockout.swf");
+					navigateToURL(a, "_parent");
+
+					
+				//	var lockout:LockoutView = new LockoutView();
+				//	lockout.x = lockout.y = 0;
+				//	lockout.height = contextView.height;
+				//	lockout.width = contextView.width;
+				//	PopUpManager.addPopUp(lockout, contextView, true);
+				//	mediatorMap.createMediator(lockout);
+				//	Alert.buttonWidth = 87;
+				//	Alert.okLabel = 'OK';
+				//	Alert.show("This course cannot be successfully" + '\n' + 
+				//		"completed today because there are more" + '\n' + 
+				//		"incorrect question answers than allowed. The system" + '\n' + 
+				//		"is now locked until 8am tomorrow morning." + '\n' + 
+				//		"After that time, you will be able to enter the system" + '\n' + 
+				//		"and retake this course or begin another one.", 'Lockout');
+					
+				//
 				}
 			}
+			
 			alert.setStyle('buttonStyleName', 'styledAlertButtons');
 		}
 		
