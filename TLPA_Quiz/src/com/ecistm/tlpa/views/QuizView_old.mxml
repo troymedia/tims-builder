@@ -77,7 +77,7 @@
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
 				currentQuestion.soundPlayer.play();
 				currentQuestion.currentState = currentQuestion.type;
-//				Alert.show(currentQuestion.currentState);
+//				Alert.show(currentQuestion.audio);
 			}
 			
 			public function stepToNextQuestionPool(model:ResponseTextModel):void
@@ -85,7 +85,7 @@
 				stack.selectedIndex += 1;
 				currentQuestionPool = QuestionPool(stack.selectedChild);
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
-				SoundMixer.stopAll();
+				stopAllSounds();
 				currentQuestion.soundPlayer.play();
 				model.numIncorrectAnswers = 0;
 				currentQuestion.currentState = currentQuestion.type;
@@ -97,7 +97,7 @@
 				currentQuestionPool.selectedIndex += 1;
 				currentQuestionPool = QuestionPool(stack.selectedChild);
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
-				SoundMixer.stopAll();
+				stopAllSounds();
 				currentQuestion.soundPlayer.play();
 				currentQuestion.currentState = currentQuestion.type;
 //				Alert.show(currentQuestion.currentState);
@@ -109,13 +109,19 @@
 				currentQuestionPool = QuestionPool(stack.selectedChild);
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
 				currentQuestion.questionPool.selection = null;
-				SoundMixer.stopAll();
+				stopAllSounds();
 				currentQuestion.soundPlayer.play();
 			}
 			
 			public function showSuccessView():void
 			{
 				currentState = 'quizSuccessView';
+				stopAllSounds();
+			}
+			
+			protected function stopAllSounds():void
+			{
+				SoundMixer.stopAll();
 			}
 			
 		]]>

@@ -44,8 +44,9 @@
 					feedbackSlide.imageSource = img.source;
 					feedbackSlide.audioSource = img.audio;
 					stack.addElement(feedbackSlide);
+//					Alert.show('feedback audio: ' + feedbackSlide.audioSource);
 				}
-				
+				currentSlide = FeedbackDialogBoxSlide(stack.getItemAt(currentIndex));
 				stepThroughSlides();
 			}
 			
@@ -53,6 +54,7 @@
 			{
 				SoundMixer.stopAll();
 				currentSlide.soundPlayer.play();
+//				Alert.show('currentslide audio: ' + currentSlide.audioSource);
 			}
 			
 			protected function stepTo(delta:Number):void

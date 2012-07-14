@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lessons>
+<!-- Valid Question Types -->
+<!-- MCT    multiple choice with text answers -->
+<!-- MCG    multiple choice with image answers -->
+<!-- TF     true/false -->
+<!-- MCTI   multiple choice with text answers and graphic image -->
+	<lesson id="Lesson Three">
+		<incorrectFeedback>
+			<image source="assets/images/tlpa01_pool01_302.png" audio="psd3-02.mp3" video="" pool="1"/>
+			<image source="" audio="" video="tlpa1_3a.flv" pool="2"/>
+			<image source="" audio="" video="tlpa1_3b.flv" pool="3"/>
+			<image source="assets/images/tlpa01_314.jpg" audio="psd3-14.mp3" video="" pool="4"/>
+			<image source="assets/images/tlpa01_317.jpg" audio="psd3-18_feedback.mp3" video="tlpa1_3d.flv" pool="5"/>
+		</incorrectFeedback>
+		<questionPool number="1">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="TF" text="All passengers are the same and should be treated the same." audio="3-21a.mp3" cardinality="single">
+				<response text="True" correct="0" randomize="0"/>
+				<response text="False" correct="1" randomize="0"/>
+			</question>
+			<question type="TF" text="It is up to you to provide unique service based on a passenger's needs." audio="3-21b.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+			<question type="MCTI" text="Do these two passengers have the same needs?" audio="3-21c.mp3" image="tlpa01-lesson3-q3.png" x="219" y="145" cardinality="single">
+				<response text="Yes" correct="0" randomize="0"/>
+				<response text="No" correct="1" randomize="0"/>
+			</question>
+		</questionPool>
+
+		<questionPool number="2">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCTI" text="A passenger makes small talk while paying the fare. What should the driver do?" audio="3-22a.mp3" image="tlpa01-lesson3-pool2-q1.jpg" x="416" y="114" cardinality="single">
+				<response text="Look down at the money and receipts when talking to the passenger" correct="0" randomize="1"/>
+				<response text="Make eye contact with the passenger" correct="1" randomize="1"/>
+			</question>
+			<question type="MCTI" text="The passenger asks the driver a question. How should he respond?" audio="3-22b.mp3" image="tlpa01-lesson3-pool2-q2.jpg" x="367" y="76" cardinality="single">
+				<response text="Answer the passenger quickly" correct="1" randomize="1"/>
+				<response text="Be grumpy and say, 'What?'" correct="0" randomize="1"/>
+			</question>
+			<question type="MCTI" text="A passenger is explaining where she wants to go.  What should the driver do?" audio="3-22c.mp3" image="tlpa01-lesson3-pool2-q3.jpg" x="376" y="178" cardinality="single">
+				<response text="Tune the radio" correct="0" randomize="1"/>
+				<response text="Listen to what the passenger is saying about her destination" correct="1" randomize="1"/>
+			</question>
+		</questionPool>
+
+		<questionPool number="3">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCTI" text="A passenger is carrying a bag and a large suitcase.  What should the driver do?" audio="3-23a.mp3" image="tlpa01-lesson3-pool3-q1.jpg" x="370" y="74" cardinality="single">
+				<response text="Stay in the cab and pop the trunk" correct="0" randomize="1"/>
+				<response text="Help the passenger with his or her bags" correct="1" randomize="1"/>
+			</question>
+			<question type="MCTI" text="A passenger approaches the cab.  What should the driver do next?" audio="3-23b.mp3" image="tlpa01-lesson3-pool3-q2.jpg" x="380" y="176" cardinality="single">
+				<response text="Ask the passenger where she wants to go" correct="1" randomize="1"/>
+				<response text="Wait for the passenger to tell him where she wants to go" correct="0" randomize="1"/>
+			</question>
+			<question type="MCTI" text="A passenger settles into the back seat of this driver's cab.  What should he do next?" audio="3-23c.mp3" image="tlpa01-lesson3-pool3-q3.jpg" x="387" y="75" cardinality="single">
+				<response text="Finish reading an article in the newspaper" correct="0" randomize="1"/>
+				<response text="Greet the passenger" correct="1" randomize="1"/>
+			</question>
+		</questionPool>
+
+		<questionPool number="4">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCT" text="Making pleasant conversation with your passengers is ________." audio="3-24a.mp3" cardinality="single">
+				<response text="A good business practice" correct="1" randomize="1"/>
+				<response text="Never a good idea" correct="0" randomize="1"/>
+				<response text="Not part of the job" correct="0" randomize="1"/>
+				<response text="None of the above" correct="0" randomize="0"/>
+			</question>
+			<question type="TF" text="Conversation inside the cab should be kept to a minimum; only speak to your customers when necessary." audio="3-24b.mp3" cardinality="single">
+				<response text="True" correct="0" randomize="0"/>
+				<response text="False" correct="1" randomize="0"/>
+			</question>
+			<question type="TF" text="Conversation allows you to get to know your passengers personally; once passengers become familiar with you, they may ask for your services again." audio="3-24c.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+		</questionPool>
+
+		<questionPool number="5">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCT" text="If you get into a conversation with your passenger that might easily turn offensive, what should you do?" audio="3-25a.mp3" cardinality="single">
+				<response text="Always be true to yourself and express your opinion" correct="0" randomize="1"/>
+				<response text="Politely change the subject" correct="1" randomize="1"/>
+				<response text="Tell the passenger you cannot talk to him anymore" correct="0" randomize="1"/>
+				<response text="None of the above" correct="0" randomize="0"/>
+			</question>
+			<question type="TF" text="Heated political conversations with passengers are okay, as long as no one gets offended." audio="3-25b.mp3" cardinality="single">
+				<response text="True" correct="0" randomize="0"/>
+				<response text="False" correct="1" randomize="0"/>
+			</question>
+			<question type="TF" text="Changing the subject is one way to re-focus a potentially offensive topic of conversation." audio="3-25c.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+		</questionPool>
+
+	</lesson>
+<!-- End Lesson Three -->
+
+</lessons>

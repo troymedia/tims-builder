@@ -26,8 +26,21 @@ package com.ecistm.tlpa.services
 		public function getResults():void
 		{
 			service = new HTTPService();
-			service.url = 'com/ecistm/tlpa/data/tlpa-c9.xml';
-//			service.url = 'com/ecistm/tlpa/data/tlpa01-lesson4-quiz.xml';
+			
+			/********** test urls **********/ 
+			service.url = 'com/ecistm/tlpa/data/test/tlpa-c9_test.xml';
+//			service.url = 'com/ecistm/tlpa/data/test/tlpa01-lesson1-quiz_test.xml';//Course 1, Lesson 1
+//			service.url = 'com/ecistm/tlpa/data/test/tlpa01-lesson2-quiz_test.xml';//Course 1, Lesson 2
+//			service.url = 'com/ecistm/tlpa/data/test/tlpa01-lesson3-quiz_test.xml';//Course 1, Lesson 3
+//			service.url = 'com/ecistm/tlpa/data/test/tlpa01-lesson4-quiz_test.xml';//Course 1, Lesson 4
+			/********** end of  **********/
+			
+			//service.url = 'com/ecistm/tlpa/data/tlpa-c9.xml';//Course 9
+//			service.url = 'com/ecistm/tlpa/data/tlpa01-lesson1-quiz.xml';//Course 1, Lesson 1
+//			service.url = 'com/ecistm/tlpa/data/tlpa01-lesson2-quiz.xml';//Course 1, Lesson 2
+//			service.url = 'com/ecistm/tlpa/data/tlpa01-lesson3-quiz.xml';//Course 1, Lesson 3
+//			service.url = 'com/ecistm/tlpa/data/tlpa01-lesson4-quiz.xml';//Course 1, Lesson 4
+
 			service.resultFormat = 'object';
 			var responder:Responder = new Responder(onServiceResult, onServiceFault);
 			var token:AsyncToken = service.send();
