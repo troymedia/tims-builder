@@ -12,6 +12,7 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.ecistm.tlpa.components.ImageWithAnswer;
 			import com.ecistm.tlpa.models.FeedbackImagesModel;
 			import com.ecistm.tlpa.models.LessonsModel;
 			import com.ecistm.tlpa.models.ResponseTextModel;
@@ -61,13 +62,25 @@
 						{
 //							question.responses.addItem(r.text);
 //							question.cbGroup.multiSelect = (question.cardinality == 'single') ? false : true;
-							question.rb = new spark.components.RadioButton();
-							question.rb.groupName = 'questionPool';
-							question.rb.label = r.text;
-							question.rb.setStyle('color', 'white');
-							question.rb.setStyle('fontSize', 14);
-							question.rb.name = (r.correct == 0) ? 'false' : 'true';
-							question.btnContainer.addElement(question.rb);
+							if(q.type != 'MCG')
+							{
+								question.rb = new spark.components.RadioButton();
+								question.rb.groupName = 'questionPool';
+								question.rb.label = r.text;
+								question.rb.setStyle('color', 'white');
+								question.rb.setStyle('fontSize', 14);
+								question.rb.name = (r.correct == 0) ? 'false' : 'true';
+								question.btnContainer.addElement(question.rb);
+							}
+							else
+							{
+								//Alert.show(r.text);
+								var mcgImage:ImageWithAnswer = new ImageWithAnswer();
+								mcgImage.imageSource = r.image;
+								mcgImage.buttonLabel = r.text;
+								question.imgWithAnswerContainer.addElement(mcgImage);
+								Alert.show(mcgImage.imageSource);
+							}
 						}
 						questionPool.addElement(nav);
 						stack.addElement(questionPool);
@@ -82,6 +95,7 @@
 			
 			public function stepToNextQuestionPool(model:ResponseTextModel):void
 			{
+				//updateCurrentState(currentQuestion.currentState);
 				stack.selectedIndex += 1;
 				currentQuestionPool = QuestionPool(stack.selectedChild);
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
@@ -90,6 +104,7 @@
 				model.numIncorrectAnswers = 0;
 				currentQuestion.currentState = currentQuestion.type;
 //				Alert.show(currentQuestion.currentState);
+				updateCurrentState(currentQuestion.currentState);
 			}
 			
 			public function stepToNextQuestion():void
@@ -101,6 +116,7 @@
 				currentQuestion.soundPlayer.play();
 				currentQuestion.currentState = currentQuestion.type;
 //				Alert.show(currentQuestion.currentState);
+				updateCurrentState(currentQuestion.currentState);
 			}
 			
 			public function resetQuiz():void
@@ -111,6 +127,15 @@
 				currentQuestion.questionPool.selection = null;
 				stopAllSounds();
 				currentQuestion.soundPlayer.play();
+			}
+			
+			protected function updateCurrentState(state:String):void
+			{
+//				Alert.show('..' + state);
+				if(state == 'MCG')
+				{
+					question.currentState = 'MCG';
+				}
 			}
 			
 			public function showSuccessView():void

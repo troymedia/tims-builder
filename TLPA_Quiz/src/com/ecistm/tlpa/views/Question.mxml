@@ -50,6 +50,8 @@
 			[Bindable] public var incorrectImage:String;
 			public var feedbackImages:Array = [];
 			
+			[Bindable] public var questionTypeIsMCG:Boolean;
+			
 			protected function init():void
 			{
 				super.createChildren();
@@ -109,14 +111,16 @@
 	</s:states>
 	
 	<!--<components:SmartCheckboxGroup id="cbGroup" checkBoxGroup="{responses}"/>-->
-	<s:HGroup id="outerShell">
-		<s:VGroup id="btnContainer" width="100%"/>
-		<s:VGroup id="picContainer" includeIn="MCTI" horizontalAlign="right">
-			<s:Image source="assets/images/tlpa09_pool01_101.png"/>
+	<s:HGroup id="outerShell" width="100%" height="100%">
+		<s:VGroup id="btnContainer" width="100%" height="100%"/>
+		<s:VGroup id="picContainer" width="100%" height="100%" includeIn="MCTI" horizontalAlign="right">
+			<s:Image source="assets/images/course09/tlpa09_pool01_101.png"/>
 		</s:VGroup>
 	</s:HGroup>
 	
-	<s:HGroup id="imgWithAnswerContainer" includeIn="MCG"/>
+	<s:HGroup id="imgWithAnswerContainer" horizontalAlign="center" verticalAlign="middle" width="100%" height="100%">
+		<!--<s:Button label="Life"/>-->
+	</s:HGroup>
 	
 	
 </s:VGroup>

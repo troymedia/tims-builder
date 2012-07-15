@@ -5,18 +5,11 @@
 		  horizontalAlign="center">
 	<fx:Declarations>
 		<fx:String id="imageSource"/>
+		<fx:String id="buttonLabel"/>
 	</fx:Declarations>
+
 	
-	<fx:Script>
-		<![CDATA[
-			import mx.collections.ArrayCollection;
-			
-			[Bindable] protected var options:ArrayCollection = new ArrayCollection(['A', 'B', 'C', 'D', 'E']);
-			
-		]]>
-	</fx:Script>
-	
-	<s:Image source="{imageSource}"/>
-	<s:RadioButton/>
+	<s:BitmapImage id="img" source="{imageSource}"/>
+	<s:RadioButton id="button" label="{buttonLabel}" color="white"/>
 	
 </s:VGroup>
