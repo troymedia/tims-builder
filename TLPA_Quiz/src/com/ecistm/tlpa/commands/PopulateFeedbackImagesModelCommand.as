@@ -31,6 +31,7 @@ package com.ecistm.tlpa.commands
 		
 		protected function populateFeedbackImages():void
 		{
+			feedbackModel.correctResponseAudio = event.results.correctResponse.audio;
 			for each(var obj:Object in event.results.lesson.incorrectFeedback.image)
 			{
 				feedbackModel.images.addItem(obj);
@@ -41,6 +42,8 @@ package com.ecistm.tlpa.commands
 		{
 			for each(var pool:Object in event.results.lesson.questionPool)
 				questionPoolModel.questionPools.addItem(pool);
+//			questionPoolModel.correctResponseAudio = event.results.correctResponse.audio;
+//			questionPoolModel.correctResponseText = event.results.correctResponse.text;
 		}
 	}
 }

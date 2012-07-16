@@ -17,6 +17,7 @@
 	
 	<fx:Script>
 		<![CDATA[
+			import com.ecistm.tlpa.components.ResponseWithImage;
 			import com.ecistm.tlpa.components.SmartCheckboxGroup;
 			
 			import mx.collections.ArrayCollection;
@@ -38,7 +39,8 @@
 			[Bindable] public var responses:ArrayCollection = new ArrayCollection();
 			public var responsesGroup:VGroup;
 			public var rb:RadioButton;
-			[Bindable]public var registeredAnswer:String;
+			[Bindable] public var registeredAnswer:String;
+			
 			public var label:TextArea;
 			public var selections:ArrayCollection = new ArrayCollection();
 		
@@ -51,6 +53,7 @@
 			public var feedbackImages:Array = [];
 			
 			[Bindable] public var questionTypeIsMCG:Boolean;
+			[Bindable] public var mcgAnswerIsSelected:Boolean;
 			
 			protected function init():void
 			{
@@ -100,11 +103,24 @@
 				//TODO
 			}
 			
+			public function playCorrectAudio(audios:String):void
+			{
+				soundPlayer.url = audios;
+				Alert.show('audio: ' + correctAudio);
+			}
+			
+			public function setImageAnswerSelection(selection:String):void
+			{
+//				for each(var elem:QuestionWithImageAnswer in imgWithAnswerContainer.numElements)
+					Alert.show('selection: ' + selection);
+			}
+			
 		]]>
 	</fx:Script>
 	
 	<s:states>
 		<s:State name="TF"/>
+		<s:State name="TFI"/>
 		<s:State name="MCT"/>
 		<s:State name="MCG"/>
 		<s:State name="MCTI"/>
@@ -113,13 +129,13 @@
 	<!--<components:SmartCheckboxGroup id="cbGroup" checkBoxGroup="{responses}"/>-->
 	<s:HGroup id="outerShell" width="100%" height="100%">
 		<s:VGroup id="btnContainer" width="100%" height="100%"/>
-		<s:VGroup id="picContainer" width="100%" height="100%" includeIn="MCTI" horizontalAlign="right">
+		<s:VGroup id="picContainer" width="100%" height="100%" includeIn="MCTI, TFI" horizontalAlign="right">
 			<s:Image source="assets/images/course09/tlpa09_pool01_101.png"/>
 		</s:VGroup>
 	</s:HGroup>
 	
 	<s:HGroup id="imgWithAnswerContainer" horizontalAlign="center" verticalAlign="middle" width="100%" height="100%">
-		<!--<s:Button label="Life"/>-->
+		
 	</s:HGroup>
 	
 	

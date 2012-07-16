@@ -24,6 +24,8 @@ package com.ecistm.tlpa.mediators
 		override public function onRegister():void
 		{
 			eventMap.mapListener(view.questionPool, ItemClickEvent.ITEM_CLICK, onItemClick, ItemClickEvent);
+			addContextListener(AnswerSelectionEvent.IMAGE_ANSWER_SELECTED, onImageAnswerSelected, AnswerSelectionEvent);
+			addContextListener(AnswerSelectionEvent.CORRECT_ANSWER, onCorrectAnswer, AnswerSelectionEvent);
 		}
 		
 		protected function onItemClick(e:ItemClickEvent):void
@@ -34,10 +36,20 @@ package com.ecistm.tlpa.mediators
 			dispatch(new AnswerSelectionEvent(AnswerSelectionEvent.ANSWER_SELECTED));
 		}
 		
+		protected function onImageAnswerSelected(e:AnswerSelectionEvent):void
+		{
+			view.setImageAnswerSelection(e.selection);
+		}
+		
 		protected function onSubmit(e:SubmitEvent):void
 		{
 			
 			//Alert.show(e.type);
+		}
+		
+		protected function onCorrectAnswer(e:AnswerSelectionEvent):void
+		{
+			view.playCorrectAudio(e.selection);
 		}
 		
 	}

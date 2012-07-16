@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:components="com.ecistm.tlpa.components.*">
+	<fx:Declarations>
+		<components:SoundPlayer id="soundPlayer" url="{audio}"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import mx.events.CloseEvent;
+			
+			protected var alert:Alert;
+			[Bindable] protected var audio:String = 'assets/audio/spanish_joint.mp3';
+			
+			public function callCorrectAlert():void
+			{
+				playAudio();
+				Alert.buttonWidth = 180;
+				Alert.okLabel = 'Continue';
+				alert = Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK, null, function(e:CloseEvent):void{ 
+					soundPlayer.stop();
+//					if(e.detail == Alert.OK && responseModel.pool != String(questionPoolModel.questionPools.length))
+//						dispatch(new SubmitEvent(SubmitEvent.NEXT_QUESTION, '', responseModel));
+//					else
+//						dispatch(new QuizSuccessEvent(QuizSuccessEvent.SUCCESS));
+				});
+				alert.setStyle('buttonStyleName', 'styledAlertButtons');
+			}
+			
+			protected function playAudio():void
+			{
+				SoundMixer.stopAll();
+				soundPlayer.play();
+			}
+		]]>
+	</fx:Script>
+</s:Group>

@@ -1,6 +1,9 @@
 package com.ecistm.tlpa.commands
 {
 	import com.ecistm.tlpa.components.FeedbackDialogBox;
+	import com.ecistm.tlpa.components.ResponseAlert;
+	import com.ecistm.tlpa.components.SoundPlayer;
+	import com.ecistm.tlpa.events.AnswerSelectionEvent;
 	import com.ecistm.tlpa.events.QuizSuccessEvent;
 	import com.ecistm.tlpa.events.SubmitEvent;
 	import com.ecistm.tlpa.models.FeedbackImagesModel;
@@ -43,16 +46,22 @@ package com.ecistm.tlpa.commands
 			var alert:Alert;
 			if(submitEvent.questionType == 'true')
 			{
-				Alert.buttonWidth = 180;
-				Alert.okLabel = 'Continue';
-				Alert.cancelLabel = 'Retry Quiz';
-				alert = Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK, null, function(e:CloseEvent):void{ 
-					if(e.detail == Alert.OK && responseModel.pool != String(questionPoolModel.questionPools.length))
-						dispatch(new SubmitEvent(SubmitEvent.NEXT_QUESTION, '', responseModel));
-					else
-						dispatch(new QuizSuccessEvent(QuizSuccessEvent.SUCCESS));
-				});
-				alert.setStyle('buttonStyleName', 'styledAlertButtons');
+				var responseAlert:ResponseAlert = new ResponseAlert();
+				responseAlert.callCorrectAlert();
+//				Alert.buttonWidth = 180;
+//				Alert.okLabel = 'Continue';
+////				dispatch(new AnswerSelectionEvent(AnswerSelectionEvent.CORRECT_ANSWER, questionPoolModel.correctResponseAudio));
+////				Alert.cancelLabel = 'Retry Quiz';
+////				var sp:SoundPlayer = new SoundPlayer();
+////				sp.url = feedbackModel.correctResponseAudio;
+////				sp.play();
+//				alert = Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK, null, function(e:CloseEvent):void{ 
+//					if(e.detail == Alert.OK && responseModel.pool != String(questionPoolModel.questionPools.length))
+//						dispatch(new SubmitEvent(SubmitEvent.NEXT_QUESTION, '', responseModel));
+//					else
+//						dispatch(new QuizSuccessEvent(QuizSuccessEvent.SUCCESS));
+//				});
+//				alert.setStyle('buttonStyleName', 'styledAlertButtons');
 			}
 			else if(submitEvent.questionType == 'false')
 			{

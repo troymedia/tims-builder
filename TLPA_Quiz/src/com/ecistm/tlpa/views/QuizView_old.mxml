@@ -12,7 +12,7 @@
 	
 	<fx:Script>
 		<![CDATA[
-			import com.ecistm.tlpa.components.ImageWithAnswer;
+			import com.ecistm.tlpa.components.ResponseWithImage;
 			import com.ecistm.tlpa.models.FeedbackImagesModel;
 			import com.ecistm.tlpa.models.LessonsModel;
 			import com.ecistm.tlpa.models.ResponseTextModel;
@@ -75,11 +75,12 @@
 							else
 							{
 								//Alert.show(r.text);
-								var mcgImage:ImageWithAnswer = new ImageWithAnswer();
+								var mcgImage:ResponseWithImage = new ResponseWithImage();
 								mcgImage.imageSource = r.image;
 								mcgImage.buttonLabel = r.text;
+								mcgImage.button.groupName = 'questionPool';
 								question.imgWithAnswerContainer.addElement(mcgImage);
-								Alert.show(mcgImage.imageSource);
+//								Alert.show(mcgImage.imageSource);
 							}
 						}
 						questionPool.addElement(nav);
@@ -148,6 +149,7 @@
 			{
 				SoundMixer.stopAll();
 			}
+			
 			
 		]]>
 	</fx:Script>

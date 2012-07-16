@@ -2,6 +2,7 @@ package
 {
 	import com.ecistm.tlpa.commands.*;
 	import com.ecistm.tlpa.components.FeedbackDialogBox;
+	import com.ecistm.tlpa.components.ResponseWithImage;
 	import com.ecistm.tlpa.components.SmartCheckboxGroup;
 	import com.ecistm.tlpa.components.SubmitButton;
 	import com.ecistm.tlpa.components.TLPAQuizTitle;
@@ -36,6 +37,7 @@ package
 			mediatorMap.mapView(FeedbackDialogBox, FeedbackDialogBoxMediator, FeedbackDialogBox);
 			mediatorMap.mapView(Question, QuestionMediator, Question);
 			mediatorMap.mapView(TLPAQuizTitle, TLPAQuizTitleMediator, TLPAQuizTitle);
+			mediatorMap.mapView(ResponseWithImage, ResponseWithImageMediator, ResponseWithImage);
 			
 			//commands
 			commandMap.mapEvent(SearchResultEvent.RECEIVED, PopulateFeedbackImagesModelCommand, SearchResultEvent);

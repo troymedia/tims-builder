@@ -10,6 +10,7 @@ package com.ecistm.tlpa.models
 		[Bindable] public var source:String;
 		[Bindable] public var pool:String;
 		[Bindable] public var images:ArrayCollection = new ArrayCollection();
+		[Bindable] public var correctResponseAudio:String;
 		
 		public function FeedbackImagesModel()
 		{

@@ -16,7 +16,7 @@
 		</incorrectFeedback>
 		<questionPool number="1">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
-			<question type="MCT" text="What is professionalism?" audio="1-35a.mp3" cardinality="single">
+			<question type="MCT" text="What is professionalism?" audio="https://dl-web.dropbox.com/get/Life%20Is%20Good/Stay.mp3?w=6b35eebf" cardinality="single">
 				<response text="Always respect the customer, and strive to make a good impression" correct="1" randomize="1"/>
 				<response text="Always taking care of your needs first" correct="0" randomize="1"/>
 				<response text="Wearing a suit" correct="0" randomize="1"/>
