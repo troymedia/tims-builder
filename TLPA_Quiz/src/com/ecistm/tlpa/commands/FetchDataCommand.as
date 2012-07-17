@@ -33,8 +33,6 @@ package com.ecistm.tlpa.commands
 		override public function execute():void
 		{
 			buildLesson();
-			//updateQuestionModel()
-			//dispatch(new SearchResultEvent(SearchResultEvent.POPULATE));
 		}
 		
 		protected function buildLesson():void

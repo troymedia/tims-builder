@@ -78,9 +78,9 @@
 								var mcgImage:ResponseWithImage = new ResponseWithImage();
 								mcgImage.imageSource = r.image;
 								mcgImage.buttonLabel = r.text;
-								mcgImage.button.groupName = 'questionPool';
+								//mcgImage.button.groupName = 'questionPool';
 								question.imgWithAnswerContainer.addElement(mcgImage);
-//								Alert.show(mcgImage.imageSource);
+								question.mcgImages.addItem(mcgImage);
 							}
 						}
 						questionPool.addElement(nav);
@@ -91,7 +91,6 @@
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
 				currentQuestion.soundPlayer.play();
 				currentQuestion.currentState = currentQuestion.type;
-//				Alert.show(currentQuestion.audio);
 			}
 			
 			public function stepToNextQuestionPool(model:ResponseTextModel):void

@@ -39,6 +39,7 @@
 			[Bindable] public var responses:ArrayCollection = new ArrayCollection();
 			public var responsesGroup:VGroup;
 			public var rb:RadioButton;
+			public var mcgImage:ResponseWithImage;
 			[Bindable] public var registeredAnswer:String;
 			
 			public var label:TextArea;
@@ -54,6 +55,7 @@
 			
 			[Bindable] public var questionTypeIsMCG:Boolean;
 			[Bindable] public var mcgAnswerIsSelected:Boolean;
+			[Bindable] public var mcgImages:ArrayCollection = new ArrayCollection();
 			
 			protected function init():void
 			{
@@ -109,10 +111,11 @@
 				Alert.show('audio: ' + correctAudio);
 			}
 			
-			public function setImageAnswerSelection(selection:String):void
+			public function setImageAnswerSelection(selection:ResponseWithImage):void
 			{
-//				for each(var elem:QuestionWithImageAnswer in imgWithAnswerContainer.numElements)
-					Alert.show('selection: ' + selection);
+				for each(var imgAnswer:ResponseWithImage in mcgImages)
+					if(selection.imageSource != imgAnswer.imageSource)
+						imgAnswer.selected = false;
 			}
 			
 		]]>

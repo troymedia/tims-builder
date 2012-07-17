@@ -2,6 +2,7 @@ package
 {
 	import com.ecistm.tlpa.commands.*;
 	import com.ecistm.tlpa.components.FeedbackDialogBox;
+	import com.ecistm.tlpa.components.ResponseAlert;
 	import com.ecistm.tlpa.components.ResponseWithImage;
 	import com.ecistm.tlpa.components.SmartCheckboxGroup;
 	import com.ecistm.tlpa.components.SubmitButton;
@@ -38,12 +39,16 @@ package
 			mediatorMap.mapView(Question, QuestionMediator, Question);
 			mediatorMap.mapView(TLPAQuizTitle, TLPAQuizTitleMediator, TLPAQuizTitle);
 			mediatorMap.mapView(ResponseWithImage, ResponseWithImageMediator, ResponseWithImage);
+//			mediatorMap.mapView(ResponseAlert, ResponseAlertMediator, ResponseAlert);
 			
 			//commands
 			commandMap.mapEvent(SearchResultEvent.RECEIVED, PopulateFeedbackImagesModelCommand, SearchResultEvent);
 			commandMap.mapEvent(SubmitEvent.REGISTER_ANSWERS, RegisterAnswersCommand, SubmitEvent);
 			commandMap.mapEvent(SubmitEvent.SUBMIT_ANSWERS, SubmitAnswerCommand, SubmitEvent);
 			commandMap.mapEvent(SubmitEvent.ANSWER_SUBMITTED, FeedbackDialogCommand, SubmitEvent);
+			commandMap.mapEvent(AnswerSelectionEvent.IMAGE_ANSWER_SELECTED, RegisterImageAnswersCommand, AnswerSelectionEvent);
+//			commandMap.mapEvent(CorrectAnswerEvent.CORRECT, StepThroughQuestionsCommand, CorrectAnswerEvent);
+//			commandMap.mapEvent(RetryQuizEvent.RETRY, RegisterImageAnswersCommand, RetryQuizEvent);
 			
 			//injectors
 			injector.mapSingleton(LessonsService);
@@ -53,6 +58,7 @@ package
 			injector.mapSingleton(AnswersModel);
 			injector.mapSingleton(ResponseTextModel);
 			injector.mapSingleton(FeedbackImagesModel);
+			injector.mapSingleton(ImageAnswersModel);
 		}
 	}
 }

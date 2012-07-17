@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:BorderContainer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		  xmlns:s="library://ns.adobe.com/flex/spark" 
+		  xmlns:mx="library://ns.adobe.com/flex/mx"
+		  xmlns:components="com.ecistm.tlpa.components.*"
+		  backgroundColor="black"
+		  minHeight="0" minWidth="0"
+		  >
+	<fx:Declarations>
+		<components:SoundPlayer id="soundPlayer" url="{audio}"/>
+		<fx:String id="feedbackText"/>
+		<fx:String id="titleText"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			
+			import spark.components.NavigatorContent;
+			import spark.primitives.BitmapImage;
+			
+			[Bindable] protected var isAtBeginning:Boolean;
+			[Bindable] protected var isAtEnd:Boolean;
+			
+			[Bindable] protected var hasMultipleFeedbackImages:Boolean;
+			[Bindable] protected var dialogText:Array = [];
+			
+			[Bindable] public var audio:String = '';
+			[Bindable] public var videoSource:String = '';
+			[Bindable] public var imageSource:String = '';
+			[Bindable] public var feedbackImages:ArrayCollection = new ArrayCollection();
+			
+			protected var currentIndex:int = 0;
+			protected var currentSlide:FeedbackDialogBoxSlide;
+			
+			public function populateImageStack(images:ArrayCollection):void
+			{
+				for each(var img:Object in images)
+				{
+					var feedbackSlide:FeedbackDialogBoxSlide = new FeedbackDialogBoxSlide();
+					feedbackSlide.percentHeight = 100
+					feedbackSlide.percentWidth = 100;
+					feedbackSlide.imageSource = img.source;
+					feedbackSlide.audioSource = img.audio;
+					stack.addElement(feedbackSlide);
+//					Alert.show('feedback audio: ' + feedbackSlide.audioSource);
+				}
+				currentSlide = FeedbackDialogBoxSlide(stack.getItemAt(currentIndex));
+				stepThroughSlides();
+			}
+			
+			protected function stepThroughSlides():void
+			{
+				SoundMixer.stopAll();
+				currentSlide.soundPlayer.play();
+//				Alert.show('currentslide audio: ' + currentSlide.audioSource);
+			}
+			
+			protected function stepTo(delta:Number):void
+			{	
+				currentIndex += delta;
+				stack.selectedIndex = currentIndex;
+				if (currentIndex < 0)
+					currentIndex = 0;
+				isAtBeginning = currentIndex == 0;
+				var max:int = stack.numElements - 1;
+				if (currentIndex > max)
+					currentIndex = max;
+				isAtEnd = currentIndex == max;	
+				currentSlide = FeedbackDialogBoxSlide(stack.getItemAt(currentIndex));
+				stepThroughSlides();
+			}
+			
+			public function close():void
+			{
+				this.visible = false;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	
+	<s:states>
+		<s:State name="incorrectImageView"/>
+		<s:State name="correctView"/>
+		<s:State name="incorrectTextView"/>
+	</s:states>
+	
+	<s:VGroup height="100%" width="100%" verticalAlign="middle" horizontalAlign="center" gap="0">
+		<mx:ViewStack id="stack" width="576" height="436">
+			
+		</mx:ViewStack>
+		
+		<s:HGroup width="100%" horizontalAlign="center" 
+				  paddingBottom="10" paddingTop="5">
+			<s:Button id="okButton" 
+					  label="Continue" color="0x333333" chromeColor="0x00ff00" width="120"/>
+			<s:Button id="cancelButton" 
+					  label.correctView="Retry Quiz"
+					  includeIn="correctView"/>
+		</s:HGroup>
+	</s:VGroup>
+	
+	<s:HGroup width="100%" height="100%" verticalAlign="middle" paddingLeft="5" paddingRight="5" visible="{feedbackImages.length > 1}">
+		<s:Button label="Back" click="stepTo(-1)" 
+				  enabled="{!isAtBeginning}"
+				  alpha="{!isAtBeginning ? 1 : .5}"
+				  skinClass="com.ecistm.tlpa.skins.BackButtonSkin"/>
+		<s:Spacer width="100%"/>
+		<s:Button label="Next" click="stepTo(1)"
+				  enabled="{!isAtEnd}"
+				  alpha="{!isAtEnd ? 1 : .5}"
+				  skinClass="com.ecistm.tlpa.skins.NextButtonSkin"/>
+	</s:HGroup>
+	
+</s:BorderContainer>

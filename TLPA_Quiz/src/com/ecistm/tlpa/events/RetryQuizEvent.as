@@ -5,14 +5,16 @@ package com.ecistm.tlpa.events
 	public class RetryQuizEvent extends Event
 	{
 		public static const RETRY:String = 'retry';
-		public function RetryQuizEvent(type:String)
+		[Bindable] public var selection:String;
+		public function RetryQuizEvent(type:String, selection:String)
 		{
 			super(type);
+			this.selection = selection;
 		}
 		
 		override public function clone():Event
 		{
-			return new RetryQuizEvent(type);
+			return new RetryQuizEvent(type, selection);
 		}
 	}
 }

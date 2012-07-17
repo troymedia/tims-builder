@@ -1,6 +1,7 @@
 package com.ecistm.tlpa.mediators
 {
 	import com.ecistm.tlpa.components.FeedbackDialogBox;
+	import com.ecistm.tlpa.events.AnswerSelectionEvent;
 	import com.ecistm.tlpa.events.LaunchFeedbackEvent;
 	import com.ecistm.tlpa.events.QuizSuccessEvent;
 	import com.ecistm.tlpa.events.SearchResultEvent;

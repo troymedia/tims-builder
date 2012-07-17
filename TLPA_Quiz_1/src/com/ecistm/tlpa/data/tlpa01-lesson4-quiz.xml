@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lessons>
+<!-- Valid Question Types -->
+<!-- MCT    multiple choice with text answers -->
+<!-- MCG    multiple choice with image answers -->
+<!-- TF     true/false -->
+<!-- MCTI   multiple choice with text answers and graphic image -->
+	<lesson id="Lesson Four">
+		<incorrectFeedback>
+			<image source="" audio="" video="tlpa1_4a.flv" pool="1"/>
+			<image source="" audio="" video="tlpa1_4b.flv" pool="2"/>
+			<image source="" audio="" video="tlpa1_4c.flv" pool="3"/>
+			<image source="" audio="" video="tlpa1_4d.flv" pool="4"/>
+		</incorrectFeedback>
+		<questionPool number="1">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="TF" text="You only need to turn your radio down if your passenger requests it." audio="4-10a.mp3" cardinality="single">
+				<response text="True" correct="0" randomize="0"/>
+				<response text="False" correct="1" randomize="0"/>
+			</question>
+			<question type="MCT" text="If you get a personal call while you are transporting a customer, what should you do?" audio="4-10b.mp3" cardinality="single">
+				<response text="Keep the conversation brief" correct="1" randomize="0"/>
+				<response text="Keep your voice level down" correct="0" randomize="0"/>
+				<response text="Shout loudly so the person on the phone can hear you" correct="0" randomize="1"/>
+				<response text="Both A and B" correct="0" randomize="0"/>
+			</question>
+			<question type="TF" text="Keep the radio at a low, sensible volume while transporting passengers." audio="4-10c.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+		</questionPool>
+
+		<questionPool number="2">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCTI" text="This driver was disrespectful to his passenger. What could he have done differently?" audio="4-11a.mp3" image="tlpa01-lesson4-pool2-q1.jpg" x="429" y="67" cardinality="single">
+				<response text="Answered passenger's questions" correct="0" randomize="1"/> 
+				<response text="Shown more patience with passenger" correct="0" randomize="1"/>
+				<response text="He should not have told the passenger to be quiet" correct="0" randomize="1"/>
+				<response text="All of the above" correct="1" randomize="0"/>
+			</question>
+			<question type="MCTI" text="This driver treated his passenger with respect. What did he do right?" audio="4-11b.mp3" image="tlpa01-lesson4-pool2-q2.jpg" x="364" y="67" cardinality="single">
+				<response text="Answered his passenger's questions" correct="0" randomize="1"/>
+				<response text="Was pleasant" correct="0" randomize="1"/>
+				<response text="Was very informative" correct="0" randomize="1"/>
+				<response text="All of the above" correct="1" randomize="0"/>
+			</question>
+			<question type="TF" text="No matter how annoying a passenger might be, try to be helpful and answer any questions he or she may have." audio="4-11c.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+		</questionPool>
+
+		<questionPool number="3">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCT" text="After dropping off an elderly passenger, you see she has trouble making her way to the entrance of a building. What do you do?" audio="4-12a.mp3" cardinality="single">
+				<response text="Offer her help" correct="1" randomize="1"/>
+				<response text="Say, 'Thank you, have a nice day.'" correct="0" randomize="1"/>
+				<response text="Keep an eye on her as you drive away" correct="0" randomize="1"/>
+				<response text="None of the above" correct="0" randomize="0"/>
+			</question>
+			<question type="TF" text="Even if a customer does not ask for help, you should still offer assistance if you see that it is needed." audio="4-12b.mp3" cardinality="single">
+				<response text="True" correct="1" randomize="0"/>
+				<response text="False" correct="0" randomize="0"/>
+			</question>
+			<question type="TF" text="If you do not have the time, you do not need to offer special assistance to passengers." audio="4-12c.mp3" cardinality="single">
+				<response text="True" correct="0" randomize="0"/>
+				<response text="False" correct="1" randomize="0"/>
+			</question>
+		</questionPool>
+
+		<questionPool number="4">
+			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCTI" text="This driver is a model of professional service delivery. What did he do right?" audio="4-13a.mp3" image="tlpa01-lesson4-pool4-q1.jpg" x="358" y="72" cardinality="single">
+				<response text="Greeted passenger warmly" correct="0" randomize="1"/>
+				<response text="Helped passenger with bags" correct="0" randomize="1"/>
+				<response text="Offered business card" correct="0" randomize="1"/>
+				<response text="All of the above" correct="1" randomize="0"/>
+			</question>
+			<question type="MCG" text="Which driver is a model for professional service delivery?" audio="4-13b.mp3" cardinality="single">
+				<response image="tlpa01-lesson4-pool4-q2-itemA.jpg" text="A" correct="1" x="14" y="116" randomize="0"/>
+				<response image="tlpa01-lesson4-pool4-q2-itemB.jpg" text="B" correct="0" x="349" y="116" randomize="0"/>
+			</question>
+			<question type="MCTI" text="This driver is ________." audio="4-13c.mp3" image="tlpa01-lesson4-pool4-q3.jpg" x="358" y="72" cardinality="single">
+				<response text="Professional" correct="0" randomize="1"/> 
+				<response text="Has a good attitude" correct="0" randomize="1"/>
+				<response text="A good business person" correct="0" randomize="1"/>
+				<response text="All of the above" correct="1" randomize="1"/>
+			</question>
+		</questionPool>
+
+	</lesson>
+<!-- End Lesson Four -->
+
+</lessons>

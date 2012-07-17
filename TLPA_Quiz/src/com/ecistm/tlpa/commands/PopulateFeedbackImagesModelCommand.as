@@ -2,6 +2,7 @@ package com.ecistm.tlpa.commands
 {
 	import com.ecistm.tlpa.events.SearchResultEvent;
 	import com.ecistm.tlpa.models.FeedbackImagesModel;
+	import com.ecistm.tlpa.models.ImageAnswersModel;
 	import com.ecistm.tlpa.models.QuestionPoolModel;
 	
 	import mx.controls.Alert;
@@ -15,6 +16,9 @@ package com.ecistm.tlpa.commands
 		
 		[Inject]
 		public var questionPoolModel:QuestionPoolModel;
+		
+		[Inject]
+		public var imageAnswersModel:ImageAnswersModel;
 		
 		[Inject]
 		public var event:SearchResultEvent;
@@ -31,7 +35,7 @@ package com.ecistm.tlpa.commands
 		
 		protected function populateFeedbackImages():void
 		{
-			feedbackModel.correctResponseAudio = event.results.correctResponse.audio;
+//			feedbackModel.correctResponseAudio = event.results.correctResponse.audio;
 			for each(var obj:Object in event.results.lesson.incorrectFeedback.image)
 			{
 				feedbackModel.images.addItem(obj);
@@ -41,9 +45,23 @@ package com.ecistm.tlpa.commands
 		protected function populateQuestionPoolModel():void
 		{
 			for each(var pool:Object in event.results.lesson.questionPool)
+			{
+//				Alert.show('pool');
 				questionPoolModel.questionPools.addItem(pool);
+				for each(var q:Object in pool.question)
+				{
+					if(q.type == 'MCG')
+						populateImageAnswersModel(q);
+				}
+			}
 //			questionPoolModel.correctResponseAudio = event.results.correctResponse.audio;
 //			questionPoolModel.correctResponseText = event.results.correctResponse.text;
+		}
+		
+		protected function populateImageAnswersModel(question:Object):void
+		{
+			imageAnswersModel.imageAnswers.addItem(question);
+//			Alert.show(question.text);
 		}
 	}
 }

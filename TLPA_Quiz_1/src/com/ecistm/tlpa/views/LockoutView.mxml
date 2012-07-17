@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="100%" height="100%"
+		 creationComplete="initVars()">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script><![CDATA[
+		
+		import mx.collections.ArrayCollection;
+		import mx.collections.XMLListCollection;
+		import mx.controls.Alert;
+		import mx.core.FlexGlobals;
+		import mx.rpc.AsyncToken;
+		import mx.rpc.events.FaultEvent;
+		import mx.rpc.events.ResultEvent;
+		import mx.rpc.http.mxml.HTTPService;
+		
+		
+		[Bindable]
+		public var userID:String;
+		[Bindable]
+		public var lockoutStamp;
+		
+		
+		// Assign values to new properties.
+		private function initVars():void {
+			
+			var localDate:Date = new Date();
+			var localTimestamp:Number = localDate.valueOf() / 1000; 
+			//date with valueOf function returns the milliseconds and divide by 1000 to convert to seconds 
+			var timzoneOffset:Number = localDate.timezoneOffset * 60;
+			//Timezone offset returns the minutes and multiply by 60 to convert to seconds to use for timestamp
+			lockoutStamp = localTimestamp + timzoneOffset;
+			
+			getUserId();
+			showUsers();
+			
+			
+		}
+		//Actionscript for database connection to dokeos
+		
+		//SQL Token
+		private var sqlToken:AsyncToken;
+		
+		/********************************************************
+		 * Your Configuration Paramaters
+		 * 
+		 *********************************************************/
+		//Enter the name of your database
+		public var mysql_db:String = "dokeos_main"; 
+		
+		//Enter the url to the php file you placed on your MySQL webserver
+		public var mysql_url:String = "http://tlpa.ecistm.com/main/flex_mysql/flexmysqlconn.php"; 
+		
+		
+		// Enter your sql passcode this should be a 10 digit string of letter and numbers
+		// that you make up to minimize the risk of SQL injection against your PHP script.
+		// This can be anything you want. You will also use this same code in your PHP file. 
+		
+		public var private_key:String = "01234ABCDE";
+		
+		
+		
+		/********************************************************
+		 * MySQL Query Function
+		 ********************************************************/
+		public function mysqlQuery(sql:String,fid:String):void 
+		{
+			var http:HTTPService = new HTTPService;
+			var parm:Object = new Object;
+			parm.fas_sql = sql;
+			parm.private_key = private_key;
+			parm.fas_db = mysql_db;
+			http.url = mysql_url+"?irand="+Math.random();
+			
+			http.showBusyCursor = true;
+			http.request = sql;
+			http.addEventListener(ResultEvent.RESULT, mysqlResult);
+			http.addEventListener(FaultEvent.FAULT, mysqlFault);
+			http.method = "POST";
+			
+			sqlToken = http.send(parm);
+			sqlToken.param = fid;
+		}
+		
+		private function mysqlFault(event:FaultEvent):void {
+			var err:String = event.fault.faultString;
+			Alert.show(err);
+			
+		}
+		
+		/********************************************************
+		 * mysqlResult() should be used to handle all of the
+		 * returns of your queries. This will end up being a 
+		 * long case list.
+		 * 
+		 *********************************************************/
+		
+		
+		private function mysqlResult(event:ResultEvent):void{
+			
+			//Note: All Results are stored in the
+			// event.result object
+			
+			//Create a new case/break for each of your
+			//sql query statements
+			
+			switch(event.token.param){
+				case "showUsers":
+					//showUsers();	
+					dgUsers.dataProvider = event.result.results.record;
+					//Alert.show(event.result.results.record);
+					
+					break;	
+				
+				case "updateUser":
+					
+					
+					break;
+				
+				case "getUserFromUserId":
+					
+					
+					break;
+				case "insertLockoutUser":
+					
+					break;
+				
+				
+				
+			}	
+		}
+		
+		/********************************************************
+		 * Functions: Shared Functions
+		 * 
+		 *********************************************************/
+		
+		public function addslashes(tt:String):String{
+			var ttt:String = tt.replace(/\u0027+/g,"\\'");
+			return ttt;
+		}
+		
+		
+		public var rec_id:String = "";
+		
+		/* Assign values to new properties. */
+		
+		public function showUsers():void{
+			mysqlQuery("SELECT * FROM user","showUsers");
+			
+		}
+		
+		/*	public function getUserFromUserId():void{
+		mysqlQuery("SELECT * FROM user WHERE user_id = " + userID, 'getUserFromUserId');
+		
+		}
+		*/	
+		public function updateUser():void
+		{
+			mysqlQuery("UPDATE user SET active=0, course_timestamp ='"+ lockoutStamp +"' WHERE user_id = '" + userID +"'"  , 'updateTimestamp');
+			
+		}
+		
+		
+		public function insertLockoutUser():void {
+			
+			mysqlQuery("INSERT INTO user_lockout (user_id) " + 
+				"VALUES " + 
+				"('" + userID+ "')", "InsertLockoutUser");
+			
+		}
+		
+		public function lockoutUser():void{
+			
+			insertLockoutUser();
+			updateUser();
+		}
+		
+		
+		protected function refresh(event:MouseEvent):void
+		{
+			showUsers();
+		}
+		
+		protected function undo(event:MouseEvent):void
+		{
+			mysqlQuery("UPDATE user SET active ='1' WHERE user_id = '" + 5 +"'"  , 'updateUser');	
+			mysqlQuery("UPDATE user SET course_timestamp ='"+ null +"' WHERE user_id = '" + userID +"'"  , 'updateTimestamp');
+		}
+		
+		public function getUserId():void
+		{
+			var Obj:Object=new Object();
+			kill_HttpServ.method="POST";
+			kill_HttpServ.send();
+		}
+		
+		
+		protected function getUserIdfromSession(event:MouseEvent):void
+		{	
+			getUserId();
+			Alert.show(userID+" = User ID");
+		}
+		
+		protected function lockoutBtn(event:MouseEvent):void
+		{
+			lockoutUser();
+		}
+		
+		
+		private function fnHandleFault(event:FaultEvent):void{
+			Alert.show("Error ID="+event.fault.errorID+"  faultString="+event.fault.faultString);
+		}
+		
+		private function fnDiplayResult(event:ResultEvent):void{
+			
+			userID=event.result.toString();
+			lockoutUser();
+			//	Alert.show(userID+"User ID if this is null, you are not logged into tlpa.ecistm.com");
+		}
+		
+		
+		
+		
+		
+	]]></fx:Script>
+	<fx:Declarations>
+		
+		<mx:HTTPService id="kill_HttpServ" url="http://tlpa.ecistm.com/main/flex_mysql/killSession.php" result="fnDiplayResult(event)" fault="fnHandleFault(event)"/>	
+		
+	</fx:Declarations>
+	
+	
+	
+	<mx:HRule width="100%"/>
+	<!--<s:Label id="title2" x="20" y="37" width="524" height="60"
+			 text=" This course cannot be successfully completed today because there are more incorrect question answers than allowed. The system is now locked until 8am tomorrow morning.  After that time, you will be able to enter the system and retake this course or begin another one. ">
+		
+	</s:Label>-->
+	<s:DataGrid id="dgUsers" x="18" y="160" width="534" height="274">
+		<s:columns>
+			<s:ArrayList>
+				<s:GridColumn dataField="user_id" headerText="User ID"></s:GridColumn>
+				<s:GridColumn dataField="course_timestamp" headerText="LockoutStamp"></s:GridColumn>
+				<s:GridColumn dataField="active" headerText="Access"></s:GridColumn>
+				<s:GridColumn dataField="username" headerText="Username"></s:GridColumn>
+			</s:ArrayList>
+		</s:columns>
+		
+	</s:DataGrid>
+	
+	<s:Button x="20" y="105" label="refresh" click="refresh(event)"/>
+	<s:Button x="107" y="105" label="Undo" click="undo(event)"/>
+	<s:Button x="199" y="105" label="Get User ID" click="getUserIdfromSession(event)"/>
+	<s:Button x="298" y="105" label="Lockout User ID" click="lockoutBtn(event)"/>
+	<s:Button x="436" y="105" label="test close"/>
+</s:VGroup>

@@ -2,14 +2,32 @@
 <s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		  xmlns:s="library://ns.adobe.com/flex/spark" 
 		  xmlns:mx="library://ns.adobe.com/flex/mx"
-		  horizontalAlign="center">
+		  horizontalAlign="center"
+		  >
 	<fx:Declarations>
 		<fx:String id="imageSource"/>
 		<fx:String id="buttonLabel"/>
+		<fx:String id="registeredImageAnswer"/>
 	</fx:Declarations>
-
 	
-	<s:BitmapImage id="img" source="{imageSource}"/>
-	<s:RadioButton id="button" label="{buttonLabel}" color="white"/>
+	<fx:Script>
+		<![CDATA[
+			
+			[Bindable] public var selected:Boolean;
+			
+//			[Bindable] protected var  
+			
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="normal"/>
+		<s:State name="selected"/>
+	</s:states>
+	
+	
+	<s:BitmapImage id="img" source="{imageSource}" alpha="{(selected == true) ? .5 : 1}"/>
+	<!--<s:RadioButton id="button" label="{buttonLabel}" color="white"/>-->
 	
 </s:VGroup>

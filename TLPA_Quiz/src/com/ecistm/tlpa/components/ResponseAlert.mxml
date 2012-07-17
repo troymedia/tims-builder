@@ -11,7 +11,7 @@
 			import mx.controls.Alert;
 			import mx.events.CloseEvent;
 			
-			protected var alert:Alert;
+			public var alert:Alert;
 			[Bindable] protected var audio:String = 'assets/audio/spanish_joint.mp3';
 			
 			public function callCorrectAlert():void

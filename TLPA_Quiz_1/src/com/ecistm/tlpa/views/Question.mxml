@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:VGroup xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:views="com.ecistm.tlpa.views.*"
+		 xmlns:components="com.ecistm.tlpa.components.*" 
+		 creationComplete="init()"
+		 width="100%" height="100%"
+		 showEffect="{fadeIn}" addedEffect="{fadeIn}">
+
+	<fx:Declarations>
+		<components:SoundPlayer id="soundPlayer" url="{audio}"/>
+		<s:RadioButtonGroup id="questionPool"/>
+		<fx:String id="questionText"/>
+		<s:Fade id="fadeIn" startDelay="500" duration="400" alphaFrom="0" alphaTo="1"/>
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.ecistm.tlpa.components.ResponseWithImage;
+			import com.ecistm.tlpa.components.SmartCheckboxGroup;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			
+			import spark.components.HGroup;
+			import spark.components.Label;
+			import spark.components.RadioButton;
+			import spark.components.TextArea;
+			
+			public var cbGroup:SmartCheckboxGroup;
+			
+			[Bindable] public var type:String;
+			[Bindable] public var text:String;
+			[Bindable] public var audio:String;
+			[Bindable] public var cardinality:String;
+			[Bindable] public var randomize:String;
+			[Bindable] public var responses:ArrayCollection = new ArrayCollection();
+			public var responsesGroup:VGroup;
+			public var rb:RadioButton;
+			[Bindable] public var registeredAnswer:String;
+			
+			public var label:TextArea;
+			public var selections:ArrayCollection = new ArrayCollection();
+		
+			[Bindable] public var pool:String;
+			[Bindable] public var correctAudio:String;
+			[Bindable] public var correctText:String;
+			[Bindable] public var incorrectAudio:String;
+			[Bindable] public var incorrectVideo:String;
+			[Bindable] public var incorrectImage:String;
+			public var feedbackImages:Array = [];
+			
+			[Bindable] public var questionTypeIsMCG:Boolean;
+			[Bindable] public var mcgAnswerIsSelected:Boolean;
+			
+			protected function init():void
+			{
+				super.createChildren();
+				label = new TextArea();
+				label.percentWidth = 100;
+				//label.height = 24;
+				label.minHeight = 0;
+				label.setStyle('contentBackgroundAlpha', 0);
+				label.setStyle('borderVisible', false);
+				label.editable = false;
+				label.setStyle('color', 'white');
+				label.setStyle('fontWeight', 'bold');
+				label.setStyle('fontSize', 14);
+				label.text = questionText;
+				this.addElementAt(label, 0);
+				label.addEventListener(FlexEvent.UPDATE_COMPLETE, function():void{
+					label.height = label.scroller.viewport.contentHeight + 2;
+				});
+				
+				fadeIn.play();
+				
+//				hGroup = new HGroup();
+//				hGroup.percentWidth = 100;
+//				this.addElementAt(hGroup, 1);
+				
+//				cbGroup = new SmartCheckboxGroup();
+//				cbGroup.checkBoxGroup = responses;
+//				this.addElementAt(cbGroup, 1);
+			}
+			
+			public function registerSelection():void
+			{
+				if(type == 'MCG')
+					registerMultipleAnswers();
+				else
+					registerSingleAnswer(questionPool.selectedValue as String);
+			}
+			
+			public function registerSingleAnswer(selection:String):void
+			{
+				registeredAnswer = selection;
+			}
+			
+			public function registerMultipleAnswers():void
+			{
+				//TODO
+			}
+			
+			public function playCorrectAudio(audios:String):void
+			{
+				soundPlayer.url = audios;
+				Alert.show('audio: ' + correctAudio);
+			}
+			
+			public function setImageAnswerSelection(selection:String):void
+			{
+//				for each(var elem:QuestionWithImageAnswer in imgWithAnswerContainer.numElements)
+					Alert.show('selection: ' + selection);
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="TF"/>
+		<s:State name="TFI"/>
+		<s:State name="MCT"/>
+		<s:State name="MCG"/>
+		<s:State name="MCTI"/>
+	</s:states>
+	
+	<!--<components:SmartCheckboxGroup id="cbGroup" checkBoxGroup="{responses}"/>-->
+	<s:HGroup id="outerShell" width="100%" height="100%">
+		<s:VGroup id="btnContainer" width="100%" height="100%"/>
+		<s:VGroup id="picContainer" width="100%" height="100%" includeIn="MCTI, TFI" horizontalAlign="right">
+			<s:Image source="assets/images/course09/tlpa09_pool01_101.png"/>
+		</s:VGroup>
+	</s:HGroup>
+	
+	<s:HGroup id="imgWithAnswerContainer" horizontalAlign="center" verticalAlign="middle" width="100%" height="100%">
+		
+	</s:HGroup>
+	
+	
+</s:VGroup>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:local="*" 
+			   xmlns:tlpa="com.ecistm.tlpa.*" 
+			   xmlns:views="com.ecistm.tlpa.views.*"
+			   minWidth="0" minHeight="0"
+			   height="100%" width="100%"
+			   backgroundColor="black"
+			   >
+	
+	<fx:Declarations>
+		<local:TLPAQuizContext contextView="{this}"/>
+	</fx:Declarations>
+	
+	<fx:Style source="styles.css"/>
+	
+	<s:layout>
+		<s:HorizontalLayout paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10"/>
+	</s:layout>
+	
+	<views:QuizView_old height="100%" width="100%"/>
+	
+</s:Application>

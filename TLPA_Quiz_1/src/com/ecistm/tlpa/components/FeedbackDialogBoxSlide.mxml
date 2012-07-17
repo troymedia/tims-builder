@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:NavigatorContent xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					xmlns:s="library://ns.adobe.com/flex/spark" 
+					xmlns:mx="library://ns.adobe.com/flex/mx" 
+					xmlns:components="com.ecistm.tlpa.components.*"
+					height="100%" width="100%"
+					backgroundColor="black">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<components:SoundPlayer id="soundPlayer" url="{audioSource}"/>
+		<fx:String id="imageSource"/>
+		<fx:String id="audioSource"/>
+		<fx:String id="videoSource"/>
+	</fx:Declarations>
+	
+	<s:states>
+		<s:State name="imageFeedback"/>
+		<s:State name="videoFeedback"/>
+	</s:states>
+	
+	<s:Group horizontalCenter="0" verticalCenter="0">
+		<s:layout>
+			<s:HorizontalLayout/>
+		</s:layout>
+	<s:BitmapImage source="{imageSource}" includeIn="imageFeedback" width="576" height="436"/>
+	<s:VideoDisplay source="{videoSource}" height="100%" width="100%" includeIn="videoFeedback"/>
+	</s:Group>
+</s:NavigatorContent>

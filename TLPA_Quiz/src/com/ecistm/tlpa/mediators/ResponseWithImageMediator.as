@@ -2,6 +2,7 @@ package com.ecistm.tlpa.mediators
 {
 	import com.ecistm.tlpa.components.ResponseWithImage;
 	import com.ecistm.tlpa.events.AnswerSelectionEvent;
+	import com.ecistm.tlpa.events.RetryQuizEvent;
 	
 	import flash.events.MouseEvent;
 	
@@ -20,13 +21,15 @@ package com.ecistm.tlpa.mediators
 		
 		override public function onRegister():void
 		{
-			eventMap.mapListener(view.button, MouseEvent.CLICK, onClick, MouseEvent);
+			addViewListener(MouseEvent.CLICK, onClick, MouseEvent);
 		}
 		
 		protected function onClick(e:MouseEvent):void
 		{
-//			Alert.show(e.currentTarget.label);
-			dispatch(new AnswerSelectionEvent(AnswerSelectionEvent.IMAGE_ANSWER_SELECTED, e.currentTarget.label));
+			
+			view.selected = true;
+			dispatch(new AnswerSelectionEvent(AnswerSelectionEvent.IMAGE_ANSWER_SELECTED, e.currentTarget.buttonLabel, view));
+//			Alert.show(e.currentTarget.buttonLabel);
 		}
 	}
 }

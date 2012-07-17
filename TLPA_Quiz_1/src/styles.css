@@ -1,0 +1,30 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+mx|Alert{
+	backgroundColor: #333333;
+	color: #ffffff;
+	headerHeight: 24;
+	chromeColor: #333333;
+	cornerRadius: 10;
+	buttonStyleName: styledAlertButtons;
+	
+}
+
+.styledAlertButtons{
+	cornerRadius: 5;
+	fontSize: 14;
+	chromeColor: #00ff00;
+	color: #333333;
+	
+}
+
+.styledAlertButtonsIncorrect{
+	cornerRadius: 5;
+	fontSize: 14;
+	chromeColor: #ff0000;
+	color: #ffffff;
+	
+}
+

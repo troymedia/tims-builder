@@ -1,5 +1,7 @@
 package com.ecistm.tlpa.events
 {
+	import com.ecistm.tlpa.components.ResponseWithImage;
+	
 	import flash.events.Event;
 	
 	public class AnswerSelectionEvent extends Event
@@ -9,15 +11,17 @@ package com.ecistm.tlpa.events
 		public static const IMAGE_ANSWER_SELECTED:String = 'imageAnswerSelected';
 		
 		[Bindable] public var selection:String;
-		public function AnswerSelectionEvent(type:String, selection:String='')
+		[Bindable] public var imageAnswer:ResponseWithImage;
+		public function AnswerSelectionEvent(type:String, selection:String='', imageAnswer:ResponseWithImage=null)
 		{
 			super(type);
 			this.selection = selection;
+			this.imageAnswer = imageAnswer;
 		}
 		
 		override public function clone():Event
 		{
-			return new AnswerSelectionEvent(type, selection);
+			return new AnswerSelectionEvent(type, selection, imageAnswer);
 		}
 	}
 }

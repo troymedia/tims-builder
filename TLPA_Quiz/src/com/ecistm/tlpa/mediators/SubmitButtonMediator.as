@@ -24,6 +24,7 @@ package com.ecistm.tlpa.mediators
 		{
 			addViewListener(MouseEvent.CLICK, onClick, MouseEvent);
 			addContextListener(AnswerSelectionEvent.ANSWER_SELECTED, onAnswerSelected, AnswerSelectionEvent);
+			addContextListener(AnswerSelectionEvent.IMAGE_ANSWER_SELECTED, onAnswerSelected, AnswerSelectionEvent);
 		}
 		
 		protected function onClick(e:MouseEvent):void

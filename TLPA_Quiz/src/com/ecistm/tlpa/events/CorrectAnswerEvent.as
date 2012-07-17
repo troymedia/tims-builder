@@ -4,9 +4,17 @@ package com.ecistm.tlpa.events
 	
 	public class CorrectAnswerEvent extends Event
 	{
-		public function CorrectAnswerEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
+		public static const CORRECT:String = 'correct';
+		
+		public var detail:int;
+		public function CorrectAnswerEvent(type:String, detail:int=0)
 		{
-			super(type, bubbles, cancelable);
+			super(type);
+		}
+		
+		override public function clone():Event
+		{
+			return new CorrectAnswerEvent(type, detail);
 		}
 	}
 }
