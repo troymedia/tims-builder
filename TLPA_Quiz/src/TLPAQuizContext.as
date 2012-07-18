@@ -33,7 +33,7 @@ package
 			
 			//mediators
 			mediatorMap.mapView(QuizView_old, QuizViewMediator, QuizView_old);
-			//mediatorMap.mapView(SmartCheckboxGroup, SmartCheckboxGroupMediator, SmartCheckboxGroup);
+			mediatorMap.mapView(SmartCheckboxGroup, SmartCheckboxGroupMediator, SmartCheckboxGroup);
 			mediatorMap.mapView(SubmitButton, SubmitButtonMediator, SubmitButton);
 			mediatorMap.mapView(FeedbackDialogBox, FeedbackDialogBoxMediator, FeedbackDialogBox);
 			mediatorMap.mapView(Question, QuestionMediator, Question);

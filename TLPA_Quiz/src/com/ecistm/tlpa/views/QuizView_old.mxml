@@ -27,6 +27,7 @@
 			import mx.rpc.events.ResultEvent;
 			
 			import spark.components.Button;
+			import spark.components.CheckBox;
 			import spark.components.NavigatorContent;
 			import spark.components.RadioButton;
 			
@@ -55,6 +56,7 @@
 						question.cardinality = q.cardinality;
 						question.pool = qp.number;
 						question.randomize = q.randomize;
+						question.questionImage = q.image;
 						question.correctAudio = qp.correctResponse.audio;
 						question.correctText = qp.correctResponse.text;
 						nav.addElement(question);
@@ -64,6 +66,11 @@
 //							question.cbGroup.multiSelect = (question.cardinality == 'single') ? false : true;
 							if(q.type != 'MCG')
 							{
+//								question.cb = new CheckBox();
+//								question.cb.label = r.text;
+//								question.cb.setStyle('color', 'white');
+//								question.cb.setStyle('fontSize', 14);
+//								question.cb.name = (r.correct == 0) ? 'false' : 'true';
 								question.rb = new spark.components.RadioButton();
 								question.rb.groupName = 'questionPool';
 								question.rb.label = r.text;

@@ -51,7 +51,7 @@
 		</questionPool>	
 		<questionPool number="3">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
-			<question type="MCTI" text="Is this driver dressed like a professional?" audio="1-37b.mp3" image="tlpa01-lesson1-pool3-q2.jpg" x="320" y="80" cardinality="single">
+			<question type="MCTI" text="Is this driver dressed like a professional?" audio="1-37b.mp3" image="assets/images/course09/tlpa09_pool06_129.png" x="320" y="80" cardinality="single">
 				<response text="Yes" correct="1" randomize="0"/>
 				<response text="No" correct="0" randomize="0"/>
 			</question>

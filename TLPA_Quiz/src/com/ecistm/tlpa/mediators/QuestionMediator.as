@@ -24,7 +24,7 @@ package com.ecistm.tlpa.mediators
 		override public function onRegister():void
 		{
 			eventMap.mapListener(view.questionPool, ItemClickEvent.ITEM_CLICK, onItemClick, ItemClickEvent);
-//			eventMap.mapListener(view.mcgImage, MouseEvent.CLICK, onClick, MouseEvent);
+//			eventMap.mapListener(view.cb, MouseEvent.CLICK, onItemClick, MouseEvent);
 			addContextListener(AnswerSelectionEvent.CORRECT_ANSWER, onCorrectAnswer, AnswerSelectionEvent);
 			addContextListener(AnswerSelectionEvent.IMAGE_ANSWER_SELECTED, onImageAnswerSelected, AnswerSelectionEvent);
 		}
@@ -32,9 +32,11 @@ package com.ecistm.tlpa.mediators
 		protected function onItemClick(e:ItemClickEvent):void
 		{
 			view.registeredAnswer = view.questionPool.selectedValue as String;
+//			view.registeredAnswer = 'casino';
 			view.registerSelection();
 			dispatch(new SubmitEvent(SubmitEvent.REGISTER_ANSWERS, view.type, e.currentTarget.selection, view));//convert to function that retrieves necessary data
 			dispatch(new AnswerSelectionEvent(AnswerSelectionEvent.ANSWER_SELECTED));
+//			Alert.show(view.registeredAnswer);
 		}
 		
 		protected function onClick(e:MouseEvent):void

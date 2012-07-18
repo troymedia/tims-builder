@@ -12,6 +12,7 @@
 		<components:SoundPlayer id="soundPlayer" url="{audio}"/>
 		<s:RadioButtonGroup id="questionPool"/>
 		<fx:String id="questionText"/>
+		<fx:String id="questionImage"/>
 		<s:Fade id="fadeIn" startDelay="500" duration="400" alphaFrom="0" alphaTo="1"/>
 	</fx:Declarations>
 	
@@ -22,8 +23,10 @@
 			
 			import mx.collections.ArrayCollection;
 			import mx.controls.Alert;
+			import mx.controls.CheckBox;
 			import mx.events.FlexEvent;
 			
+			import spark.components.CheckBox;
 			import spark.components.HGroup;
 			import spark.components.Label;
 			import spark.components.RadioButton;
@@ -39,6 +42,7 @@
 			[Bindable] public var responses:ArrayCollection = new ArrayCollection();
 			public var responsesGroup:VGroup;
 			public var rb:RadioButton;
+			public var cb:spark.components.CheckBox;
 			public var mcgImage:ResponseWithImage;
 			[Bindable] public var registeredAnswer:String;
 			
@@ -56,6 +60,8 @@
 			[Bindable] public var questionTypeIsMCG:Boolean;
 			[Bindable] public var mcgAnswerIsSelected:Boolean;
 			[Bindable] public var mcgImages:ArrayCollection = new ArrayCollection();
+			
+			[Bindable] protected var items:ArrayCollection = new ArrayCollection(['Ally', 'Enemy']);
 			
 			protected function init():void
 			{
@@ -133,12 +139,12 @@
 	<s:HGroup id="outerShell" width="100%" height="100%">
 		<s:VGroup id="btnContainer" width="100%" height="100%"/>
 		<s:VGroup id="picContainer" width="100%" height="100%" includeIn="MCTI, TFI" horizontalAlign="right">
-			<s:Image source="assets/images/course09/tlpa09_pool01_101.png"/>
+			<s:Image source="{questionImage}"/>
 		</s:VGroup>
 	</s:HGroup>
 	
 	<s:HGroup id="imgWithAnswerContainer" horizontalAlign="center" verticalAlign="middle" width="100%" height="100%">
-		
+		<!--<components:SmartCheckboxGroup checkBoxGroup="{items}"/>-->
 	</s:HGroup>
 	
 	
