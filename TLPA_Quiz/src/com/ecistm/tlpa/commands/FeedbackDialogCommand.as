@@ -62,7 +62,7 @@ package com.ecistm.tlpa.commands
 			else if(submitEvent.questionType == 'false')
 			{
 				responseModel.numIncorrectAnswers++;
-				if(responseModel.numIncorrectAnswers <= 2)
+				if(responseModel.numIncorrectAnswers <= 3)
 				{
 					Alert.buttonWidth = 180;
 					Alert.okLabel = "Review Information";
@@ -76,6 +76,7 @@ package com.ecistm.tlpa.commands
 						feedback.percentHeight = feedback.percentWidth = 100;
 						feedback.height = 530;
 						feedback.width = 720;
+						feedback.numIncorrect = responseModel.numIncorrectAnswers;
 						PopUpManager.addPopUp(feedback, contextView, true);
 //						PopUpManager.centerPopUp(feedback);
 						mediatorMap.createMediator(feedback);
@@ -86,8 +87,7 @@ package com.ecistm.tlpa.commands
 				}
 				else
 				{
-					var a:URLRequest = new URLRequest('http://tlpa.ecistm.com/testLockout/lockout.swf');
-					navigateToURL(a, '_parent');
+					lockoutUser();
 				}
 			}
 					
@@ -120,6 +120,12 @@ package com.ecistm.tlpa.commands
 				}
 			}
 			feedback.populateImageStack(feedback.feedbackImages);
+		}
+		
+		protected function lockoutUser():void
+		{
+			var a:URLRequest = new URLRequest('http://tlpa.ecistm.com/testLockout/lockout.swf');
+			navigateToURL(a, '_parent');
 		}
 	}	
 }

@@ -10,6 +10,7 @@
 		<components:SoundPlayer id="soundPlayer" url="{audio}"/>
 		<fx:String id="feedbackText"/>
 		<fx:String id="titleText"/>
+		<fx:int id="numIncorrect"/>
 	</fx:Declarations>
 	
 	<fx:Script>
@@ -75,6 +76,11 @@
 			public function close():void
 			{
 				this.visible = false;
+				if(numIncorrect == 3)
+				{
+					var a:URLRequest = new URLRequest('http://tlpa.ecistm.com/testLockout/lockout.swf');
+					navigateToURL(a, '_parent');
+				}
 			}
 			
 		]]>
