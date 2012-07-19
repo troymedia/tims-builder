@@ -12,13 +12,14 @@
 			<image source="assets/images/tlpa01_207.jpg" audio="psd2-07.mp3" video="" pool="3"/>
 			<image source="assets/images/tlpa01_211.jpg" audio="psd2-11.mp3" video="" pool="4"/>
 		</incorrectFeedback>
+		<correctResponse audio="assets/audio/spanish_joint.mp3" text="That's right! You selected the correct response."/>
 		<questionPool number="1">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
-			<question type="MCT" text="To become familiar with locations in your area, you should study ________." audio="2-12a.mp3" cardinality="single">
+			<question type="MCT" text="To become familiar with locations in your area, you should study ________." audio="2-12a.mp3" cardinality="multiple">
 				<response text="Street guides" correct="1" randomize="1"/>
 				<response text="Visitor's guides" correct="0" randomize="1"/>
 				<response text="Map books" correct="0" randomize="1"/>
-				<response text="All of the above" correct="0" randomize="0"/>
+				<response text="All of the above" correct="1" randomize="0"/>
 			</question>
 			<question type="MCT" text="Which of the following will help you become familiar with locations in your area?" audio="2-12b.mp3" cardinality="single">
 				<response text="Map books" correct="0" randomize="1"/>

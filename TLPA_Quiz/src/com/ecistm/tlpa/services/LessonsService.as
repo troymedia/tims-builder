@@ -29,8 +29,8 @@ package com.ecistm.tlpa.services
 			
 			/********** test urls **********/ 
 //			service.url = 'com/ecistm/tlpa/data/test/tlpa-c9_test.xml';
-			service.url = 'com/ecistm/tlpa/data/test/tlpa01-lesson1-quiz_test.xml';//Course 1, Lesson 1
-//			service.url = 'com/ecistm/tlpa/data/test/tlpa01-lesson2-quiz_test.xml';//Course 1, Lesson 2
+//			service.url = 'com/ecistm/tlpa/data/test/tlpa01-lesson1-quiz_test.xml';//Course 1, Lesson 1
+			service.url = 'com/ecistm/tlpa/data/test/tlpa01-lesson2-quiz_test.xml';//Course 1, Lesson 2
 //			service.url = 'com/ecistm/tlpa/data/test/tlpa01-lesson3-quiz_test.xml';//Course 1, Lesson 3
 //			service.url = 'com/ecistm/tlpa/data/test/tlpa01-lesson4-quiz_test.xml';//Course 1, Lesson 4
 			/********** end of  **********/
