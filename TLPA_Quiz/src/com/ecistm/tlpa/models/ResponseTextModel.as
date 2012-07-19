@@ -12,6 +12,7 @@ package com.ecistm.tlpa.models
 		[Bindable] public var video:String;
 		[Bindable] public var image:String;
 		[Bindable] public var numIncorrectAnswers:int = 0;
+		[Bindable] public var cardinality:String;
 		
 		public function ResponseTextModel()
 		{

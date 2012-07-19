@@ -4,8 +4,8 @@
 		  xmlns:mx="library://ns.adobe.com/flex/mx"
 		  xmlns:components="com.ecistm.tlpa.components.*"
 		  backgroundColor="black"
-		  minHeight="0" minWidth="0"
-		  >
+		  width="100%" height="100%"
+		  cornerRadius="4" borderVisible="false">
 	<fx:Declarations>
 		<components:SoundPlayer id="soundPlayer" url="{audio}"/>
 		<fx:String id="feedbackText"/>
@@ -33,6 +33,7 @@
 			[Bindable] public var feedbackImages:ArrayCollection = new ArrayCollection();
 			
 			protected var currentIndex:int = 0;
+			protected var previousSlide:FeedbackDialogBoxSlide;
 			protected var currentSlide:FeedbackDialogBoxSlide;
 			
 			public function populateImageStack(images:ArrayCollection):void
@@ -44,8 +45,10 @@
 					feedbackSlide.percentWidth = 100;
 					feedbackSlide.imageSource = img.source;
 					feedbackSlide.audioSource = img.audio;
+					feedbackSlide.videoSource = img.video;
 					stack.addElement(feedbackSlide);
-//					Alert.show('feedback audio: ' + feedbackSlide.audioSource);
+					feedbackSlide.currentState = (img.video == '') ? 'imageFeedback' : 'videoFeedback'; 
+//					Alert.show('state: ' + feedbackSlide.currentState);
 				}
 				currentSlide = FeedbackDialogBoxSlide(stack.getItemAt(currentIndex));
 				stepThroughSlides();
@@ -54,8 +57,10 @@
 			protected function stepThroughSlides():void
 			{
 				SoundMixer.stopAll();
+//				if(previousSlide)
+//					previousSlide.soundPlayer.stop();
 				currentSlide.soundPlayer.play();
-//				Alert.show('currentslide audio: ' + currentSlide.audioSource);
+//				Alert.show('currentslide audio: ' + currentSlide.currentState);
 			}
 			
 			protected function stepTo(delta:Number):void
@@ -68,7 +73,8 @@
 				var max:int = stack.numElements - 1;
 				if (currentIndex > max)
 					currentIndex = max;
-				isAtEnd = currentIndex == max;	
+				isAtEnd = currentIndex == max;
+				//previousSlide = FeedbackDialogBoxSlide(stack.getItemAt(currentIndex + delta));
 				currentSlide = FeedbackDialogBoxSlide(stack.getItemAt(currentIndex));
 				stepThroughSlides();
 			}
@@ -97,7 +103,7 @@
 	</s:states>
 	
 	<s:VGroup height="100%" width="100%" verticalAlign="middle" horizontalAlign="center" gap="0">
-		<mx:ViewStack id="stack" width="576" height="436">
+		<mx:ViewStack id="stack" width="100%" height="100%">
 			
 		</mx:ViewStack>
 		

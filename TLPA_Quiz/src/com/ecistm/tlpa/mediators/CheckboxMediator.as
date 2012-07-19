@@ -27,11 +27,9 @@ package com.ecistm.tlpa.mediators
 		
 		protected function onClick(e:MouseEvent):void
 		{
-			//Alert.show(view.cardinality);
 			view.registeredAnswer = view.questionLabel;
 			dispatch(new SubmitEvent(SubmitEvent.REGISTER_ANSWERS, view.questionType, view.questionLabel, view, null, view.cb.selected));
 			dispatch(new AnswerSelectionEvent(AnswerSelectionEvent.ANSWER_SELECTED, String(view.cb.selected)));
-//			Alert.show(view.registeredAnswer);
 		}
 	}
 }

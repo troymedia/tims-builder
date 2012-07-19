@@ -3,6 +3,11 @@
 @namespace mx "library://ns.adobe.com/flex/mx";
 @namespace components "com.ecistm.tlpa.components.*";
 
+global{
+	modalTransparencyBlur: 0.3;
+	modalTransparencyColor: #333333;
+}
+
 mx|Alert{
 	backgroundColor: #333333;
 	color: #ffffff;

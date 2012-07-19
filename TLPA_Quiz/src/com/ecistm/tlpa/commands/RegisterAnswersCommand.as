@@ -35,7 +35,6 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
-//			Alert.show('..');
 			if(event.selected == true)
 				populateResponseTextModel();
 			else
@@ -47,15 +46,17 @@ package com.ecistm.tlpa.commands
 		protected function populateResponseTextModel():void
 		{
 			var responseModel:ResponseTextModel = new ResponseTextModel();
+			responseModel.audio = event.answer.audio;
+//			Alert.show('r: ' + responseModel.audio);
 			responseModel.pool = event.answer.questionPool;
 			responseModel.label = event.question;
 			responseModel.correct = (event.answer.correct == 'false') ? false : true;
+			responseModel.cardinality = event.answer.cardinality;
 			if(event.answer.cardinality == 'single' && responses.answers.length > 0)
 				responses.answers.removeAll();
 			responses.pool = responseModel.pool;
 			responses.answers.addItem(responseModel);
-//			Alert.show(String(responses.answers.length));
-//			Alert.show('correct: ' + event.answer.correct + '\npool: ' + responseModel.pool, 'Response Model');
+//			Alert.show('r2: ' + responseModel.audio);
 		}
 		
 		protected function removeFromResponseModel(responseLabel:String):void
@@ -63,39 +64,8 @@ package com.ecistm.tlpa.commands
 			for(var i:int=0;i<responses.answers.length;i++)
 				if(responseLabel == responses.answers[i].label)
 				{
-//					Alert.show(responses.answers[i].label);
 					responses.answers.removeItemAt(i);
-//					Alert.show(String(responses.answers.length));
 				}
 		}
-		
-		protected function checkCardinality():void
-		{
-			
-		}
-		
-		protected function populateQuestionPoolModel():void
-		{
-			
-		}
-		
-//		public function registerSelection():void
-//		{
-//			if(e.answer.cardinality == 'multiple')
-//				registerMultipleAnswers();
-//			else
-//				registerSingleAnswer(cb.questionLabel);
-//		}
-//		
-//		public function registerSingleAnswer(selection:String):void
-//		{
-//			registeredAnswer = selection;
-//			Alert.show('registered answer: ' + selection);
-//		}
-//		
-//		public function registerMultipleAnswers():void
-//		{
-//			Alert.show('multiple');
-//		}
 	}
 }

@@ -39,6 +39,7 @@ package com.ecistm.tlpa.commands
 		public var submitEvent:SubmitEvent;
 		
 		protected var feedback:FeedbackDialogBox;
+//		protected var currentPool:String = responsesModel.answers.getItemAt(0).pool;
 		
 		public function FeedbackDialogCommand()
 		{
@@ -47,23 +48,20 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
+			var r:String = responsesModel.answers.getItemAt(0).audio;
+//			Alert.show('r3: ' + r + '\n' + submitEvent.answer.questionPool);
 			var alert:Alert;
 			if(submitEvent.questionType == 'true')
 			{
-//				var responseAlert:ResponseAlert = new ResponseAlert();
-//				responseAlert.callCorrectAlert();
 				Alert.buttonWidth = 180;
 				Alert.okLabel = 'Continue';
 				alert = Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK, null, function(e:CloseEvent):void{ 
-					//soundPlayer.stop();
 					if(e.detail == Alert.OK && responsesModel.pool != String(questionPoolModel.questionPools.length))
 					{
 						dispatch(new SubmitEvent(SubmitEvent.NEXT_QUESTION, '', responseModel));
-//						Alert.show(responsesModel.pool);
 					}
 					else
 						dispatch(new QuizSuccessEvent(QuizSuccessEvent.SUCCESS));
-//						Alert.show('Mariners')
 				});
 				alert.setStyle('buttonStyleName', 'styledAlertButtons');
 			}
@@ -77,19 +75,22 @@ package com.ecistm.tlpa.commands
 					alert = Alert.show('You did not select the correct response.', 'Incorrect', Alert.OK, null, function(e:CloseEvent):void{
 						feedback = new FeedbackDialogBox();
 						feedback.verticalCenter = feedback.horizontalCenter = 0;
-						feedback.audio = responseModel.audio;
-						feedback.videoSource = responseModel.video;
+						feedback.audio = r;
+//						Alert.show('r4: ' + r);
+
+						//feedback.videoSource = responseModel.video;
 						feedback.y = 135;
 						feedback.x = 360;
-						feedback.percentHeight = feedback.percentWidth = 100;
-						feedback.height = 530;
-						feedback.width = 720;
+//						feedback.percentHeight = feedback.percentWidth = 100;
+						feedback.height = 600;
+						feedback.width = 800;
 						feedback.numIncorrect = responseModel.numIncorrectAnswers;
 						PopUpManager.addPopUp(feedback, contextView, true);
-//						PopUpManager.centerPopUp(feedback);
 						mediatorMap.createMediator(feedback);
 						feedback.currentState = 'incorrectImageView';
+						//Alert.show('response: ' + responseModel.audio);
 						addFeedbackImages();
+						
 					});
 					alert.setStyle('buttonStyleName', 'styledAlertButtonsIncorrect');
 				}
@@ -98,36 +99,25 @@ package com.ecistm.tlpa.commands
 					lockoutUser();
 				}
 			}
-					
-				//	var lockout:LockoutView = new LockoutView();
-				//	lockout.x = lockout.y = 0;
-				//	lockout.height = contextView.height;
-				//	lockout.width = contextView.width;
-				//	PopUpManager.addPopUp(lockout, contextView, true);
-				//	mediatorMap.createMediator(lockout);
-				//	Alert.buttonWidth = 87;
-				//	Alert.okLabel = 'OK';
-				//	Alert.show("This course cannot be successfully" + '\n' + 
-				//		"completed today because there are more" + '\n' + 
-				//		"incorrect question answers than allowed. The system" + '\n' + 
-				//		"is now locked until 8am tomorrow morning." + '\n' + 
-				//		"After that time, you will be able to enter the system" + '\n' + 
-				//		"and retake this course or begin another one.", 'Lockout');
-					
-				//
 		}
 		protected function addFeedbackImages():void
 		{
 			var obj:Object;
+//			var currentPool:String = responsesModel.answers.getItemAt(0).pool;
 			for each(obj in feedbackModel.images)
 			{
-				
-				if(obj.pool == responseModel.pool)
+				if(obj.pool == responsesModel.pool)
 				{
 					feedback.feedbackImages.addItem(obj);
 				}
 			}
+//			Alert.show('..');
 			feedback.populateImageStack(feedback.feedbackImages);
+		}
+		
+		protected function getCurrentPool():String
+		{
+			return submitEvent.answer.questionPool;
 		}
 		
 		protected function lockoutUser():void

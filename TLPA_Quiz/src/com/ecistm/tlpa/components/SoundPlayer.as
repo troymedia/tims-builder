@@ -20,6 +20,14 @@ package com.ecistm.tlpa.components
 			request = new URLRequest(url);
 			channel = new SoundChannel();
 			sound.load(request);
+			channel = sound.play(0, 5);
+		}
+		
+		public function playCorrectAudio():void
+		{
+			request = new URLRequest('assets/audio/spanish_joint.mp3');
+			channel = new SoundChannel();
+			sound.load(request);
 			channel = sound.play();
 		}
 		

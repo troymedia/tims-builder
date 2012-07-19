@@ -15,6 +15,19 @@
 		<fx:String id="videoSource"/>
 	</fx:Declarations>
 	
+	<fx:Script>
+		<![CDATA[
+			
+//			[Bindable
+			
+			protected function togglePlayback():void
+			{
+				//video.pla
+			}
+			
+		]]>
+	</fx:Script>
+	
 	<s:states>
 		<s:State name="imageFeedback"/>
 		<s:State name="videoFeedback"/>
@@ -22,9 +35,10 @@
 	
 	<s:Group horizontalCenter="0" verticalCenter="0">
 		<s:layout>
-			<s:HorizontalLayout/>
+			<s:HorizontalLayout paddingLeft="5" paddingRight="5"/>
 		</s:layout>
 	<s:BitmapImage source="{imageSource}" includeIn="imageFeedback" width="576" height="436"/>
-	<s:VideoDisplay source="{videoSource}" height="100%" width="100%" includeIn="videoFeedback"/>
+	<s:VideoDisplay id="video" source="{videoSource}" autoPlay="true" loop="true" height="600" width="800" includeIn="videoFeedback"
+					click="togglePlayback()"/>
 	</s:Group>
 </s:NavigatorContent>

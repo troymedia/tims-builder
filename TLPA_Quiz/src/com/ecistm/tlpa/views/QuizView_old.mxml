@@ -7,7 +7,7 @@
 				   xmlns:views="com.ecistm.tlpa.views.*"
 				   cornerRadius="10" >
 	<fx:Declarations>
-		
+		<components:SoundPlayer id="correctSound" url="{currentQuestion.correctAudio}"/>
 	</fx:Declarations>
 	
 	<fx:Script>
@@ -41,13 +41,11 @@
 			[Bindable] protected var currentQuestion:Question;
 			public function buildQuiz(data:*):void
 			{
-//				for each(var qp:Object in data.questionPool)
 				for each(var qp:Object in data.lesson.questionPool)
 				{
 					var questionPool:QuestionPool = new QuestionPool();
 					for each(var q:Object in qp.question)
 					{
-//						Alert.show(q.text);
 						var nav:NavigatorContent = new NavigatorContent();
 						nav.percentHeight = nav.percentWidth = 100;
 						question = new Question();
@@ -58,13 +56,11 @@
 						question.pool = qp.number;
 						question.randomize = q.randomize;
 						question.questionImage = q.image;
-						question.correctAudio = qp.correctResponse.audio;
+						question.correctAudio = data.lesson.correctResponse.audio;
 						question.correctText = qp.correctResponse.text;
 						nav.addElement(question);
 						for each(var r:Object in q.response)
 						{
-//							question.responses.addItem(r.text);
-//							question.cbGroup.multiSelect = (question.cardinality == 'single') ? false : true;
 							if(q.type != 'MCG')
 							{
 								question.cb = new SmartCheckbox();
@@ -72,23 +68,17 @@
 								question.cb.questionLabel = r.text;
 								question.cb.questionPool = question.pool;
 								question.cb.cardinality = question.cardinality;
+								question.cb.audio = question.audio;
 								question.cb.correct = (r.correct == 0) ? 'false' : 'true';
-//								question.rb = new spark.components.RadioButton();
-//								question.rb.groupName = 'questionPool';
-//								question.rb.label = r.text;
-//								question.rb.setStyle('color', 'white');
-//								question.rb.setStyle('fontSize', 14);
-//								question.rb.name = (r.correct == 0) ? 'false' : 'true';
 								question.btnContainer.addElement(question.cb);
 								question.allAnswers.addItem(question.cb);
+								//Alert.show('question audio: ' + question.cb.audio);
 							}
 							else
 							{
-								//Alert.show(r.text);
 								var mcgImage:ResponseWithImage = new ResponseWithImage();
 								mcgImage.imageSource = r.image;
 								mcgImage.buttonLabel = r.text;
-								//mcgImage.button.groupName = 'questionPool';
 								question.imgWithAnswerContainer.addElement(mcgImage);
 								question.mcgImages.addItem(mcgImage);
 							}
@@ -105,15 +95,13 @@
 			
 			public function stepToNextQuestionPool(model:ResponseTextModel):void
 			{
-				//updateCurrentState(currentQuestion.currentState);
 				stack.selectedIndex += 1;
 				currentQuestionPool = QuestionPool(stack.selectedChild);
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
-				stopAllSounds();
+				SoundMixer.stopAll();
 				currentQuestion.soundPlayer.play();
 				model.numIncorrectAnswers = 0;
 				currentQuestion.currentState = currentQuestion.type;
-//				Alert.show(currentQuestion.currentState);
 				updateCurrentState(currentQuestion.currentState);
 			}
 			
@@ -122,10 +110,9 @@
 				currentQuestionPool.selectedIndex += 1;
 				currentQuestionPool = QuestionPool(stack.selectedChild);
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
-				stopAllSounds();
+				SoundMixer.stopAll();
 				currentQuestion.soundPlayer.play();
 				currentQuestion.currentState = currentQuestion.type;
-//				Alert.show(currentQuestion.currentState);
 				updateCurrentState(currentQuestion.currentState);
 			}
 			
@@ -135,13 +122,12 @@
 				currentQuestionPool = QuestionPool(stack.selectedChild);
 				currentQuestion = NavigatorContent(currentQuestionPool.selectedChild).getElementAt(0) as Question;
 				currentQuestion.questionPool.selection = null;
-				stopAllSounds();
+				SoundMixer.stopAll();
 				currentQuestion.soundPlayer.play();
 			}
 			
 			protected function updateCurrentState(state:String):void
 			{
-//				Alert.show('..' + state);
 				if(state == 'MCG')
 				{
 					question.currentState = 'MCG';
@@ -151,12 +137,15 @@
 			public function showSuccessView():void
 			{
 				currentState = 'quizSuccessView';
-				stopAllSounds();
+				SoundMixer.stopAll();
 			}
 			
 			public function stopAllSounds():void
 			{
-				SoundMixer.stopAll();
+				SoundMixer.stopAll(); 
+				//correctSound.url = currentQuestion.correctAudio;
+				//correctSound.play();
+//				Alert.show(currentQuestion.correctAudio);
 			}
 			
 			

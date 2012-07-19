@@ -9,6 +9,8 @@
 		<fx:String id="questionLabel"/>
 		<fx:String id="registeredAnswer"/>
 		<fx:String id="cardinality"/>
+		<fx:String id="audio"/>
+		<fx:String id="video"/>
 	</fx:Declarations>
 	
 	<s:CheckBox id="cb" label="{questionLabel}"/>

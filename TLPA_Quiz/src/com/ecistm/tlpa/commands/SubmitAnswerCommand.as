@@ -38,10 +38,17 @@ package com.ecistm.tlpa.commands
 		{
 			var allAnswersCorrect:Boolean;
 			for each(var response:ResponseTextModel in responseModel.answers)
-				if(response.correct == true)
+			{
+				if(response.cardinality == 'single' && response.correct == true)
 					allAnswersCorrect = true;
+				else if(response.cardinality == 'multiple')
+					if(response.cardinality == 'multiple' && responseModel.answers.length > 1 && response.correct == true)
+						allAnswersCorrect = true;
+					else if(response.cardinality == 'multiple' && responseModel.answers.length > 1 && response.correct == false)
+						allAnswersCorrect = false;
 				else
 					allAnswersCorrect = false;
+			}
 			dispatch(new SubmitEvent(SubmitEvent.ANSWER_SUBMITTED, String(allAnswersCorrect)));
 			responseModel.answers.removeAll();
 		}
