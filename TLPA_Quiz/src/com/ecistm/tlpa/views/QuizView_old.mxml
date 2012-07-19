@@ -13,6 +13,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.ecistm.tlpa.components.ResponseWithImage;
+			import com.ecistm.tlpa.components.SmartCheckbox;
 			import com.ecistm.tlpa.models.FeedbackImagesModel;
 			import com.ecistm.tlpa.models.LessonsModel;
 			import com.ecistm.tlpa.models.ResponseTextModel;
@@ -66,18 +67,20 @@
 //							question.cbGroup.multiSelect = (question.cardinality == 'single') ? false : true;
 							if(q.type != 'MCG')
 							{
-//								question.cb = new CheckBox();
-//								question.cb.label = r.text;
-//								question.cb.setStyle('color', 'white');
-//								question.cb.setStyle('fontSize', 14);
-//								question.cb.name = (r.correct == 0) ? 'false' : 'true';
-								question.rb = new spark.components.RadioButton();
-								question.rb.groupName = 'questionPool';
-								question.rb.label = r.text;
-								question.rb.setStyle('color', 'white');
-								question.rb.setStyle('fontSize', 14);
-								question.rb.name = (r.correct == 0) ? 'false' : 'true';
-								question.btnContainer.addElement(question.rb);
+								question.cb = new SmartCheckbox();
+								question.cb.questionType = q.type;
+								question.cb.questionLabel = r.text;
+								question.cb.questionPool = question.pool;
+								question.cb.cardinality = question.cardinality;
+								question.cb.correct = (r.correct == 0) ? 'false' : 'true';
+//								question.rb = new spark.components.RadioButton();
+//								question.rb.groupName = 'questionPool';
+//								question.rb.label = r.text;
+//								question.rb.setStyle('color', 'white');
+//								question.rb.setStyle('fontSize', 14);
+//								question.rb.name = (r.correct == 0) ? 'false' : 'true';
+								question.btnContainer.addElement(question.cb);
+								question.allAnswers.addItem(question.cb);
 							}
 							else
 							{
@@ -151,7 +154,7 @@
 				stopAllSounds();
 			}
 			
-			protected function stopAllSounds():void
+			public function stopAllSounds():void
 			{
 				SoundMixer.stopAll();
 			}

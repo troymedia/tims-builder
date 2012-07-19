@@ -3,6 +3,7 @@ package com.ecistm.tlpa.commands
 	import com.ecistm.tlpa.events.AnswerSelectionEvent;
 	import com.ecistm.tlpa.models.ImageAnswersModel;
 	import com.ecistm.tlpa.models.ResponseTextModel;
+	import com.ecistm.tlpa.models.ResponsesModel;
 	
 	import mx.controls.Alert;
 	
@@ -15,6 +16,9 @@ package com.ecistm.tlpa.commands
 		
 		[Inject]
 		public var responseModel:ResponseTextModel;
+		
+		[Inject]
+		public var responsesModel:ResponsesModel;
 		
 		[Inject]
 		public var event:AnswerSelectionEvent;
@@ -35,6 +39,7 @@ package com.ecistm.tlpa.commands
 					{
 						imageAnswersModel.registeredAnswer = response.text;
 						responseModel.correct = (response.correct == '0') ? false : true;
+						responsesModel.answers.addItem(responseModel);
 					}
 			}
 //			diapa

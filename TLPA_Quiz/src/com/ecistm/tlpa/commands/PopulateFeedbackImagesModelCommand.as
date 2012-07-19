@@ -1,6 +1,7 @@
 package com.ecistm.tlpa.commands
 {
 	import com.ecistm.tlpa.events.SearchResultEvent;
+	import com.ecistm.tlpa.models.AnswersModel;
 	import com.ecistm.tlpa.models.FeedbackImagesModel;
 	import com.ecistm.tlpa.models.ImageAnswersModel;
 	import com.ecistm.tlpa.models.QuestionPoolModel;
@@ -19,6 +20,9 @@ package com.ecistm.tlpa.commands
 		
 		[Inject]
 		public var imageAnswersModel:ImageAnswersModel;
+		
+		[Inject]
+		public var answersModel:AnswersModel;
 		
 		[Inject]
 		public var event:SearchResultEvent;
@@ -52,6 +56,8 @@ package com.ecistm.tlpa.commands
 				{
 					if(q.type == 'MCG')
 						populateImageAnswersModel(q);
+					else
+						populateAnswersModel(q);
 				}
 			}
 //			questionPoolModel.correctResponseAudio = event.results.correctResponse.audio;
@@ -61,7 +67,13 @@ package com.ecistm.tlpa.commands
 		protected function populateImageAnswersModel(question:Object):void
 		{
 			imageAnswersModel.imageAnswers.addItem(question);
-//			Alert.show(question.text);
+//			Alert.show('image answers: ' + String(imageAnswersModel.imageAnswers.length));
+		}
+		
+		protected function populateAnswersModel(question:Object):void
+		{
+			answersModel.answers.addItem(question);
+//			Alert.show('answers: ' + String(answersModel.answers.length));
 		}
 	}
 }

@@ -5,6 +5,7 @@ package com.ecistm.tlpa.commands
 	import com.ecistm.tlpa.models.QuestionModel;
 	import com.ecistm.tlpa.models.QuestionPoolModel;
 	import com.ecistm.tlpa.models.ResponseTextModel;
+	import com.ecistm.tlpa.models.ResponsesModel;
 	
 	import mx.controls.Alert;
 	
@@ -15,8 +16,11 @@ package com.ecistm.tlpa.commands
 		[Inject]
 		public var answersModel:AnswersModel;
 		
+//		[Inject]
+//		public var responseModel:ResponseTextModel;
+		
 		[Inject]
-		public var responseModel:ResponseTextModel;
+		public var responses:ResponsesModel;
 		
 		[Inject]
 		public var questionPoolModel:QuestionPoolModel;
@@ -31,25 +35,67 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
-			populateResponseTextModel()
+//			Alert.show('..');
+			if(event.selected == true)
+				populateResponseTextModel();
+			else
+				removeFromResponseModel(event.question);
 			answersModel.removeAnswers();
-			answersModel.registerAnswers(event.question.registeredAnswer);
+			answersModel.registerAnswers(event.answer.registeredAnswer);
 		}
 		
 		protected function populateResponseTextModel():void
 		{
-			responseModel.pool = event.answer.pool;
-			responseModel.label = event.question.label;
-			responseModel.correct = (event.question.name == 'false') ? false : true;
-//			Alert.show('correct: ' + event.question.name + '\npool: ' + responseModel.pool);
-//			responseModel.audio = event.question.incorrectAudio;
-//			responseModel.video = event.question.incorrectVideo;
-//			responseModel.image = event.question.incorrectImage;
+			var responseModel:ResponseTextModel = new ResponseTextModel();
+			responseModel.pool = event.answer.questionPool;
+			responseModel.label = event.question;
+			responseModel.correct = (event.answer.correct == 'false') ? false : true;
+			if(event.answer.cardinality == 'single' && responses.answers.length > 0)
+				responses.answers.removeAll();
+			responses.pool = responseModel.pool;
+			responses.answers.addItem(responseModel);
+//			Alert.show(String(responses.answers.length));
+//			Alert.show('correct: ' + event.answer.correct + '\npool: ' + responseModel.pool, 'Response Model');
+		}
+		
+		protected function removeFromResponseModel(responseLabel:String):void
+		{
+			for(var i:int=0;i<responses.answers.length;i++)
+				if(responseLabel == responses.answers[i].label)
+				{
+//					Alert.show(responses.answers[i].label);
+					responses.answers.removeItemAt(i);
+//					Alert.show(String(responses.answers.length));
+				}
+		}
+		
+		protected function checkCardinality():void
+		{
+			
 		}
 		
 		protected function populateQuestionPoolModel():void
 		{
 			
 		}
+		
+//		public function registerSelection():void
+//		{
+//			if(e.answer.cardinality == 'multiple')
+//				registerMultipleAnswers();
+//			else
+//				registerSingleAnswer(cb.questionLabel);
+//		}
+//		
+//		public function registerSingleAnswer(selection:String):void
+//		{
+//			registeredAnswer = selection;
+//			Alert.show('registered answer: ' + selection);
+//		}
+//		
+//		public function registerMultipleAnswers():void
+//		{
+//			Alert.show('multiple');
+//		}
 	}
 }

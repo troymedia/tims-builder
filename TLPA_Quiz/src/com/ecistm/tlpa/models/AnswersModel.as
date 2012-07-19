@@ -13,10 +13,10 @@ package com.ecistm.tlpa.models
 			super();
 		}
 		
-		public function registerAnswers(selections:String):void
+		public function registerAnswers(selections:Array):void
 		{
 			answers.addItem(selections);
-			//Alert.show('selections: ' + String(answers.length));
+			Alert.show('selections: ' + String(answers.length));
 		}
 		
 		public function removeAnswers():void

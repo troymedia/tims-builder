@@ -35,7 +35,7 @@ package com.ecistm.tlpa.mediators
 		
 		protected function onAnswerSelected(e:AnswerSelectionEvent):void
 		{
-			view.enabled = true;
+			view.enabled = Boolean(e.selection);
 		}
 	}
 }

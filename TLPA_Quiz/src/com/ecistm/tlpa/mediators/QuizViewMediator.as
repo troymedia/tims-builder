@@ -47,6 +47,8 @@ package com.ecistm.tlpa.mediators
 			addContextListener(SubmitEvent.NEXT_QUESTION, onAnswerSubmitted, SubmitEvent);
 			addContextListener(SubmitEvent.CLOSE_FEEDBACK, closeFeedback, SubmitEvent);
 			addContextListener(QuizSuccessEvent.SUCCESS, onSuccess, QuizSuccessEvent);
+			addContextListener(SubmitEvent.ANSWER_SUBMITTED, stopQuestionAudio, SubmitEvent);
+
 		}
 		
 		protected function onStartupComplete(e:Event):void
@@ -72,6 +74,11 @@ package com.ecistm.tlpa.mediators
 		protected function onSuccess(e:QuizSuccessEvent):void
 		{
 			view.showSuccessView();
+		}
+		
+		protected function stopQuestionAudio(e:SubmitEvent):void
+		{
+			view.stopAllSounds();	
 		}
 	}
 }

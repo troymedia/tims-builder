@@ -26,7 +26,6 @@ package com.ecistm.tlpa.mediators
 		
 		protected function onClick(e:MouseEvent):void
 		{
-			
 			view.selected = true;
 			dispatch(new AnswerSelectionEvent(AnswerSelectionEvent.IMAGE_ANSWER_SELECTED, e.currentTarget.buttonLabel, view));
 //			Alert.show(e.currentTarget.buttonLabel);

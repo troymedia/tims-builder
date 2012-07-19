@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<fx:String id="correct"/>
+		<fx:String id="questionType"/>
+		<fx:String id="questionPool"/>
+		<fx:String id="questionLabel"/>
+		<fx:String id="registeredAnswer"/>
+		<fx:String id="cardinality"/>
+	</fx:Declarations>
+	
+	<s:CheckBox id="cb" label="{questionLabel}"/>
+	
+</s:Group>

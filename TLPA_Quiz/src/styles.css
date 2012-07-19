@@ -1,6 +1,7 @@
 /* CSS file */
 @namespace s "library://ns.adobe.com/flex/spark";
 @namespace mx "library://ns.adobe.com/flex/mx";
+@namespace components "com.ecistm.tlpa.components.*";
 
 mx|Alert{
 	backgroundColor: #333333;
@@ -26,5 +27,10 @@ mx|Alert{
 	chromeColor: #ff0000;
 	color: #ffffff;
 	
+}
+
+components|SmartCheckbox{
+	color: #ffffff;
+	fontSize: 14;
 }
 

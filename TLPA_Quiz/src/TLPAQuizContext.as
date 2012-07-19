@@ -4,6 +4,7 @@ package
 	import com.ecistm.tlpa.components.FeedbackDialogBox;
 	import com.ecistm.tlpa.components.ResponseAlert;
 	import com.ecistm.tlpa.components.ResponseWithImage;
+	import com.ecistm.tlpa.components.SmartCheckbox;
 	import com.ecistm.tlpa.components.SmartCheckboxGroup;
 	import com.ecistm.tlpa.components.SubmitButton;
 	import com.ecistm.tlpa.components.TLPAQuizTitle;
@@ -18,6 +19,8 @@ package
 	
 	import org.robotlegs.base.ContextEvent;
 	import org.robotlegs.mvcs.Context;
+	
+	import spark.components.CheckBox;
 	
 	
 	public class TLPAQuizContext extends Context
@@ -34,6 +37,7 @@ package
 			//mediators
 			mediatorMap.mapView(QuizView_old, QuizViewMediator, QuizView_old);
 			mediatorMap.mapView(SmartCheckboxGroup, SmartCheckboxGroupMediator, SmartCheckboxGroup);
+			mediatorMap.mapView(SmartCheckbox, CheckboxMediator, SmartCheckbox);
 			mediatorMap.mapView(SubmitButton, SubmitButtonMediator, SubmitButton);
 			mediatorMap.mapView(FeedbackDialogBox, FeedbackDialogBoxMediator, FeedbackDialogBox);
 			mediatorMap.mapView(Question, QuestionMediator, Question);
@@ -57,6 +61,7 @@ package
 			injector.mapSingleton(QuestionModel);
 			injector.mapSingleton(AnswersModel);
 			injector.mapSingleton(ResponseTextModel);
+			injector.mapSingleton(ResponsesModel);
 			injector.mapSingleton(FeedbackImagesModel);
 			injector.mapSingleton(ImageAnswersModel);
 		}

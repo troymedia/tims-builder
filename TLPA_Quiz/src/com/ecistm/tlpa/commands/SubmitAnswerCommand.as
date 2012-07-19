@@ -5,6 +5,7 @@ package com.ecistm.tlpa.commands
 	import com.ecistm.tlpa.models.AnswersModel;
 	import com.ecistm.tlpa.models.FeedbackImagesModel;
 	import com.ecistm.tlpa.models.ResponseTextModel;
+	import com.ecistm.tlpa.models.ResponsesModel;
 	
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
@@ -22,8 +23,7 @@ package com.ecistm.tlpa.commands
 		public var answers:AnswersModel;
 		
 		[Inject]
-		public var responseModel:ResponseTextModel;
-		
+		public var responseModel:ResponsesModel;		
 		[Inject]
 		public var event:SubmitEvent;
 		
@@ -36,7 +36,14 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
-			dispatch(new SubmitEvent(SubmitEvent.ANSWER_SUBMITTED, String(responseModel.correct)));
+			var allAnswersCorrect:Boolean;
+			for each(var response:ResponseTextModel in responseModel.answers)
+				if(response.correct == true)
+					allAnswersCorrect = true;
+				else
+					allAnswersCorrect = false;
+			dispatch(new SubmitEvent(SubmitEvent.ANSWER_SUBMITTED, String(allAnswersCorrect)));
+			responseModel.answers.removeAll();
 		}
 	}
 }

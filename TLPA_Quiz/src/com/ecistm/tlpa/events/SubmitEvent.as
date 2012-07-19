@@ -1,5 +1,6 @@
 package com.ecistm.tlpa.events
 {
+	import com.ecistm.tlpa.components.SmartCheckbox;
 	import com.ecistm.tlpa.views.Question;
 	
 	import flash.events.Event;
@@ -14,21 +15,23 @@ package com.ecistm.tlpa.events
 		
 		[Bindable] public var question:*;
 		[Bindable] public var questionType:String;
-		[Bindable] public var answer:Question;
-		private var answers:Array = [];
+		[Bindable] public var answer:*;
+		public var answers:Array = [];
+		public var selected:Boolean;
 
-		public function SubmitEvent(type:String, questionType:String='', question:*=null, answer:Question=null, answers:Array=null)
+		public function SubmitEvent(type:String, questionType:String='', question:*=null, answer:*=null, answers:Array=null, selected:Boolean=true)
 		{
 			super(type);
 			this.question = question;
 			this.questionType = questionType;
 			this.answer = answer;
 			this.answers = answers;
+			this.selected = selected;
 		}
 		
 		override public function clone():Event
 		{
-			return new SubmitEvent(type, questionType, question, answer, answers);
+			return new SubmitEvent(type, questionType, question, answer, answers, selected);
 		}
 	}
 }

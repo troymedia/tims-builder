@@ -19,6 +19,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.ecistm.tlpa.components.ResponseWithImage;
+			import com.ecistm.tlpa.components.SmartCheckbox;
 			import com.ecistm.tlpa.components.SmartCheckboxGroup;
 			
 			import mx.collections.ArrayCollection;
@@ -42,7 +43,7 @@
 			[Bindable] public var responses:ArrayCollection = new ArrayCollection();
 			public var responsesGroup:VGroup;
 			public var rb:RadioButton;
-			public var cb:spark.components.CheckBox;
+			public var cb:SmartCheckbox;
 			public var mcgImage:ResponseWithImage;
 			[Bindable] public var registeredAnswer:String;
 			
@@ -60,9 +61,8 @@
 			[Bindable] public var questionTypeIsMCG:Boolean;
 			[Bindable] public var mcgAnswerIsSelected:Boolean;
 			[Bindable] public var mcgImages:ArrayCollection = new ArrayCollection();
-			
-			[Bindable] protected var items:ArrayCollection = new ArrayCollection(['Ally', 'Enemy']);
-			
+			[Bindable] public var allAnswers:ArrayCollection = new ArrayCollection();
+					
 			protected function init():void
 			{
 				super.createChildren();
@@ -95,26 +95,35 @@
 			
 			public function registerSelection():void
 			{
-				if(type == 'MCG')
+				if(cardinality == 'multiple')
 					registerMultipleAnswers();
 				else
-					registerSingleAnswer(questionPool.selectedValue as String);
+					registerSingleAnswer(cb.questionLabel);
 			}
 			
 			public function registerSingleAnswer(selection:String):void
 			{
 				registeredAnswer = selection;
+				Alert.show('registered answer: ' + selection);
 			}
 			
 			public function registerMultipleAnswers():void
 			{
-				//TODO
+				Alert.show('multiple');
 			}
 			
 			public function playCorrectAudio(audios:String):void
 			{
 				soundPlayer.url = audios;
 				Alert.show('audio: ' + correctAudio);
+			}
+			
+			public function setAnswerSelection(selection:SmartCheckbox):void
+			{
+				if(selection.cardinality == 'single')
+					for each(var answer:SmartCheckbox in allAnswers)
+						if(selection.questionLabel != answer.questionLabel)
+							answer.cb.selected = false;
 			}
 			
 			public function setImageAnswerSelection(selection:ResponseWithImage):void

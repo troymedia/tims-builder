@@ -33,7 +33,7 @@
 		</questionPool>	
 		<questionPool number="2">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
-			<question type="MCT" text="Which of the following is an example of professionalism?" audio="1-36a.mp3" cardinality="single">
+			<question type="MCT" text="Which of the following is an example of professionalism?" audio="1-36a.mp3" cardinality="multiple">
 				<response text="Keeping your personal life separate" correct="1" randomize="1"/>
 				<response text="Using mind-altering substances on the job" correct="0" randomize="1"/>
 				<response text="Disobeying traffic signs" correct="0" randomize="1"/>

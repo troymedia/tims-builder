@@ -9,6 +9,7 @@ package com.ecistm.tlpa.commands
 	import com.ecistm.tlpa.models.FeedbackImagesModel;
 	import com.ecistm.tlpa.models.QuestionPoolModel;
 	import com.ecistm.tlpa.models.ResponseTextModel;
+	import com.ecistm.tlpa.models.ResponsesModel;
 	import com.ecistm.tlpa.views.LockoutView;
 	
 	import flash.net.URLRequest;
@@ -24,6 +25,9 @@ package com.ecistm.tlpa.commands
 	{
 		[Inject]
 		public var responseModel:ResponseTextModel;
+		
+		[Inject]
+		public var responsesModel:ResponsesModel;
 		
 		[Inject]
 		public var feedbackModel:FeedbackImagesModel;
@@ -52,10 +56,14 @@ package com.ecistm.tlpa.commands
 				Alert.okLabel = 'Continue';
 				alert = Alert.show("That'\'s right! You have selected the correct response.", 'Correct', Alert.OK, null, function(e:CloseEvent):void{ 
 					//soundPlayer.stop();
-					if(e.detail == Alert.OK && responseModel.pool != String(questionPoolModel.questionPools.length))
+					if(e.detail == Alert.OK && responsesModel.pool != String(questionPoolModel.questionPools.length))
+					{
 						dispatch(new SubmitEvent(SubmitEvent.NEXT_QUESTION, '', responseModel));
+//						Alert.show(responsesModel.pool);
+					}
 					else
 						dispatch(new QuizSuccessEvent(QuizSuccessEvent.SUCCESS));
+//						Alert.show('Mariners')
 				});
 				alert.setStyle('buttonStyleName', 'styledAlertButtons');
 			}
