@@ -81,11 +81,11 @@
 
 		<questionPool number="5">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
-			<question type="MCT" text="If you get into a conversation with your passenger that might easily turn offensive, what should you do?" audio="3-25a.mp3" cardinality="single">
+			<question type="MCT" text="If you get into a conversation with your passenger that might easily turn offensive, what should you do?" audio="3-25a.mp3" cardinality="multiple">
 				<response text="Always be true to yourself and express your opinion" correct="0" randomize="1"/>
 				<response text="Politely change the subject" correct="1" randomize="1"/>
 				<response text="Tell the passenger you cannot talk to him anymore" correct="0" randomize="1"/>
-				<response text="None of the above" correct="0" randomize="0"/>
+				<response text="None of the above" correct="1" randomize="0"/>
 			</question>
 			<question type="TF" text="Heated political conversations with passengers are okay, as long as no one gets offended." audio="3-25b.mp3" cardinality="single">
 				<response text="True" correct="0" randomize="0"/>

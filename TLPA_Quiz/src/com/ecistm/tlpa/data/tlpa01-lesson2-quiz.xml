@@ -12,13 +12,20 @@
 			<image source="assets/images/tlpa01_207.jpg" audio="psd2-07.mp3" video="" pool="3"/>
 			<image source="assets/images/tlpa01_211.jpg" audio="psd2-11.mp3" video="" pool="4"/>
 		</incorrectFeedback>
+		<correctResponse audio="assets/audio/spanish_joint.mp3" text="That's right! You selected the correct response."/>
 		<questionPool number="1">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
 			<question type="MCT" text="To become familiar with locations in your area, you should study ________." audio="2-12a.mp3" cardinality="single">
-				<response text="Street guides" correct="1" randomize="1"/>
 				<response text="Visitor's guides" correct="0" randomize="1"/>
+				<response text="Street guides" correct="0" randomize="1"/>
 				<response text="Map books" correct="0" randomize="1"/>
-				<response text="All of the above" correct="0" randomize="0"/>
+				<response text="All of the above" correct="1" randomize="0"/>
+			</question>
+			<question type="MCT" text="Which of the following is an example of professionalism?" audio="1-36a.mp3" cardinality="multiple">
+				<response text="Keeping your personal life separate" correct="1" randomize="1"/>
+				<response text="Using mind-altering substances on the job" correct="0" randomize="1"/>
+				<response text="Disobeying traffic signs" correct="1" randomize="1"/>
+				<response text="None of the above" correct="0" randomize="1"/>
 			</question>
 			<question type="MCT" text="Which of the following will help you become familiar with locations in your area?" audio="2-12b.mp3" cardinality="single">
 				<response text="Map books" correct="0" randomize="1"/>
@@ -34,35 +41,35 @@
 
 		<questionPool number="2">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
+			<question type="MCT" text="Which of the following locations should you be familiar with in your area?" audio="2-13c.mp3" cardinality="multiple">
+				<response text="Hotels" correct="1" randomize="1"/>
+				<response text="Restaurants" correct="0" randomize="1"/>
+				<response text="Churches" correct="1" randomize="1"/>
+				<response text="All of the above" correct="0" randomize="0"/>
+			</question>
 			<question type="TF" text="It is not important to learn various locations in your area; your customers will tell you where you need to go." audio="2-13a.mp3" cardinality="single">
-				<response text="True" correct="0" randomize="0"/>
+				<response text="True" correct="1" randomize="0"/>
 				<response text="False" correct="1" randomize="0"/>
 			</question>
 			<question type="TF" text="You should be familiar with the location of hotels, hospitals, and churches in your area." audio="2-13b.mp3" cardinality="single">
 				<response text="True" correct="1" randomize="0"/>
 				<response text="False" correct="0" randomize="0"/>
 			</question>
-			<question type="MCT" text="Which of the following locations should you be familiar with in your area?" audio="2-13c.mp3" cardinality="single">
-				<response text="Hotels" correct="0" randomize="1"/>
-				<response text="Restaurants" correct="0" randomize="1"/>
-				<response text="Churches" correct="0" randomize="1"/>
-				<response text="All of the above" correct="1" randomize="0"/>
-			</question>
 		</questionPool>	
 
 		<questionPool number="3">
 			<correctResponse audio="correct-feedback.mp3" text="That's right! You selected the correct response."/>
-			<question type="MCT" text="When transporting a passenger who does not speak the same language as you, how should you greet him or her?" audio="2-14a.mp3" cardinality="single">
+			<question type="MCT" text="When transporting a passenger who does not speak the same language as you, how should you greet him or her?" audio="2-14a.mp3" cardinality="multiple">
 				<response text="Shout, 'Do you understand what I am saying?'" correct="0" randomize="1"/>
 				<response text="Smile and have a friendly attitude" correct="1" randomize="1"/>
-				<response text="Say, 'I cannot understand you.'" correct="0" randomize="1"/>
+				<response text="Say, 'I cannot understand you.'" correct="1" randomize="1"/>
 				<response text="None of the above" correct="0" randomize="0"/>
 			</question>
 			<question type="TF" text="Smiling and having a friendly attitude are two of the best non-verbal tools you can use to communicate with others, even if you don't know their language." audio="2-14b.mp3" cardinality="single">
 				<response text="True" correct="1" randomize="0"/>
 				<response text="False" correct="0" randomize="0"/>
 			</question>
-			<question type="MCT" text="How do you communicate with a passenger who may not speak the same language as you?" audio="2-14c.mp3" cardinality="single">
+			<question type="MCT" text="How do you communicate with a passenger who may not speak the same language as you?" audio="2-14c.mp3" cardinality="multiple">
 				<response text="Smile and have a friendly attitude" correct="1" randomize="1"/>
 				<response text="Make a joke" correct="0" randomize="1"/>
 				<response text="Speak very loudly" correct="0" randomize="1"/>

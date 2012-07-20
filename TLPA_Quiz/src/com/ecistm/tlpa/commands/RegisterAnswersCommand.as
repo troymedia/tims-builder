@@ -56,7 +56,8 @@ package com.ecistm.tlpa.commands
 				responses.answers.removeAll();
 			responses.pool = responseModel.pool;
 			responses.answers.addItem(responseModel);
-//			Alert.show('r2: ' + responseModel.audio);
+//			for each(var response:ResponseTextModel in responses)
+//				Alert.show('correct: ' + String(response.correct));
 		}
 		
 		protected function removeFromResponseModel(responseLabel:String):void

@@ -36,19 +36,18 @@ package com.ecistm.tlpa.commands
 		
 		override public function execute():void
 		{
-			var allAnswersCorrect:Boolean;
+			var allAnswersCorrect:Boolean = false;
+			var numOfIncorrectAnswers:int = 0;
 			for each(var response:ResponseTextModel in responseModel.answers)
 			{
-				if(response.cardinality == 'single' && response.correct == true)
-					allAnswersCorrect = true;
-				else if(response.cardinality == 'multiple')
-					if(response.cardinality == 'multiple' && responseModel.answers.length > 1 && response.correct == true)
-						allAnswersCorrect = true;
-					else if(response.cardinality == 'multiple' && responseModel.answers.length > 1 && response.correct == false)
-						allAnswersCorrect = false;
-				else
+				if(response.correct == false)
+					numOfIncorrectAnswers++;
+				if(numOfIncorrectAnswers > 0)
 					allAnswersCorrect = false;
+				else
+					allAnswersCorrect = true;
 			}
+
 			dispatch(new SubmitEvent(SubmitEvent.ANSWER_SUBMITTED, String(allAnswersCorrect)));
 			responseModel.answers.removeAll();
 		}
